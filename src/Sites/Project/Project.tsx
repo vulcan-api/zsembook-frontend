@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import classes from "./Project.module.css";
-import Button from "../../Components/Button";
-import * as Icon from "react-bootstrap-icons";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
-import Modal from "../../Layout/ModalComponents/Modal";
 import ProjectItem from "./ProjectItem";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
@@ -26,21 +22,9 @@ const Project = () => {
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState("");
-  const [reportedProjectId, setReportedProjectId] = useState(-100);
-  const [listType, setListType] = useState({
+  const [listType] = useState({
     width: "40%",
   });
-
-  const [isActive, setIsActive] = useState(true);
-
-  function changeListTypeHandler(length: Number, id: Number) {
-    setIsActive(!id);
-    setListType({
-      width: length + "%",
-    });
-  }
 
   useEffect(() => {
     getAllProjects();
@@ -118,41 +102,8 @@ const Project = () => {
     }
   }
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
-  const openModal = (id: any, modalContent:any) => {
-    setModalContent(modalContent);
-    setShowModal(true);
-    setReportedProjectId(id);
-  };
   return (
     <>
-      {showModal && (
-        <Modal
-          projectId={reportedProjectId}
-          onBgClick={closeModal}
-          onClose={closeModal}
-          modalContent={modalContent}
-        />
-      )}
-      {!isLoading && (
-        <div className={classes.menu}>
-          <div>
-            <Icon.List
-              className={isActive ? "" : classes.active}
-              onClick={() => changeListTypeHandler(100, 1)}
-            />
-            <Icon.GridFill
-              className={isActive ? classes.active : ""}
-              onClick={() => changeListTypeHandler(40, 0)}
-            />
-          </div>
-          <Link to="/project/add">
-            <Button buttonText="Dodaj projekt" className="alternate" />
-          </Link>
-        </div>
-      )}
       {!isLoading && (
         <div className={classes.posts}>
           {projects.map((project) => {
@@ -160,7 +111,6 @@ const Project = () => {
               <div key={project.id} style={listType}>
                 <ProjectItem
                   project={project}
-                  openModal={openModal}
                   applyToProject={() => applyToProjectHandler(project)}
                 />
               </div>

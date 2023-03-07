@@ -55,8 +55,8 @@ const Sidebar = () => {
                   icon: <Icon.PeopleFill />,
                 },
                 {
-                  destination: "/project",
-                  label: "Projekty",
+                  destination: "/events",
+                  label: "Eventy",
                   icon: <Icon.CardChecklist />,
                 },
                 {
@@ -65,9 +65,9 @@ const Sidebar = () => {
                   icon: <Icon.Chat />,
                 },
                 {
-                  destination: "/school",
-                  label: "Dziennik",
-                  icon: <Icon.JournalBookmarkFill />,
+                  destination: "/faq",
+                  label: "FAQ",
+                  icon: <Icon.QuestionCircleFill />,
                 },
               ]}
             />

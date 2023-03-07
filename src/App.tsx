@@ -14,13 +14,8 @@ import Profile from './Sites/User/Profile';
 //@ts-ignore
 import {NotificationContainer} from "react-notifications";
 import Project from "./Sites/Project/Project";
-import Addproject from "./Sites/Project/Addproject";
 import ProfileRedirect from './Sites/User/ProfileRedirect';
 import Settings from './Sites/User/Settings';
-import School from './Sites/School/School';
-import Grades from './Sites/School/Grades';
-import RegisterVulcan from './Sites/User/RegisterVulcan';
-import Exams from "./Sites/School/Exams";
 import ComingSoon from './Layout/ComingSoon';
 import ErrorElement from './Layout/ErrorElement';
 
@@ -58,20 +53,16 @@ const router = createBrowserRouter([
         element: <Addpost />,
       },
       {
-        path: "project",
+        path: "events",
         element: <Project />,
       },
       {
-        path: "project/add",
-        element: <Addproject />,
+        path: "faq",
+        element: <ComingSoon />,
       },
       {
         path: "settings",
         element: <Settings />,
-      },
-      {
-        path: "settings/vulcan",
-        element: <RegisterVulcan />,
       },
       {
         path: "profile",
@@ -84,38 +75,6 @@ const router = createBrowserRouter([
       {
         path: "chat",
         element: <ComingSoon />,
-      },
-    ],
-  },
-  {
-    path: "/school",
-    element: <Main removeWrapper={true} />,
-    children: [
-      {
-        path: "",
-        element: <School />,
-        children: [
-          {
-            path: "grades",
-            element: <Grades />,
-          },
-          {
-            path: "attendance",
-            element: <ComingSoon />,
-          },
-          {
-            path: "exams",
-            element: <Exams />,
-          },
-          {
-            path: "lessons",
-            element: <ComingSoon />,
-          },
-          {
-            path: "messages",
-            element: <ComingSoon />,
-          },
-        ],
       },
     ],
   },
