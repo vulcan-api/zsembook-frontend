@@ -39,7 +39,7 @@ const Sidebar = () => {
         <div className={classes.navbar} ref={ref}>
           <div className={classes.mainLogo}>
             <NavLink to="/">
-              <h1>BasedBook</h1>
+              <h1>ZSEMBook</h1>
             </NavLink>
           </div>
           <div>
@@ -55,6 +55,11 @@ const Sidebar = () => {
                   icon: <Icon.PeopleFill />,
                 },
                 {
+                  destination: "https://zsem.edu.pl/rekrutacja%202023/2024",
+                  label: "Oferta",
+                  icon: <Icon.FolderFill />
+                },
+                {
                   destination: "/events",
                   label: "Eventy",
                   icon: <Icon.CardChecklist />,
@@ -63,6 +68,11 @@ const Sidebar = () => {
                   destination: "/chat",
                   label: "Komunikator",
                   icon: <Icon.Chat />,
+                },
+                {
+                  destination: "/walk",
+                  label: "Szkoła",
+                  icon: <Icon.BuildingFill />,
                 },
                 {
                   destination: "/faq",

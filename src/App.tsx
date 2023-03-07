@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import Login from './Sites/auth/Login/Login';
 import Auth from './Sites/auth/Auth';
-import Register from './Sites/auth/Register/Register';
 import Main from './Sites/Main';
 import Homepage from './Sites/Homepage/Homepage';
 import Spotted from './Sites/Spotted/Spotted';
@@ -18,6 +17,7 @@ import ProfileRedirect from './Sites/User/ProfileRedirect';
 import Settings from './Sites/User/Settings';
 import ComingSoon from './Layout/ComingSoon';
 import ErrorElement from './Layout/ErrorElement';
+import Walk from './Sites/Walk/Walk';
 
 const router = createBrowserRouter([
   {
@@ -31,10 +31,6 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     element: <Login />,
-  },
-  {
-    path: "/auth/signup",
-    element: <Register />,
   },
   {
     path: "/",
@@ -78,6 +74,17 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/",
+    element: <Main removeWrapper={true} />,
+    children: [
+      {
+        path: "walk",
+        element: <Walk />,
+      },
+    ]
+  }
+
 ]);
 
 
