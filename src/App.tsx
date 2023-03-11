@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import Login from './Sites/auth/Login/Login';
 import Auth from './Sites/auth/Auth';
-import Register from './Sites/auth/Register/Register';
 import Main from './Sites/Main';
 import Homepage from './Sites/Homepage/Homepage';
 import Spotted from './Sites/Spotted/Spotted';
@@ -14,15 +13,11 @@ import Profile from './Sites/User/Profile';
 //@ts-ignore
 import {NotificationContainer} from "react-notifications";
 import Project from "./Sites/Project/Project";
-import Addproject from "./Sites/Project/Addproject";
 import ProfileRedirect from './Sites/User/ProfileRedirect';
 import Settings from './Sites/User/Settings';
-import School from './Sites/School/School';
-import Grades from './Sites/School/Grades';
-import RegisterVulcan from './Sites/User/RegisterVulcan';
-import Exams from "./Sites/School/Exams";
 import ComingSoon from './Layout/ComingSoon';
 import ErrorElement from './Layout/ErrorElement';
+import Walk from './Sites/Walk/Walk';
 
 const router = createBrowserRouter([
   {
@@ -36,10 +31,6 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     element: <Login />,
-  },
-  {
-    path: "/auth/signup",
-    element: <Register />,
   },
   {
     path: "/",
@@ -58,20 +49,16 @@ const router = createBrowserRouter([
         element: <Addpost />,
       },
       {
-        path: "project",
+        path: "events",
         element: <Project />,
       },
       {
-        path: "project/add",
-        element: <Addproject />,
+        path: "faq",
+        element: <ComingSoon />,
       },
       {
         path: "settings",
         element: <Settings />,
-      },
-      {
-        path: "settings/vulcan",
-        element: <RegisterVulcan />,
       },
       {
         path: "profile",
@@ -88,37 +75,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/school",
+    path: "/",
     element: <Main removeWrapper={true} />,
     children: [
       {
-        path: "",
-        element: <School />,
-        children: [
-          {
-            path: "grades",
-            element: <Grades />,
-          },
-          {
-            path: "attendance",
-            element: <ComingSoon />,
-          },
-          {
-            path: "exams",
-            element: <Exams />,
-          },
-          {
-            path: "lessons",
-            element: <ComingSoon />,
-          },
-          {
-            path: "messages",
-            element: <ComingSoon />,
-          },
-        ],
+        path: "walk",
+        element: <Walk />,
       },
-    ],
-  },
+    ]
+  }
+
 ]);
 
 

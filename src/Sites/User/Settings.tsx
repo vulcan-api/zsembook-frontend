@@ -12,7 +12,7 @@ import {
   PencilFill,
   CheckSquareFill,
 } from "react-bootstrap-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
@@ -85,10 +85,6 @@ const Settings = () => {
         console.error(err);
         return throwObject;
       });
-    // if (settingsRequest.statusCode === 200 || Array.isArray(settings)) {
-    //     NotificationManager.success("Udało się zaktualizować ustawienia.", "Sukces!", 3000);
-    //     navigate("/profile");
-    // }
   }
 
   const handleUserNameChange = (event: any) => {
@@ -205,23 +201,6 @@ const Settings = () => {
                 </div>
                 <label className={classes.label}>Ciemny motyw</label>
               </div>
-              <div>
-                <Button
-                  buttonText="Dodaj weryfikację dwuetapową"
-                />
-              </div>
-            </div>
-          </Section>
-          <Section>
-            <h2>Dziennik</h2>
-            <div>
-              <p>
-                  Kliknij{" "}
-                  <Link to="vulcan" style={{ color: "var(--add2-500)" }}>
-                    tutaj
-                  </Link>
-                  , aby połączyć swój dziennik Vulcan z aplikacją Basedbook
-              </p>
             </div>
           </Section>
           <Section>

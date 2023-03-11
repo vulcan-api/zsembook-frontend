@@ -19,15 +19,6 @@ const Searchbar = (props: {
   const [height, setHeight] = useState(0);
   const [users, setUsers] = useState([]);
 
-  const setupHeight = useCallback(() => {
-    if (parentRef.current) setParentWidth(parentRef.current.offsetWidth);
-    if (ref.current) setHeight(ref.current.offsetHeight * -1);
-  }, [parentRef]);
-
-  useEffect(() => {
-    setupHeight();
-  }, [setupHeight]);
-
   const searchHandler = () => {
     if (isSearching) {
       setIsSearching(false);
@@ -46,9 +37,18 @@ const Searchbar = (props: {
       .then((json) => setUsers(json));
   };
 
+  const setupHeight = useCallback(() => {
+    if (parentRef.current) setParentWidth(parentRef.current.offsetWidth);
+    if (ref.current) setHeight(ref.current.offsetHeight * -1);
+  }, [parentRef, ref]);
+
   window.addEventListener("keydown", (ev) => {
     ev.key === "Escape" && searchHandler();
   });
+
+  useEffect(() => {
+    setupHeight();
+  }, [setupHeight]);
 
   return (
     <>
