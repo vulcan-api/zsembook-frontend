@@ -27,13 +27,6 @@ const ProjectItem = (props: any) => {
               ":" +
               new Date(project.createdAt).getMinutes()}
           </div>
-          <div
-            onClick={() => {
-              props.openModal(project.id, "report");
-            }}
-          >
-            <Icon.FlagFill />
-          </div>
         </div>
         <h2>{project.title}</h2>
         <p className={classes.content}>{project.text}</p>
