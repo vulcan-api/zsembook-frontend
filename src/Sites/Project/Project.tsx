@@ -27,23 +27,12 @@ const Events = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const [reportedProjectId, setReportedProjectId] = useState(-100);
-  const [listType, setListType] = useState({
-    width: "45%",
-  });
-
+  const [modalProjectId, setModalProjectId] = useState(-100);
   const [isActive, setIsActive] = useState(true);
 
-  function changeListTypeHandler(length: Number, id: Number) {
-    setIsActive(!id);
-    setListType({
-      width: length + "%",
-    });
+  function changeListType(active?: boolean) {
+    active !== undefined ? setIsActive(active) : setIsActive(!isActive);
   }
-
-  useEffect(() => {
-    getAllProjects();
-  }, []);
 
   async function getAllProjects() {
     setIsLoading(true);
@@ -120,43 +109,43 @@ const Events = () => {
   const closeModal = () => {
     setShowModal(false);
   };
-  const openModal = (id: any, modalContent:any) => {
-    setModalContent(modalContent);
-    setShowModal(true);
-    setReportedProjectId(id);
-  };
+
+  useEffect(() => {
+    getAllProjects();
+  },[]);
+
   return (
     <>
       {showModal && (
         <Modal
-          projectId={reportedProjectId}
+          projectId={modalProjectId}
           onBgClick={closeModal}
           onClose={closeModal}
           modalContent={modalContent}
         />
       )}
-      {!isLoading && (
-        <div className={classes.menu}>
-          <div>
-            <Icon.List
-              className={isActive ? "" : classes.active}
-              onClick={() => changeListTypeHandler(100, 1)}
-            />
-            <Icon.GridFill
-              className={isActive ? classes.active : ""}
-              onClick={() => changeListTypeHandler(45, 0)}
-            />
-          </div>
+      <div className={classes.menu}>
+        <div className={classes.managementIcons}>
+          <Icon.List
+            className={isActive ? "" : classes.active}
+            onClick={() => changeListType()}
+          />
+          <Icon.GridFill
+            className={isActive ? classes.active : ""}
+            onClick={() => changeListType()}
+          />
         </div>
-      )}
+      </div>
       {!isLoading && (
         <div className={classes.posts}>
           {projects.map((project) => {
             return (
-              <div key={project.id} style={listType}>
+              <div key={project.id} className={isActive ? classes.narrowContainer : classes.wideContainer}>
                 <ProjectItem
                   project={project}
-                  openModal={openModal}
+                  setShowModal={setShowModal}
+                  setModalProjectId={setModalProjectId}
+                  setModalContent={setModalContent}
                   applyToProject={() => applyToProjectHandler(project)}
                 />
               </div>

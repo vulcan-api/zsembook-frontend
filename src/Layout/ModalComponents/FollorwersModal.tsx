@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
 import classes from "./Modal.module.css";
 import defaultAvatar from "../../Sites/User/Graphics/default.png";
+import { Link } from "react-router-dom";
 
-const ProjectAppliedUsersModal = (props: {
-  postId: Number;
-  projectId: Number;
+const FollowersModal = (props: {
+  userId: Number,
   showSpinner: Function;
   onClose: Function;
 }) => {
   const [showUsers, setShowUsers] = useState(false);
-  const [participants, setParticipants] = useState([
+  const [followers, setFollowers] = useState([
     {
       user: {
         id: Number,
@@ -25,14 +24,14 @@ const ProjectAppliedUsersModal = (props: {
   useEffect(() => {
     async function getUsers() {
       await fetch(
-        `http://localhost:3000/project/${props.projectId}/participants`,
+        `http://localhost:3000/user/follows/followers/${props.userId}`,
         {
           method: "GET",
           credentials: "include",
         }
       )
         .then((res) => res.json())
-        .then(setParticipants)
+        .then(setFollowers)
         .catch((err) => {
           console.error(err);
           NotificationManager.error(
@@ -51,17 +50,16 @@ const ProjectAppliedUsersModal = (props: {
 
   return (
     <>
-      {participants.length < 1 ? (
-        <p>Brak zapisanych użytkowników !</p>
-      ) : (
-        <p>Zapisani użytkownicy: </p>
-      )}
+      <p>Obserwujący: </p>
       <ul>
         {showUsers &&
-          participants.map((participant: any, index: any) => {
+          followers.map((user: any, index: any) => {
             return (
               <li key={index}>
-                <Link to={`/profile/${participant.user.id}`} onClick={() => props.onClose()}>
+                <Link
+                  to={`/profile/${user.follower.id}`}
+                  onClick={() => props.onClose()}
+                >
                   <div className={classes.avatar}>
                     <img
                       className={classes.avImage}
@@ -69,7 +67,7 @@ const ProjectAppliedUsersModal = (props: {
                       alt=""
                     />
                   </div>
-                  {participant.user.username}
+                  {user.follower.username}
                 </Link>
               </li>
             );
@@ -78,4 +76,5 @@ const ProjectAppliedUsersModal = (props: {
     </>
   );
 };
-export default ProjectAppliedUsersModal;
+
+export default FollowersModal;
