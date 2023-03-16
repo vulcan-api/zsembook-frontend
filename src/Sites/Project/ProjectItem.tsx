@@ -31,16 +31,8 @@ const ProjectItem = (props: any) => {
               : new Date(project.createdAt).getMinutes()}
           </div>
           <div>
-            {loggedUser.id !== project.author.id ? (
-              <Icon.FlagFill
-                onClick={() => {
-                  props.setShowModal(true);
-                  props.setModalProjectId(project.id);
-                  props.setModalContent("report");
-                }}
-                className={classes.report}
-              />
-            ) : (
+            {loggedUser.id === project.author.id && (
+             
               <Icon.TrashFill
                 onClick={() => {
                   props.setShowModal(true);
