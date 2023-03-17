@@ -4,7 +4,6 @@
     border: 1px solid var(--main-100);
     margin-block: 2rem;
     box-shadow: 0px 1px 0px var(--main-100);
-    height: fit-content;
     box-sizing: border-box;
 }
 

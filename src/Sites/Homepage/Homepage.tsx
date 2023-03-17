@@ -95,9 +95,7 @@ const Homepage = () => {
     <>
       {isLoading && <LoadingSpinner />}
       <div>
-        <h1>
-          Witaj {user.name} {user.surname}!
-        </h1>
+        <h1>{Object.keys(user).length === 0 ? `Witaj na ZSEMBook!` :  `Witaj ${user.name} ${user.surname}!`}</h1>
       </div>
       <Wrapper>
         <h2>Aktualności</h2>
@@ -105,77 +103,87 @@ const Homepage = () => {
       </Wrapper>
       <Wrapper>
         <h2>Spotted</h2>
-        <p>Proponowane posty</p>
-        {!isLoading && (
-          <div className={classes.posts}>
-            {posts.map((post) => {
-              return (
-                <Wrapper
-                  className={classes.post}
-                  style={{ width: "45%" }}
-                  key={post.id}
-                >
-                  <div className={classes.topData}>
-                    {post.isAnonymous ? (
-                      <div>
-                        <Icon.PersonFill />
-                        <p>
-                          {post.isAnonymous ? "Anonim" : post.author.username}
-                        </p>
-                      </div>
-                    ) : (
-                      <div>
-                        <Link
-                          to={`/profile/${
-                            post.isAnonymous ? 0 : post.author.id
-                          }`}
-                        >
+        {!isLoading && Array.isArray(posts) ? (
+          <>
+            <p>Proponowane posty</p>
+            <div className={classes.posts}>
+              {posts.map((post) => {
+                return (
+                  <Wrapper
+                    className={classes.post}
+                    style={{ width: "45%" }}
+                    key={post.id}
+                  >
+                    <div className={classes.topData}>
+                      {post.isAnonymous ? (
+                        <div>
                           <Icon.PersonFill />
                           <p>
                             {post.isAnonymous ? "Anonim" : post.author.username}
                           </p>
-                        </Link>
-                      </div>
-                    )}
-                    <div>
-                      <Icon.CalendarDate />
-                      {new Date(post.createdAt).toLocaleDateString()}
-                    </div>
-                    <div>
-                      <Icon.Clock />
-                      {new Date(post.createdAt).getUTCHours() + ":"}
-                      {new Date(post.createdAt).getUTCMinutes() < 10
-                        ? "0" + new Date(post.createdAt).getUTCMinutes()
-                        : new Date(post.createdAt).getUTCMinutes()}
-                    </div>
-                  </div>
-                  <div className={classes.content}>{post.text}</div>
-                  <div className={classes.bottomData}>
-                    <div
-                      onClick={() => {
-                        likeHandler(post);
-                      }}
-                    >
-                      {post.isLiked && (
-                        <Icon.HeartFill style={{ color: "var(--add1-500)" }} />
+                        </div>
+                      ) : (
+                        <div>
+                          <Link
+                            to={`/profile/${
+                              post.isAnonymous ? 0 : post.author.id
+                            }`}
+                          >
+                            <Icon.PersonFill />
+                            <p>
+                              {post.isAnonymous
+                                ? "Anonim"
+                                : post.author.username}
+                            </p>
+                          </Link>
+                        </div>
                       )}
-                      {!post.isLiked && <Icon.Heart />}
-                      <p
-                        style={post.isLiked ? { color: "var(--add1-500)" } : {}}
-                      >
-                        {post.likes}
-                      </p>
+                      <div>
+                        <Icon.CalendarDate />
+                        {new Date(post.createdAt).toLocaleDateString()}
+                      </div>
+                      <div>
+                        <Icon.Clock />
+                        {new Date(post.createdAt).getUTCHours() + ":"}
+                        {new Date(post.createdAt).getUTCMinutes() < 10
+                          ? "0" + new Date(post.createdAt).getUTCMinutes()
+                          : new Date(post.createdAt).getUTCMinutes()}
+                      </div>
                     </div>
-                  </div>
-                </Wrapper>
-              );
-            })}
-            <Button
-              buttonText="Więcej postów"
-              style={{ width: "40%" }}
-              onClick={() => navigate("/spotted")}
-            />
-          </div>
+                    <div className={classes.content}>{post.text}</div>
+                    <div className={classes.bottomData}>
+                      <div
+                        onClick={() => {
+                          likeHandler(post);
+                        }}
+                      >
+                        {post.isLiked && (
+                          <Icon.HeartFill
+                            style={{ color: "var(--add1-500)" }}
+                          />
+                        )}
+                        {!post.isLiked && <Icon.Heart />}
+                        <p
+                          style={
+                            post.isLiked ? { color: "var(--add1-500)" } : {}
+                          }
+                        >
+                          {post.likes}
+                        </p>
+                      </div>
+                    </div>
+                  </Wrapper>
+                );
+              })}
+              <Button
+                buttonText="Więcej postów"
+                style={{ width: "40%" }}
+                onClick={() => navigate("/spotted")}
+              />
+            </div>
+          </>
+        ) : (
+          <p>Brak postów do wyświetlenia !</p>
         )}
       </Wrapper>
     </>

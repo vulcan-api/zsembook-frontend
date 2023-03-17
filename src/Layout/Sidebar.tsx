@@ -79,7 +79,7 @@ const Sidebar = () => {
                   icon: <Icon.PeopleFill />,
                 },
                 {
-                  destination: "https://zsem.edu.pl/rekrutacja%202023/2024",
+                  destination: "/offer",
                   label: "Oferta",
                   icon: <Icon.FolderFill />
                 },

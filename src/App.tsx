@@ -4,6 +4,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import Login from './Sites/auth/Login/Login';
+import Register from './Sites/auth/Register/Register';
 import Auth from './Sites/auth/Auth';
 import Main from './Sites/Main';
 import Homepage from './Sites/Homepage/Homepage';
@@ -18,6 +19,7 @@ import Settings from './Sites/User/Settings';
 import ComingSoon from './Layout/ComingSoon';
 import ErrorElement from './Layout/ErrorElement';
 import Walk from './Sites/Walk/Walk';
+import Offer from './Sites/Offer/Offer';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     element: <Login />,
+  },
+  {
+    path: "/auth/signup",
+    element: <Register />,
   },
   {
     path: "/",
@@ -47,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "spotted/add",
         element: <Addpost />,
+      },
+      {
+        path: "offer",
+        element: <Offer />,
       },
       {
         path: "events",
@@ -82,9 +92,8 @@ const router = createBrowserRouter([
         path: "walk",
         element: <Walk />,
       },
-    ]
-  }
-
+    ],
+  },
 ]);
 
 

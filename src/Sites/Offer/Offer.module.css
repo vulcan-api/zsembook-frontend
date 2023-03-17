@@ -1,0 +1,64 @@
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 3rem;
+}
+
+.offertItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.offertItems > div {
+    box-sizing: border-box;
+    margin: 1rem;
+    width: calc(100%/3);
+    min-width: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: stretch;
+    gap: 2rem;
+}
+
+.main > h1 {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.main > p {
+    font-size: 1.5rem;
+    color: var(--main-400);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.offertItems > div h2 {
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    font-size: 1.25rem !important;
+}
+
+.offertItems > div > p:first-of-type {
+    border-bottom: 1px solid var(--main-100);
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.new p:first-of-type {
+    font-size: 1.5rem;
+    color: var(--add1-500);
+    font-weight: 600;
+}
+
+.new p {
+    color: var(--main-400);
+    font-size: 1.25rem;
+    font-weight: 500;
+}
