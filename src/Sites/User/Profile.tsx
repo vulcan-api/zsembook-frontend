@@ -4,7 +4,7 @@ import defaultAvatar from "./Graphics/default.png";
 import Button from "../../Components/Button";
 import { Instagram } from "react-bootstrap-icons";
 import * as Icon from "react-bootstrap-icons";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
 import LoadingSpinner from "../../Components/LoadingSpinner";
@@ -14,6 +14,7 @@ import ProjectItem from "../Project/ProjectItem";
 import getUserObject from "../../Lib/getUser";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showSpottedPosts, setShowSpottedPosts] = useState(false);
   const [modalContent, setModalContent] = useState("");
@@ -140,7 +141,8 @@ const Profile = () => {
   useEffect(() => {
     getUserPosts();
     getUserProjects();
-  }, [getUserPosts, getUserProjects]);
+    userId === undefined ? navigate("/") : <></>;
+  }, [getUserPosts, getUserProjects, navigate, userId]);
 
   const getPublicInfo = useCallback(
     async function getPublicInfo() {
@@ -154,9 +156,10 @@ const Profile = () => {
           .then(setUser).finally(() => setIsLoading(false));
       } catch (error) {
         console.error(error);
+        navigate("/");
       }
     },
-    [userId]
+    [userId, navigate]
   );
 
   useEffect(() => {
