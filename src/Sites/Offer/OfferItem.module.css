@@ -1,0 +1,24 @@
+.mainDesc {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  line-height: 150%;
+}
+
+@media only screen and (max-width: 1300px) {
+  .lastItem {
+    margin-bottom: 10rem;
+  }
+}
+
+.offerLi > span {
+  font-size: 1.25rem;
+  margin: 1rem 0;
+}
+
+.offerLi {
+  margin: 0.5rem 0;
+}
+
+.h2 {
+  margin: 2rem 0;
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import Wrapper from "../../Layout/Wrapper";
 import classes from "./Offer.module.css";
+import { Link } from "react-router-dom";
+import Button from "../../Components/Button";
 
 const Offer = () => {
   return (
@@ -25,7 +27,9 @@ const Offer = () => {
                 <li>J. angielski</li>
               </ul>
             </p>
-            <p>Więcej informacji</p>
+            <Link to={"/offer/informatyk"}>
+              <Button buttonText="Więcej informacji" />
+            </Link>
           </Wrapper>
           <Wrapper>
             <div>
@@ -39,7 +43,9 @@ const Offer = () => {
                 <li>Fizyka</li>
               </ul>
             </p>
-            <p>Więcej informacji</p>
+            <Link to={"/offer/mechatronik"}>
+              <Button buttonText="Więcej informacji" />
+            </Link>
           </Wrapper>
           <Wrapper>
             <div>
@@ -53,7 +59,9 @@ const Offer = () => {
                 <li>J. angielski</li>
               </ul>
             </p>
-            <p>Więcej informacji</p>
+            <Link to={"/offer/programista"}>
+              <Button buttonText="Więcej informacji" />
+            </Link>
           </Wrapper>
           <Wrapper>
             <div>
@@ -73,7 +81,9 @@ const Offer = () => {
                 teleinformatycznych
               </p>
             </div>
-            <p>Więcej informacji</p>
+            <Link to={"/offer/teleinformatyk"}>
+              <Button buttonText="Więcej informacji" />
+            </Link>
           </Wrapper>
           <Wrapper>
             <div>
@@ -90,7 +100,9 @@ const Offer = () => {
               <p>Nowość !</p>
               <p>Specjalizacja: Programowanie mikroprocesorów</p>
             </div>
-            <p>Więcej informacji</p>
+            <Link to={"/offer/elektronik"}>
+              <Button buttonText="Więcej informacji" />
+            </Link>
           </Wrapper>
           <Wrapper>
             <div>
@@ -107,7 +119,9 @@ const Offer = () => {
               <p>Nowość !</p>
               <p>Specjalizacja: Systemy inteligentnych budynków</p>
             </div>
-            <p>Więcej informacji</p>
+            <Link to={"/offer/elektryk"}>
+              <Button buttonText="Więcej informacji" />
+            </Link>
           </Wrapper>
         </div>
       </div>

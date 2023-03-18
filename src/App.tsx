@@ -19,6 +19,7 @@ import ComingSoon from './Layout/ComingSoon';
 import ErrorElement from './Layout/ErrorElement';
 import Walk from './Sites/Walk/Walk';
 import Offer from './Sites/Offer/Offer';
+import OfferItem from './Sites/Offer/OfferItem';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "offer",
         element: <Offer />,
+      },
+      {
+        path: "offer/:profile",
+        element: <OfferItem />,
       },
       {
         path: "events",
