@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import classes from "./Settings.module.css";
 import Section from "../../Layout/Section";
 import Input from "../../Components/Input";
@@ -22,17 +22,19 @@ const Settings = () => {
   const [darkTheme, setDarkTheme] = useState(getTheme());
   const [isLoading, setIsLoading] = useState(true);
   const [settings, setSettings] = useState({
-    username: "Nazwa użytkownika",
-    email: "Email",
-    name: "Imię",
-    surname: "Nazwisko",
-    facebook: "Facebook",
-    instagram: "Instagram",
-    youtube: "Youtube",
-    website: "Strona",
-    profileDesc: "Opis profilu",
+    avatar: new File([new Blob()], "avatar"),
+    username: "",
+    email: "",
+    name: "",
+    surname: "",
+    facebook: "",
+    instagram: "",
+    youtube: "",
+    website: "",
+    profileDesc: "",
     darkTheme: false,
   });
+
 
   async function getSettings() {
     setIsLoading(true);
@@ -58,9 +60,7 @@ const Settings = () => {
 
   async function updateSettings(event: any) {
     event.preventDefault();
-    const filteredSettings = Object.fromEntries(
-      Object.entries(settings).filter(([_, value]) => value !== null)
-    );
+    const filteredSettings = Object.fromEntries(Object.entries(settings).filter(([_, v]) => v !== ""));
     const throwObject = {};
     fetch(
       "http://localhost:3000/user/settings/",
@@ -74,6 +74,7 @@ const Settings = () => {
       }
     )
       .then((res) => res.text())
+      .then(() => setIsLoading(true))
       .then(() => {
         NotificationManager.success(
           "Udało się zaktualizować ustawienia.",
@@ -125,6 +126,14 @@ const Settings = () => {
     });
   };
 
+  const handleAvatarChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if(event.target.files)
+    setSettings({
+      ...settings,
+      avatar: new File([event.target.files[0]], "avatar", {type: 'image/jpg'}),
+    });
+  }
+
   useEffect(() => {
     getSettings();
   }, []);
@@ -175,13 +184,14 @@ const Settings = () => {
                 />
               </div>
               <div className={classes.inputHolder}>
-                <div className={classes.avatar}>
+                <label htmlFor="avatarUploader" className={classes.avatar}>
                   <span className={`${classes.coverer} ${classes.hidden}`}>
                     <PencilFill className={classes.covererIcon} />
                   </span>
                   <img className={classes.avImage} src={defaultAvatar} alt="" />
-                </div>
+                </label>
               </div>
+              <input type="file" id="avatarUploader" className={classes.invisible} onChange={handleAvatarChange}/>
             </div>
           </Section>
           <Section>

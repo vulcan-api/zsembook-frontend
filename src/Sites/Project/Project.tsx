@@ -108,6 +108,7 @@ const Events = () => {
 
   const closeModal = () => {
     setShowModal(false);
+    getAllProjects();
   };
 
   useEffect(() => {

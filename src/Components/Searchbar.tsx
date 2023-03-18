@@ -7,6 +7,7 @@ import SearchResult from "./SearchResult";
 const Searchbar = (props: {
   sidebarWidth?: number,
   isSearching?: boolean,
+  onResClick?: Function 
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,7 +33,10 @@ const Searchbar = (props: {
 
   const fetchUsers = async () => {
     const val = inputRef.current?.value;
-    await fetch(`http://localhost:3000/user/?name=${val}`)
+    await fetch(`http://localhost:3000/user/?name=${val}`, {
+      method: "GET",
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((json) => setUsers(json));
   };
@@ -50,15 +54,14 @@ const Searchbar = (props: {
           <Input placeholder={"Szukaj"} ref={inputRef} onChange={fetchUsers} />
         </div>
         <div>
-          {users.map((result) => {
+          {Array.isArray(users) && users.map((result) => {
             return (
               <SearchResult
                 key={result["id"]}
                 id={result["id"]}
                 name={`${result["name"]} ${result["surname"]} - ${result["username"]}`}
                 image={defaultAvatar}
-                onClick={() => {
-                }}
+                onClick={() => { if(props.onResClick) props.onResClick()}}
               />
             );
           })}

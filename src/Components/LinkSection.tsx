@@ -6,7 +6,8 @@ import LinkBase, {LinkBaseType} from './LinkBase';
 interface LinkProperties extends LinkBaseType {
     destination?: string, 
     onClick?: any,
-    mobileOnly?: boolean
+    mobileOnly?: boolean,
+    colored?: boolean,
 }
 
 const LinkSection = (props: {className?: string, elements: LinkProperties[]}) => {
@@ -24,13 +25,14 @@ const LinkSection = (props: {className?: string, elements: LinkProperties[]}) =>
                             to={item.destination} 
                             className={`${classes.link}`} 
                             style={({ isActive }) => isActive ? {color: 'var(--add1-500)'} : {color: 'var(--add2-500)'}}
+                            onClick={item.onClick}
                             >
                                 <LinkBase icon={item.icon} label={item.label} />
                         </NavLink>
 
                         :
                         
-                        <div className={`${classes.link} ${classes.clickable}`} onClick={item.onClick}>
+                        <div className={`${classes.link} ${classes.clickable} ${item.colored ? classes.selected : ""}`} onClick={item.onClick}>
                             <LinkBase icon={item.icon} label={item.label} />
                         </div>
 

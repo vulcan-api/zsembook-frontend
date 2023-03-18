@@ -2,13 +2,11 @@ import React, {useRef, useState} from 'react';
 import LinkSection from '../Components/LinkSection';
 import * as Icon from 'react-bootstrap-icons';
 import classes from './Sidebar.module.css';
-import linkClasses from '../Components/LinkSection.module.css'
 import {NavLink, useNavigate} from 'react-router-dom';
 //@ts-ignore
 import {NotificationManager} from "react-notifications";
 import Searchbar from '../Components/Searchbar';
 import getUserObject from '../Lib/getUser';
-import LinkBase from '../Components/LinkBase';
 
 const Sidebar = () => {
     let user: any;
@@ -48,10 +46,8 @@ const Sidebar = () => {
 
     return (
       <>
-        {isSearching && (
-          <div className={classes.hide} onClick={searchHandler}></div>
-        )}
-        <Searchbar sidebarWidth={ref.current?.offsetWidth} isSearching={isSearching}/>
+        <div className={isSearching ? classes.hide : classes.disable} onClick={searchHandler}></div>
+        <Searchbar sidebarWidth={ref.current?.offsetWidth} isSearching={isSearching} onResClick={searchHandler}/>
         <div className={classes.navbar} ref={ref}>
           <div className={classes.mainLogo}>
             <NavLink to="/">
@@ -59,20 +55,22 @@ const Sidebar = () => {
             </NavLink>
           </div>
           <div>
-            <div
-              className={`${linkClasses.link} ${linkClasses.clickable} ${isShown ? classes.show : classes.hidden}`}
-              onClick={searchHandler}
-            >
-              <LinkBase
-                icon={<Icon.Search/>}
-                label="Szukaj"
-                style={isSearching ? { color: "var(--add1-500)" } : {}}
-              />
-            </div>
             <div>
               <LinkSection
                 className={classes.mainIcons} 
                 elements={[
+                {
+                  destination: "/",
+                  label: "",
+                  mobileOnly: true,
+                  icon: <Icon.HouseFill />,
+                },
+                {
+                  icon: <Icon.Search />,
+                  label: "Szukaj",
+                  colored: isSearching,
+                  onClick: searchHandler
+                },
                 {
                   destination: "/spotted",
                   label: "Spotted",
@@ -121,16 +119,18 @@ const Sidebar = () => {
                   destination: `/profile/${user.id}`,
                   label: "Profil",
                   icon: <Icon.PersonCircle />,
+                  onClick: () => {setIsShown(false)}
                 },
                 {
                   destination: "/settings",
                   label: "Ustawienia",
                   icon: <Icon.Tools />,
+                  onClick: () => {setIsShown(false)}
                 },
                 {
                   label: "Wyloguj się",
                   icon: <Icon.DoorOpen />,
-                  onClick: logout,
+                  onClick: () => {logout(); setIsShown(false)},
                 },
               ]}
             />
