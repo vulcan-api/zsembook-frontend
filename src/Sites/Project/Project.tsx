@@ -5,8 +5,6 @@ import { useState } from "react";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import Modal from "../../Layout/ModalComponents/Modal";
 import ProjectItem from "./ProjectItem";
-//@ts-ignore
-import { NotificationManager } from "react-notifications";
 
 const Events = () => {
   const [projects, setProjects] = useState([
