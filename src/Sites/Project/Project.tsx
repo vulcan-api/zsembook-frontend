@@ -12,16 +12,9 @@ const Events = () => {
   const [projects, setProjects] = useState([
     {
       id: 1,
-      createdAt: new Date("2023-02-14T18:09:09.433Z"),
-      title: "BusinessAssistant+",
-      text: "Hej! Szukamy ludzi do przepisania naszego projektu w JS/TS",
-      author: {
-        id: -100,
-        name: '',
-        surname: '',
-        username: '',
-      },
-      hasAlreadyApplied: true,
+      date: new Date("2023-03-02:09:09.433Z"),
+      title: "XI Piknik Naukowy",
+      text: "Kolejna edycja jednego z największych wydarzeń w ZSEM we współpracy z WSB-NLU",
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +30,7 @@ const Events = () => {
   async function getAllProjects() {
     setIsLoading(true);
     try {
-      await fetch("http://localhost:3000/project?take=20", {
+      await fetch("http://localhost:3000/event?take=20", {
         method: "GET",
         credentials: "include",
       })
@@ -48,64 +41,6 @@ const Events = () => {
     }
     setIsLoading(false);
   }
-
-  const applyToProjectHandler = (post:any) => {
-    let projectsCopy = [...projects];
-    let index = projectsCopy.indexOf(post);
-    if (projects[index].hasAlreadyApplied) {
-      projects[index].hasAlreadyApplied = false;
-      leaveProject(projects[index].id);
-      setProjects(projectsCopy);
-    } else {
-      projects[index].hasAlreadyApplied = true;
-      applyToProject(projects[index].id);
-      setProjects(projectsCopy);
-    }
-  }
-
-  async function applyToProject(id: any) {
-    const applyProject = {
-      projectId: id,
-    };
-    const response = await fetch("http://localhost:3000/project/apply", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(applyProject),
-    });
-    if (response.ok) {
-      NotificationManager.success(
-        "Udało się zgłosić do projektu.",
-        "Sukces!",
-        3000
-      );
-    } else {
-      NotificationManager.error("Wystąpił błąd!", "Błąd!", 3000);
-    }
-  }
-  async function leaveProject(id: any) {
-    const leaveProjectObject = {
-      projectId: id,
-    };
-    const response = await fetch("http://localhost:3000/project/leave", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(leaveProjectObject),
-    });
-    if (!response.ok) {
-      NotificationManager.error(
-        "Wystąpił błąd!",
-        "Błąd!",
-        3000
-      );
-    }
-  }
-
   const closeModal = () => {
     setShowModal(false);
     getAllProjects();
@@ -147,7 +82,6 @@ const Events = () => {
                   setShowModal={setShowModal}
                   setModalProjectId={setModalProjectId}
                   setModalContent={setModalContent}
-                  applyToProject={() => applyToProjectHandler(project)}
                 />
               </div>
             );
