@@ -212,7 +212,7 @@ const OfferItem = () => {
     <>
       {!isWrong && (
         <>
-          <h1>{(profiles as any)[profile].title}</h1>
+          <h1 className={classes.h1}>{(profiles as any)[profile].title}</h1>
           <p className={classes.mainDesc}>{(profiles as any)[profile].desc}</p>
           <h2 className={classes.h2}>Kwalifikajce</h2>
           <ul>

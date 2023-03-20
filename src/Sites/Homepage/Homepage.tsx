@@ -179,13 +179,6 @@ const Homepage = () => {
         ) : (
           <p>Brak postów do wyświetlenia</p>
         )}
-        <div className={classes.loadMoreButton}>
-          <Button
-            buttonText="Więcej postów"
-            style={{ width: "40%" }}
-            onClick={() => navigate("/spotted")}
-          />
-        </div>
       </Wrapper>
     </>
   );

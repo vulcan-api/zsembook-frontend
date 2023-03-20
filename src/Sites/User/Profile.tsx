@@ -10,13 +10,11 @@ import { NotificationManager } from "react-notifications";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import Wrapper from "../../Layout/Wrapper";
 import Modal from "../../Layout/ModalComponents/Modal";
-import ProjectItem from "../Project/ProjectItem";
 import getUserObject from "../../Lib/getUser";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [showSpottedPosts, setShowSpottedPosts] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [projectId, setProjectId] = useState(-100);
   const [postId, setPostId] = useState(-100);
@@ -37,21 +35,6 @@ const Profile = () => {
       isLiked: false,
       likes: 69,
       username: "jajco",
-    },
-  ]);
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      createdAt: new Date("2023-02-14T18:09:09.433Z"),
-      title: "BusinessAssistant+",
-      text: "Hej! Szukamy ludzi do przepisania naszego projektu w JS/TS",
-      author: {
-        name: String,
-        surname: String,
-        username: String,
-        id: 0,
-      },
-      hasAlreadyApplied: true,
     },
   ]);
   const [user, setUser] = useState({
@@ -116,22 +99,7 @@ const Profile = () => {
         credentials: "include",
       })
         .then((res) => res.json())
-        .then(setPosts);
-    } catch (error) {
-      console.error(error);
-    }
-    setIsLoading(false);
-  }, [userId]);
-
-  const getUserProjects = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      await fetch(`http://localhost:3000/user/${userId}/projects`, {
-        method: "GET",
-        credentials: "include",
-      })
-        .then((res) => res.json())
-        .then(setProjects);
+        .then(console.log);
     } catch (error) {
       console.error(error);
     }
@@ -140,9 +108,8 @@ const Profile = () => {
 
   useEffect(() => {
     getUserPosts();
-    getUserProjects();
     userId === undefined ? navigate("/") : <></>;
-  }, [getUserPosts, getUserProjects, navigate, userId]);
+  }, [getUserPosts, navigate, userId]);
 
   const getPublicInfo = useCallback(
     async function getPublicInfo() {
@@ -153,7 +120,8 @@ const Profile = () => {
           credentials: "include",
         })
           .then((res) => res.json())
-          .then(setUser).finally(() => setIsLoading(false));
+          .then(setUser)
+          .finally(() => setIsLoading(false));
       } catch (error) {
         console.error(error);
         navigate("/");
@@ -172,59 +140,6 @@ const Profile = () => {
     setProjectId(-100);
   };
 
-  const applyToProjectHandler = (post: any) => {
-    let projectsCopy = [...projects];
-    let index = projectsCopy.indexOf(post);
-    if (projects[index].hasAlreadyApplied) {
-      projects[index].hasAlreadyApplied = false;
-      leaveProject(projects[index].id);
-      setProjects(projectsCopy);
-    } else {
-      projects[index].hasAlreadyApplied = true;
-      applyToProject(projects[index].id);
-      setProjects(projectsCopy);
-    }
-  };
-
-  async function applyToProject(id: any) {
-    const applyProject = {
-      projectId: id,
-    };
-    const response = await fetch("http://localhost:3000/project/apply", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(applyProject),
-    });
-    if (response.ok) {
-      NotificationManager.success(
-        "Udało się zgłosić do projektu.",
-        "Sukces!",
-        3000
-      );
-    } else {
-      NotificationManager.error("Wystąpił błąd!", "Błąd!", 3000);
-    }
-  }
-  async function leaveProject(id: any) {
-    const leaveProjectObject = {
-      projectId: id,
-    };
-    const response = await fetch("http://localhost:3000/project/leave", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(leaveProjectObject),
-    });
-    if (!response.ok) {
-      NotificationManager.error("Wystąpił błąd!", "Błąd!", 3000);
-    }
-  }
-
   const followUser = async () => {
     const response = await fetch("http://localhost:3000/user/follows", {
       method: "POST",
@@ -241,7 +156,7 @@ const Profile = () => {
     } else {
       NotificationManager.success("Wystąpił sukces!", "Sukces!", 3000);
     }
-  }; 
+  };
 
   const unFollowUser = async () => {
     const response = await fetch("http://localhost:3000/user/follows", {
@@ -259,7 +174,7 @@ const Profile = () => {
     } else {
       NotificationManager.success("Wystąpił sukces!", "Sukces!", 3000);
     }
-  }; 
+  };
 
   const followHandler = () => {
     let userCopy = JSON.parse(JSON.stringify(user));
@@ -306,7 +221,7 @@ const Profile = () => {
             <p>{user.profileDesc}</p>
           </div>
           <div className={classes.buttonsArea}>
-            {user.Followers < 1 ? (
+            {user.Followers < 1 || user.Followers === undefined ? (
               <p>Obserwujący: 0</p>
             ) : (
               <p
@@ -319,7 +234,7 @@ const Profile = () => {
                 Obserwujący: {user.Followers}
               </p>
             )}
-            {user.Following < 1 ? (
+            {user.Following < 1 || user.Following === undefined ? (
               <p>Obserwuje: 0</p>
             ) : (
               <p
@@ -340,10 +255,10 @@ const Profile = () => {
               />
             )}
             <Button
-                onClick={() => {
-                  setShowModal(true);
-                  setModalContent("socials");
-                }}
+              onClick={() => {
+                setShowModal(true);
+                setModalContent("socials");
+              }}
               buttonText={
                 <span
                   style={{
@@ -367,45 +282,15 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className={classes.creations}>
-        <Button
-          buttonText="Wpisy na spotted"
-          className={showSpottedPosts ? "gray" : ""}
-          onClick={() => setShowSpottedPosts(false)}
-        />
-        <Button
-          buttonText="Projekty"
-          className={!showSpottedPosts ? "gray" : ""}
-          onClick={() => setShowSpottedPosts(true)}
-        />
-      </div>
       <div className={classes.profileContent}>
-        {showSpottedPosts &&
-          (projects.length < 1 ? (
-            <p>Brak projektów użytkownika.</p>
-          ) : (
-            projects.map((project) => {
-              return (
-                <div
-                  key={project.id}
-                  className={classes.postWrapper}
-                >
-                  <ProjectItem
-                    project={project}
-                    setShowModal={setShowModal}
-                    setModalProjectId={setProjectId}
-                    setModalContent={setModalContent}
-                    applyToProject={() => applyToProjectHandler(project)}
-                  />
-                </div>
-              );
-            })
-          ))}
-        {!showSpottedPosts &&
-          (posts.length < 1 ? (
-            <p className={classes.textCenter}>Brak postów użytkownika.</p>
-          ) : (
-            posts.map((post) => {
+        {posts.length < 1 ? (
+          <p className={classes.textCenter}>
+            Brak postów użytkownika do wyświetlenia.
+          </p>
+        ) : (
+          <>
+            <p>Posty użytkownika {user.username || "jajco"} na spotted</p>
+            {posts.map((post) => {
               return (
                 <div key={post.id} className={classes.postWrapper}>
                   <Wrapper className={classes.post}>
@@ -468,8 +353,9 @@ const Profile = () => {
                   </Wrapper>
                 </div>
               );
-            })
-          ))}
+            })}
+          </>
+        )}
       </div>
     </>
   );

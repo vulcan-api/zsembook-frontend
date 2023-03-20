@@ -12,6 +12,7 @@ const Sidebar = () => {
   let user: any;
   // @ts-ignore
   user = getUserObject("user_info");
+  console.log(user);
 
   const ref = useRef<HTMLDivElement>(null);
   const [isShown, setIsShown] = useState(false);
@@ -43,6 +44,25 @@ const Sidebar = () => {
   const searchHandler = () => {
     setIsSearching(!isSearching);
   };
+
+  let loginOrLogout =
+    Object.keys(user).length === 0
+      ? {
+          label: "Zaloguj się",
+          icon: <Icon.DoorClosed />,
+          onClick: () => {
+            logout();
+            setIsShown(false);
+          },
+        }
+      : {
+          label: "Wyloguj się",
+          icon: <Icon.DoorOpen />,
+          onClick: () => {
+            logout();
+            setIsShown(false);
+          },
+        };
 
   return (
     <>
@@ -125,10 +145,13 @@ const Sidebar = () => {
             className={isShown ? classes.show : classes.hidden}
             elements={[
               {
-                destination: Object.keys(user).length === 0 ? `/profile/${user.id}` : "/auth/login",
+                destination:
+                  Object.keys(user).length === 0
+                    ? "/auth/login"
+                    : `/profile/${user.id}`,
                 label: "Profil",
                 icon: <Icon.PersonCircle />,
-                className: "tooltip",
+                className: Object.keys(user).length === 0 ? "tooltip" : "",
                 tooltipText: "Zaloguj się, aby mieć dostęp",
                 isBlocked: true,
                 onClick: () => {
@@ -143,14 +166,7 @@ const Sidebar = () => {
                   setIsShown(false);
                 },
               },
-              {
-                label: "Wyloguj się",
-                icon: <Icon.DoorOpen />,
-                onClick: () => {
-                  logout();
-                  setIsShown(false);
-                },
-              },
+              loginOrLogout,
             ]}
           />
         </div>
