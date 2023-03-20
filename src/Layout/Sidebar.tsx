@@ -12,7 +12,6 @@ const Sidebar = () => {
   let user: any;
   // @ts-ignore
   user = getUserObject("user_info");
-  console.log(user);
 
   const ref = useRef<HTMLDivElement>(null);
   const [isShown, setIsShown] = useState(false);

@@ -1,0 +1,9 @@
+.walkCont {
+    width: 100%;
+    min-height: calc(100vh - 4rem);
+    display: flex;
+} 
+.iframe {
+    width: 100%;
+    height: 100%;
+}
