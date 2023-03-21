@@ -13,6 +13,7 @@ const Events = () => {
       date: new Date("2023-03-02:09:09.433Z"),
       title: "XI Piknik Naukowy",
       text: "Kolejna edycja jednego z największych wydarzeń w ZSEM we współpracy z WSB-NLU",
+      img: "https://zsem.edu.pl/img/piknik.jpeg",
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);

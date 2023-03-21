@@ -8,6 +8,7 @@ interface LinkProperties extends LinkBaseType {
   onClick?: any;
   mobileOnly?: boolean;
   colored?: boolean;
+  tooltipBtm?: string;
   tooltipText?: string;
   isBlocked?: boolean;
   className?: string;
@@ -29,6 +30,7 @@ const LinkSection = (props: {
               }
               style={item.isBlocked ? { cursor: "not-allowed" } : {}}
               tooltip-dsc={item.tooltipText}
+              tooltip-bottom={item.tooltipBtm}
             >
               {item.destination ? (
                 <NavLink

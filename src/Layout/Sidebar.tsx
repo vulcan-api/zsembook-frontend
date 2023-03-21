@@ -48,7 +48,7 @@ const Sidebar = () => {
     Object.keys(user).length === 0
       ? {
           label: "Zaloguj się",
-          icon: <Icon.DoorClosed />,
+          icon: <Icon.DoorClosedFill />,
           onClick: () => {
             logout();
             setIsShown(false);
@@ -56,7 +56,7 @@ const Sidebar = () => {
         }
       : {
           label: "Wyloguj się",
-          icon: <Icon.DoorOpen />,
+          icon: <Icon.DoorOpenFill />,
           onClick: () => {
             logout();
             setIsShown(false);
@@ -100,7 +100,7 @@ const Sidebar = () => {
                 {
                   destination: "/spotted",
                   label: "Spotted",
-                  icon: <Icon.PeopleFill />,
+                  icon: <Icon.ChatRightDotsFill />,
                 },
                 {
                   destination: "/offer",
@@ -115,7 +115,7 @@ const Sidebar = () => {
                 {
                   destination: "/chat",
                   label: "Komunikator",
-                  icon: <Icon.Chat />,
+                  icon: <Icon.ChatFill />,
                 },
                 {
                   destination: "/walk",
@@ -152,6 +152,7 @@ const Sidebar = () => {
                 icon: <Icon.PersonCircle />,
                 className: Object.keys(user).length === 0 ? "tooltip" : "",
                 tooltipText: "Zaloguj się, aby mieć dostęp",
+                tooltipBtm: "50%",
                 isBlocked: true,
                 onClick: () => {
                   setIsShown(false);

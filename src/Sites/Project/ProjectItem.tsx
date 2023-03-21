@@ -5,6 +5,7 @@ import React from "react";
 
 const ProjectItem = (props: any) => {
   const project = props.project;
+  console.log(project.img);
   return (
     <div style={props.listType}>
       <Wrapper className={classes.post}>
@@ -15,6 +16,7 @@ const ProjectItem = (props: any) => {
           </div>
         </div>
         <h2>{project.title}</h2>
+        <img src={project.img} alt={project.title} />
         <p className={classes.content}>{project.text}</p>
       </Wrapper>
     </div>

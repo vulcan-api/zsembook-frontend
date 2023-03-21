@@ -8,8 +8,14 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 //@ts-ignore
 import Modal from "../../Layout/ModalComponents/Modal";
+import getUserObject from "../../Lib/getUser";
+import { useNavigate } from "react-router-dom";
 
 const Spotted = () => {
+  const navigate = useNavigate();
+  let user: any;
+  // @ts-ignore
+  user = getUserObject("user_info");
   const [posts, setPosts] = useState([
     {
       id: 69,
@@ -118,7 +124,7 @@ const Spotted = () => {
         />
       )}
       <h1 className={classes.h1}>Spotted</h1>
-      <div className={classes.menu} >
+      <div className={classes.menu}>
         <div className={classes.managementIcons}>
           <Icon.List
             className={isActive ? "" : classes.active}
@@ -129,19 +135,35 @@ const Spotted = () => {
             onClick={() => changeListType()}
           />
         </div>
-        <Button buttonText="Dodaj post" className="alternate" 
-                          onClick={() => {
-                            setShowModal(true);
-                            setModalContent("addpost");
-                          }}
-/>
+        {Object.keys(user).length === 0 ? (
+          <Button
+            buttonText="Zaloguj się aby uzyskać dostęp"
+            onClick={() => {
+              navigate("/auth/login")
+            }}
+          />
+        ) : (
+          <Button
+            buttonText="Dodaj post"
+            className="alternate"
+            onClick={() => {
+              setShowModal(true);
+              setModalContent("addpost");
+            }}
+          />
+        )}
       </div>
       {!isLoading && (
         <>
           <div className={classes.posts}>
             {posts.map((post) => {
               return (
-                <div key={post.id} className={isActive ? classes.narrowContainer : classes.wideContainer}>
+                <div
+                  key={post.id}
+                  className={
+                    isActive ? classes.narrowContainer : classes.wideContainer
+                  }
+                >
                   <Wrapper className={classes.post}>
                     <div className={classes.topData}>
                       {post.isAnonymous ? (

@@ -9,6 +9,8 @@ export const classMgmt = (className: any) => {
         return classes.gray;
       case "gray disabled":
         return classes.grayDisabled;
+      case "tooltip":
+        return classes.default + " tooltip";
       default:
         return classes.default;
     }
@@ -16,10 +18,17 @@ export const classMgmt = (className: any) => {
 
 const Button = (props:any) => {
     return (
-        <button type={props.type || "button"} className={classes.button + ' ' + classMgmt(props.className)} onClick={props.onClick} disabled={props.disabled} style={props.style}>
-            {props.buttonText || "debiluZapomniałeśWpisać"}
-        </button>
-    )
+      <button
+        tooltip-dsc={props.tooltipDsc}
+        type={props.type || "button"}
+        className={classes.button + " " + classMgmt(props.className)}
+        onClick={props.onClick}
+        disabled={props.disabled}
+        style={props.style}
+      >
+        {props.buttonText || "debiluZapomniałeśWpisać"}
+      </button>
+    );
 }
 
 export default Button;

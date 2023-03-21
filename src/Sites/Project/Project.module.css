@@ -149,6 +149,10 @@
   padding-bottom: 1rem;
 }
 
+.post > img {
+  width: fit-content;
+}
+
 @keyframes pulse-black {
   0% {
     transform: scale(1);
