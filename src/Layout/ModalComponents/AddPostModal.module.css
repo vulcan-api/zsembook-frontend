@@ -5,7 +5,6 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .addForm > textarea {
@@ -37,9 +36,10 @@
     margin-bottom: 1rem;
 }
 
-.postOptions > input[type="date"],
-.postOptions > input[type="time"] {
-    width: 100%;
+.postOptions input[type="date"],
+.postOptions input[type="time"] {
+    flex: 1;
+    min-width: 40%;
     display: flex;
     align-items: center;
     padding: 8px 16px;
@@ -54,10 +54,22 @@
     position: relative;
 }
 
-.postOptions>input[type="date"]:focus,
-.postOptions>input[type="time"]:focus,
-.postOptions>input[type="date"]:active,
-.postOptions>input[type="time"]:active,
+@media screen and (max-width: 900px) {
+    .inputFlex {
+        flex-direction: column;
+    }
+}
+
+.inputFlex {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.postOptions input[type="date"]:focus,
+.postOptions input[type="time"]:focus,
+.postOptions input[type="date"]:active,
+.postOptions input[type="time"]:active,
 .addForm > textarea:focus,
 .addForm > textarea:active {
     outline: none;

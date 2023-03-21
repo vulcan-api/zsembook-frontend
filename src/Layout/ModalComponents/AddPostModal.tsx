@@ -63,44 +63,46 @@ const AddPostModal = (props: {onClose: Function, showSpinner: Function}) => {
         () => props.showSpinner(false)
     , [props]);
     return (
-        <>
-            <p>Dodaj post</p>
-            <form className={classes.addForm} onSubmit={addPost}>
-            <Textarea
-                onChange={maxLengthHandler}
-                id="post_value"
-                placeholder="Treść posta"
-                maxLength={300}
-                ref={postText}
+      <>
+        <p>Dodaj post</p>
+        <form className={classes.addForm} onSubmit={addPost}>
+          <Textarea
+            onChange={maxLengthHandler}
+            id="post_value"
+            placeholder="Treść posta"
+            maxLength={300}
+            ref={postText}
+          />
+          <div className={classes.postOptions}>
+            <Checkbox
+              id="anonimowyPost"
+              label="Anonimowy post"
+              ref={isAnonymous}
             />
-                <div className={classes.postOptions}>
-                    <Checkbox
-                        id="anonimowyPost"
-                        label="Anonimowy post"
-                        ref={isAnonymous}
-                    />
-                    <Checkbox
-                        id="dataIGodzina"
-                        label="Obecna data i godzina"
-                        onChange={disableTimeAndDate}
-                        checked={dateHourAuto}
-                    />
-                    <input
-                        type="date"
-                        name="data"
-                        id="data"
-                        disabled={dateHourAuto}
-                    />
-                    <input
-                        type="time"
-                        name="godzina"
-                        id="godzina"
-                        disabled={dateHourAuto}
-                    />
-                    <Button type="submit" buttonText="Dodaj post" />
-                </div>
-            </form>
-        </>
+            <Checkbox
+              id="dataIGodzina"
+              label="Obecna data i godzina"
+              onChange={disableTimeAndDate}
+              checked={dateHourAuto}
+            />
+            <div className={classes.inputFlex}>
+              <input
+                type="date"
+                name="data"
+                id="data"
+                disabled={dateHourAuto}
+              />
+              <input
+                type="time"
+                name="godzina"
+                id="godzina"
+                disabled={dateHourAuto}
+              />
+            </div>
+            <Button type="submit" buttonText="Dodaj post" />
+          </div>
+        </form>
+      </>
     );
 };
 

@@ -117,6 +117,7 @@ const Spotted = () => {
           modalContent={modalContent}
         />
       )}
+      <h1 className={classes.h1}>Spotted</h1>
       <div className={classes.menu} >
         <div className={classes.managementIcons}>
           <Icon.List

@@ -58,7 +58,6 @@
 }
 
 .post {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -137,6 +136,9 @@
     .loadMoreButton > button {
         width: 100%;
     } 
+    .centerOnPhone {
+        text-align: center;
+    }
 }
 
 @keyframes pulse-black {
@@ -151,4 +153,9 @@
     100% {
         transform: scale(1);
     }
+}
+
+.h1 {
+    text-align: center;
+    margin: 1rem 0;
 }

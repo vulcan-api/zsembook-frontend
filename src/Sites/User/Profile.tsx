@@ -99,7 +99,7 @@ const Profile = () => {
         credentials: "include",
       })
         .then((res) => res.json())
-        .then(console.log);
+        .then(setPosts);
     } catch (error) {
       console.error(error);
     }

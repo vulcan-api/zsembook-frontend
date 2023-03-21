@@ -168,6 +168,13 @@ const Sidebar = () => {
               loginOrLogout,
             ]}
           />
+          {Object.keys(user).length === 0 ? (
+            ""
+          ) : (
+            <p className={isShown ? classes.show : classes.hidden}>
+              Zalogowano jako {user.username}
+            </p>
+          )}
         </div>
       </div>
     </>
