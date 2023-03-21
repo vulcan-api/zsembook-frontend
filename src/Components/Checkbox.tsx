@@ -14,6 +14,7 @@ const Checkbox = React.forwardRef((props:any, ref) => {
           onChange={props.onChange}
           checked={props.checked}
           defaultChecked={props.defaultChecked}
+          required={props.required}
         />
         <label htmlFor={props.id} className={classes.label}>
           {props.label || "Default Label"}

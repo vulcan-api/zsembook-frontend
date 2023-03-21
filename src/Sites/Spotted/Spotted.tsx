@@ -195,17 +195,18 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {!post.isOwned && (
-                        <Icon.FlagFill
-                          onClick={() => {
-                            setShowModal(true);
-                            setModalPostId(post.id);
-                            setModalContent("report");
-                          }}
-                          className={classes.report}
-                        />
-                      )}
-                      {post.isOwned && (
+                      {post.author.id !== user.id &&
+                        Object.keys(user).length !== 0 && (
+                          <Icon.FlagFill
+                            onClick={() => {
+                              setShowModal(true);
+                              setModalPostId(post.id);
+                              setModalContent("report");
+                            }}
+                            className={classes.report}
+                          />
+                        )}
+                      {post.author.id === user.id && (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);
@@ -220,7 +221,11 @@ const Spotted = () => {
                     <div className={classes.bottomData}>
                       <div
                         onClick={() => {
-                          likeHandler(post);
+                          Object.keys(user).length !== 0 ? (
+                            likeHandler(post)
+                          ) : (
+                            <></>
+                          );
                         }}
                       >
                         {post.isLiked && (

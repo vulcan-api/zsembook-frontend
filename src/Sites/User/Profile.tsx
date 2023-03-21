@@ -16,8 +16,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const [projectId, setProjectId] = useState(-100);
-  const [postId, setPostId] = useState(-100);
+  const [projectId, setProjectId] = useState<number | undefined>();
+  const [postId, setPostId] = useState<number | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([
     {

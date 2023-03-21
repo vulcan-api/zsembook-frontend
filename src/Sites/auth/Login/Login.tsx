@@ -79,9 +79,9 @@ const Login = () => {
             navigate("/");
         } else {
             NotificationManager.error(
-                "Podałeś błędne dane",
-                "Wystąpił błąd",
-                3000
+              "Nie udało się zalogować. Sprawdź poprawność danych.",
+              "Wystąpił błąd",
+              3000
             );
         }
     };

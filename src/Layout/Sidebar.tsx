@@ -159,10 +159,13 @@ const Sidebar = () => {
                 },
               },
               {
-                destination: "/settings",
+                destination:
+                  Object.keys(user).length === 0
+                    ? "/auth/login"
+                    : `/settings`,
                 label: "Ustawienia",
                 icon: <Icon.Tools />,
-                  className: Object.keys(user).length === 0 ? "tooltip" : "",
+                className: Object.keys(user).length === 0 ? "tooltip" : "",
                 tooltipText: "Zaloguj się, aby mieć dostęp",
                 tooltipBtm: "50%",
                 isBlocked: true,

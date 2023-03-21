@@ -54,15 +54,6 @@ const Register = () => {
 
   const registerHandler = (event: any) => {
     event.preventDefault();
-    if (usernameRef.current.value.length < 2) {
-      NotificationManager.error(
-        "Wpisz nazwę użtkownika dłuższą niż 1 znak",
-        "Błąd przy rejestacji",
-        3000
-      );
-      return;
-    }
-
     if (nameRef.current.value.length < 2) {
       NotificationManager.error(
         "Wpisz imię dłuższe niż 1 znak",
@@ -75,6 +66,15 @@ const Register = () => {
     if (surnameRef.current.value.length < 2) {
       NotificationManager.error(
         "Wpisz nazwisko dłuższe niż 1 znak",
+        "Błąd przy rejestacji",
+        3000
+      );
+      return;
+    }
+
+    if (usernameRef.current.value.length < 2) {
+      NotificationManager.error(
+        "Wpisz nazwę użtkownika dłuższą niż 1 znak",
         "Błąd przy rejestacji",
         3000
       );
@@ -114,7 +114,8 @@ const Register = () => {
       redirect: "follow",
       credentials: "include",
     })
-      .then((response) => response.text())
+      .then((response) => response.json())
+      .then(console.log) 
       .then(() => {
         NotificationManager.success(
           "Udało się zarejestrować. Nie zapomnij potwierdzić rejestracji poprzez email!",
@@ -140,35 +141,35 @@ const Register = () => {
           <p>Zarejestruj się</p>
           <img src={registerImg} alt="cool register img" />
           <form className={classes.form} onSubmit={registerHandler}>
-              <>
-                <Input placeholder="Imię" ref={nameRef} require />
-                <Input placeholder="Nazwisko" ref={surnameRef} require />
-                <Input
-                  placeholder="Nazwa użytkownika"
-                  ref={usernameRef}
-                  require
-                />
-                <Input
-                  type="email"
-                  placeholder="E-Mail"
-                  ref={emailRef}
-                  require
-                />
-                <Input
-                  type="password"
-                  placeholder="Hasło"
-                  ref={passwordRef}
-                  require
-                />
-                <Input
-                  type="password"
-                  placeholder="Powtórz hasło"
-                  ref={repeatPasswordRef}
-                  require
-                />
-                <Checkbox id="acceptRegulamin" label="Akceptuję regulamin" />
-                <Button buttonText="Zarejestruj się" type="submit" />
-              </>
+            <>
+              <Input placeholder="Imię" ref={nameRef} require />
+              <Input placeholder="Nazwisko" ref={surnameRef} require />
+              <Input
+                placeholder="Nazwa użytkownika"
+                ref={usernameRef}
+                required
+              />
+              <Input
+                type="email"
+                placeholder="E-Mail"
+                ref={emailRef}
+                required
+              />
+              <Input
+                type="password"
+                placeholder="Hasło"
+                ref={passwordRef}
+                required
+              />
+              <Input
+                type="password"
+                placeholder="Powtórz hasło"
+                ref={repeatPasswordRef}
+                required
+              />
+              <Checkbox id="acceptRegulamin" label="Akceptuję regulamin" required/>
+              <Button buttonText="Zarejestruj się" type="submit" />
+            </>
           </form>
           <Link to={"/auth/login"}>Masz już konto? Zaloguj się!</Link>
         </div>

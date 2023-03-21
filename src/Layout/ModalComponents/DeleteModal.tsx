@@ -66,7 +66,7 @@ const DeleteModal = (props: any) => {
           setShowContent(true);
         });
     };
-    props.projectId !== -100 ? getRemovableProject() : getRemovablePost();
+    props.projectId !== undefined ? getRemovableProject() : getRemovablePost();
   }, [props]);
 
   const deleteProject = async (projectId: number) => {
@@ -106,9 +106,9 @@ const DeleteModal = (props: any) => {
 
   return (
     <>
-      <p>Usuń {props.projectId !== -100 ? "projekt" : "post"}</p>
+      <p>Usuń {props.projectId !== undefined ? "projekt" : "post"}</p>
       {showContent &&
-        (props.projectId !== -100
+        (props.projectId !== undefined
           ? removableContent.map((project, index) => {
               return (
                 <div key={index}>
