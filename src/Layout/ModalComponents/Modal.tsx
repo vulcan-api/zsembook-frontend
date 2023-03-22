@@ -10,6 +10,7 @@ import FollowersModal from "./FollorwersModal";
 import FollowingModal from "./FollowingModal";
 import SocialsModal from "./SocialsModal";
 import AddPostModal from "./AddPostModal";
+import AddQuestion from "./AddQuestion";
 
 const Modal = (props: any) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -79,6 +80,12 @@ const Modal = (props: any) => {
           )}
           {props.modalContent === "addpost" && (
             <AddPostModal
+              onClose={props.onClose}
+              showSpinner={showSpinner}
+            />
+          )}
+          {props.modalContent === "addquestion" && (
+            <AddQuestion
               onClose={props.onClose}
               showSpinner={showSpinner}
             />

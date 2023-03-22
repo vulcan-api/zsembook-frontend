@@ -18,7 +18,6 @@ const Faq = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState("report");
-    const [modalPostId, setModalPostId] = useState(-100);
 
     const getQuestions = useCallback(async () => {
         setIsLoading(true);
@@ -37,7 +36,6 @@ const Faq = () => {
     return (<>
         {showModal && (
             <Modal
-            postId={modalPostId}
             onBgClick={closeModal}
             onClose={closeModal}
             modalContent={modalContent}
@@ -56,7 +54,12 @@ const Faq = () => {
         <div>
             <p className={classes.buttonDesc}>Nie ma tutaj nurtującego Cię pytania?</p>
             <div className={classes.buttonCont}>
-                <Button buttonText="Zadaj pytanie" onClick={() => setShowModal(true)} />
+                <Button buttonText="Zadaj pytanie" onClick={
+                    () => {
+                    setShowModal(true);
+                    setModalContent("addquestion");
+                    }
+                } />
             </div>
         </div>
     </>)

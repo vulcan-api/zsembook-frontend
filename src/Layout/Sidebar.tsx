@@ -79,6 +79,13 @@ const Sidebar = () => {
           <NavLink to="/">
             <h1>ZSEMBook</h1>
           </NavLink>
+          {Object.keys(user).length === 0 ? (
+            ""
+          ) : (
+            <p className={isShown ? classes.show : classes.hidden}>
+              Zalogowano jako {user.username}
+            </p>
+          )}
         </div>
         <div>
           <div>
@@ -109,13 +116,8 @@ const Sidebar = () => {
                 },
                 {
                   destination: "/events",
-                  label: "Eventy",
+                  label: "Wydarzenia",
                   icon: <Icon.CardChecklist />,
-                },
-                {
-                  destination: "/chat",
-                  label: "Komunikator",
-                  icon: <Icon.ChatFill />,
                 },
                 {
                   destination: "/walk",
@@ -176,13 +178,6 @@ const Sidebar = () => {
               loginOrLogout,
             ]}
           />
-          {Object.keys(user).length === 0 ? (
-            ""
-          ) : (
-            <p className={isShown ? classes.show : classes.hidden}>
-              Zalogowano jako {user.username}
-            </p>
-          )}
         </div>
       </div>
     </>
