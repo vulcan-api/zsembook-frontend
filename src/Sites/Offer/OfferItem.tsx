@@ -264,7 +264,7 @@ const OfferItem = () => {
                             );
                         })}
                     </ul>
-                    <h2 className={classes.h2}>Kwalifikajce</h2>
+                    <h2 className={classes.h2}>Kwalifikacje</h2>
                     <ul>
                         {(profiles as any)[profile].qualifications.map((qual: any) => {
                             return (
