@@ -26,7 +26,7 @@ const Button = (props:any) => {
         disabled={props.disabled}
         style={props.style}
       >
-        {props.buttonText || "debiluZapomniałeśWpisać"}
+        {props.icon}{props.buttonText || "debiluZapomniałeśWpisać"}
       </button>
     );
 }

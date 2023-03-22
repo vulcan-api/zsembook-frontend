@@ -9,6 +9,9 @@
     width: 100% !important;
     justify-content: center;
   }
+  .topData {
+    justify-content: space-around !important;
+  }
 }
 
 .narrowContainer {

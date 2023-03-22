@@ -221,33 +221,35 @@ const Profile = () => {
             <p>{user.profileDesc}</p>
           </div>
           <div className={classes.buttonsArea}>
-            {user.Followers < 1 || user.Followers === undefined ? (
-              <p>Obserwujący: 0</p>
-            ) : (
-              <p
-                onClick={() => {
-                  setShowModal(true);
-                  setModalContent("followers");
-                }}
-                className={classes.activeFollowing}
-              >
-                Obserwujący: {user.Followers}
-              </p>
-            )}
-            {user.Following < 1 || user.Following === undefined ? (
-              <p>Obserwuje: 0</p>
-            ) : (
-              <p
-                onClick={() => {
-                  setShowModal(true);
-                  setModalContent("following");
-                }}
-                className={classes.activeFollowing}
-              >
-                Obserwuje: {user.Following}
-              </p>
-            )}
-            {loggedUser.id !== +userId! && (
+            <div className={classes.followerFlex}>
+              {user.Followers < 1 || user.Followers === undefined ? (
+                <p>Obserwujący: 0</p>
+              ) : (
+                <p
+                  onClick={() => {
+                    setShowModal(true);
+                    setModalContent("followers");
+                  }}
+                  className={classes.activeFollowing}
+                >
+                  Obserwujący: {user.Followers}
+                </p>
+              )}
+              {user.Following < 1 || user.Following === undefined ? (
+                <p>Obserwuje: 0</p>
+              ) : (
+                <p
+                  onClick={() => {
+                    setShowModal(true);
+                    setModalContent("following");
+                  }}
+                  className={classes.activeFollowing}
+                >
+                  Obserwuje: {user.Following}
+                </p>
+              )}
+            </div>
+            {loggedUser.id !== +userId! && loggedUser.id !== undefined && (
               <Button
                 className={user.isAlreadyFollowed ? "alternate" : ""}
                 buttonText={user.isAlreadyFollowed ? "Obserwujesz" : "Obserwuj"}

@@ -2,6 +2,7 @@ import Wrapper from "../../Layout/Wrapper";
 import classes from "./Project.module.css";
 import * as Icon from "react-bootstrap-icons";
 import React from "react";
+import Button from "../../Components/Button";
 
 const ProjectItem = (props: any) => {
   const project = props.project;
@@ -16,8 +17,11 @@ const ProjectItem = (props: any) => {
           </div>
         </div>
         <h2>{project.title}</h2>
-        <img src={project.img} alt={project.title} />
         <p className={classes.content}>{project.text}</p>
+        <div className={classes.buttonFlex}>
+          <Button buttonText="Facebook" icon={<Icon.Facebook />} />
+          <Button buttonText="Strona szkoły" icon={<Icon.BrowserFirefox />} className="alternate"/>
+        </div>
       </Wrapper>
     </div>
   );

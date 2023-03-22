@@ -1,0 +1,34 @@
+.heading {
+    margin-bottom: 1rem;
+}
+
+.question {
+    color: var(--add1-500);
+    font-size: 1.5rem;
+    font-family: 'Zen dots';
+}
+
+.answer {
+    font-size: 1.2rem;
+}
+
+.questionCont {
+    margin-bottom: 1rem;
+}
+
+.buttonCont {
+    max-width: 15rem;
+}
+
+.buttonDesc {
+    margin-bottom: .5rem;
+}
+
+@media screen and (max-width: 900px) {
+    .question, .answer {
+        text-align: center;
+    } 
+    .buttonCont {
+        margin: auto;
+    }
+}

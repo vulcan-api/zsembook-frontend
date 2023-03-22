@@ -20,6 +20,7 @@ import ErrorElement from './Layout/ErrorElement';
 import Walk from './Sites/Walk/Walk';
 import Offer from './Sites/Offer/Offer';
 import OfferItem from './Sites/Offer/OfferItem';
+import Faq from './Sites/Faq/Faq';
 
 const router = createBrowserRouter([
   {
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: "faq",
-        element: <ComingSoon />,
+        element: <Faq />,
       },
       {
         path: "settings",

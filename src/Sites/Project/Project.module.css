@@ -145,8 +145,6 @@
 .content {
   font-size: 2rem;
   color: var(--main-400);
-  border-bottom: 1px solid var(--main-100);
-  padding-bottom: 1rem;
 }
 
 .post > img {
@@ -165,4 +163,21 @@
   100% {
     transform: scale(1);
   }
+}
+
+.buttonFlex {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--main-100);
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.buttonFlex > button {
+  flex: 1;
+  min-width: 200px;
+  overflow: hidden;
 }

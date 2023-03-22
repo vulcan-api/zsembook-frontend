@@ -145,7 +145,6 @@ const Spotted = () => {
         ) : (
           <Button
             buttonText="Dodaj post"
-            className="alternate"
             onClick={() => {
               setShowModal(true);
               setModalContent("addpost");
@@ -249,7 +248,7 @@ const Spotted = () => {
             })}
           </div>
           <div className={classes.loadMoreButton}>
-            <Button buttonText="Więcej postów" onClick={downloadMorePosts} />
+            <Button buttonText="Więcej postów" onClick={downloadMorePosts} className="alternate"/>
           </div>
         </>
       )}
