@@ -6,7 +6,6 @@ import Button from "../../Components/Button";
 
 const ProjectItem = (props: any) => {
   const project = props.project;
-  console.log(project.img);
   return (
     <div style={props.listType}>
       <Wrapper className={classes.post}>
@@ -20,7 +19,7 @@ const ProjectItem = (props: any) => {
         <p className={classes.content}>{project.text}</p>
         <div className={classes.buttonFlex}>
           <Button buttonText="Facebook" icon={<Icon.Facebook />} />
-          <Button buttonText="Strona szkoły" icon={<Icon.BrowserFirefox />} className="alternate"/>
+          <Button buttonText="Strona szkoły" icon={<Icon.BrowserFirefox />} className="alternate" onClick={() => {window.location.replace(project.website)}}/>
         </div>
       </Wrapper>
     </div>
