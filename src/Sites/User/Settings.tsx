@@ -5,7 +5,7 @@ import Input from "../../Components/Input";
 import Textarea from "../../Components/Textarea";
 import Button from "../../Components/Button";
 import defaultAvatar from "./Graphics/default.png";
-import { getTheme, toggleTheme } from "../../Lib/getUser";
+import { getTheme, toggleTheme } from "../../Lib/Theme";
 import {
   BrightnessHighFill,
   MoonFill,

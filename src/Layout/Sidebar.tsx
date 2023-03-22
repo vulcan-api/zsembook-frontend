@@ -6,13 +6,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
 import Searchbar from "../Components/Searchbar";
-import getUserObject from "../Lib/getUser";
+import User from "../Lib/User";
 
 const Sidebar = () => {
-  let user: any;
-  // @ts-ignore
-  user = getUserObject("user_info");
-
   const ref = useRef<HTMLDivElement>(null);
   const [isShown, setIsShown] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -45,18 +41,18 @@ const Sidebar = () => {
   };
 
   let loginOrLogout =
-    Object.keys(user).length === 0
+    User.isLoggined
       ? {
-          label: "Zaloguj się",
-          icon: <Icon.DoorClosedFill />,
+          label: "Wyloguj się",
+          icon: <Icon.DoorOpenFill />,
           onClick: () => {
             logout();
             setIsShown(false);
           },
         }
       : {
-          label: "Wyloguj się",
-          icon: <Icon.DoorOpenFill />,
+          label: "Zaloguj się",
+          icon: <Icon.DoorClosedFill />,
           onClick: () => {
             logout();
             setIsShown(false);
@@ -140,30 +136,24 @@ const Sidebar = () => {
             elements={[
               {
                 destination:
-                  Object.keys(user).length === 0
-                    ? "/auth/login"
-                    : `/profile/${user.id}`,
+                    User.isLoggined
+                    ? `/profile/${User.data.id}`
+                    : "/auth/login",
                 label: "Profil",
                 icon: <Icon.PersonCircle />,
-                className: Object.keys(user).length === 0 ? "tooltip" : "",
-                tooltipText: "Zaloguj się, aby mieć dostęp",
-                tooltipBtm: "50%",
-                isBlocked: true,
+                usersOnly: true,
                 onClick: () => {
                   setIsShown(false);
                 },
               },
               {
                 destination:
-                  Object.keys(user).length === 0
-                    ? "/auth/login"
-                    : `/settings`,
+                    User.isLoggined
+                    ? `/settings`
+                    : "/auth/login",
                 label: "Ustawienia",
                 icon: <Icon.Tools />,
-                className: Object.keys(user).length === 0 ? "tooltip" : "",
-                tooltipText: "Zaloguj się, aby mieć dostęp",
-                tooltipBtm: "50%",
-                isBlocked: true,
+                usersOnly: true,
                 onClick: () => {
                   setIsShown(false);
                 },

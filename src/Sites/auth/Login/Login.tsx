@@ -7,6 +7,7 @@ import loginImg from "./Graphics/loginImg.png";
 import {Link, useNavigate} from "react-router-dom";
 //@ts-ignore
 import {NotificationManager} from "react-notifications";
+import User from "../../../Lib/User";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -76,6 +77,7 @@ const Login = () => {
             });
         console.log(response)
         if (response.token) {
+            User.getUser();
             navigate("/");
         } else {
             NotificationManager.error(

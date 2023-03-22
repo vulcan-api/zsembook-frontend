@@ -37,3 +37,27 @@
         display: none;
     }
 }
+
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover::after {
+  content: attr(tooltip-dsc);
+  font-size: 1rem;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 20%;
+  left: -5px;
+  min-height: 2rem;
+  background-color: var(--add2-500);
+  color: var(--bg-clr);
+  padding: .25rem;
+  border-radius: .25rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

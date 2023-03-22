@@ -3,9 +3,12 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../Layout/Sidebar";
 import classes from "./Main.module.css";
 //@ts-ignore
-import { executeTheme } from "../Lib/getUser";
+import { executeTheme } from "../Lib/Theme";
+import User from "../Lib/User";
 
 const Main = (props: {removeWrapper?: boolean}) => {
+  User.getUser();
+
   useEffect(() => {
     executeTheme();
   }, []);

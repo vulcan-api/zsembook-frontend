@@ -7,8 +7,8 @@ specifiers:
   '@types/js-cookie': ^3.0.3
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.10
+  cookie-ts: ^1.0.1
   cross-env: ^7.0.3
-  js-cookie: ^3.0.1
   localforage: ^1.10.0
   match-sorter: ^6.3.1
   matrix-js-sdk: ^23.2.0
@@ -31,7 +31,7 @@ dependencies:
   '@types/js-cookie': 3.0.3
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.10
-  js-cookie: 3.0.1
+  cookie-ts: 1.0.1
   localforage: 1.10.0
   match-sorter: 6.3.1
   matrix-js-sdk: 23.2.0
@@ -3780,6 +3780,10 @@ packages:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
     dev: false
 
+  /cookie-ts/1.0.1:
+    resolution: {integrity: sha512-uvnEgH5LAQrsI6WKvztkWNhbPva8K7TAAXuseGyh2svx5IKSHThHRdDHy/GhHqW1w/FbKhOjScdcceuwjR0O0w==}
+    dev: false
+
   /cookie/0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
@@ -6704,11 +6708,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-    dev: false
-
-  /js-cookie/3.0.1:
-    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
-    engines: {node: '>=12'}
     dev: false
 
   /js-sdsl/4.3.0:

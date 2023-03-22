@@ -8,14 +8,12 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 //@ts-ignore
 import Modal from "../../Layout/ModalComponents/Modal";
-import getUserObject from "../../Lib/getUser";
 import { useNavigate } from "react-router-dom";
+import User from "../../Lib/User";
 
 const Spotted = () => {
   const navigate = useNavigate();
-  let user: any;
   // @ts-ignore
-  user = getUserObject("user_info");
   const [posts, setPosts] = useState([
     {
       id: 69,
@@ -135,19 +133,19 @@ const Spotted = () => {
             onClick={() => changeListType()}
           />
         </div>
-        {Object.keys(user).length === 0 ? (
-          <Button
-            buttonText="Zaloguj się aby uzyskać dostęp"
-            onClick={() => {
-              navigate("/auth/login")
-            }}
-          />
-        ) : (
+        {User.isLoggined ? (
           <Button
             buttonText="Dodaj post"
             onClick={() => {
               setShowModal(true);
               setModalContent("addpost");
+            }}
+          />
+        ) : (
+          <Button
+            buttonText="Zaloguj się aby uzyskać dostęp"
+            onClick={() => {
+              navigate("/auth/login")
             }}
           />
         )}
@@ -194,8 +192,8 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {post.author.id !== user.id &&
-                        Object.keys(user).length !== 0 && (
+                      {!User.isItMe(post.author.id) &&
+                        User.isLoggined && (<>
                           <Icon.FlagFill
                             onClick={() => {
                               setShowModal(true);
@@ -204,26 +202,22 @@ const Spotted = () => {
                             }}
                             className={classes.report}
                           />
-                        )}
-                      {post.author.id === user.id && (
-                        <Icon.TrashFill
-                          onClick={() => {
-                            setShowModal(true);
-                            setModalPostId(post.id);
-                            setModalContent("delete");
-                          }}
-                          className={classes.report}
-                        />
-                      )}
+                          <Icon.TrashFill
+                            onClick={() => {
+                              setShowModal(true);
+                              setModalPostId(post.id);
+                              setModalContent("delete");
+                            }}
+                            className={classes.report}
+                          />
+                      </>)}
                     </div>
                     <div className={classes.content}>{post.text}</div>
                     <div className={classes.bottomData}>
                       <div
                         onClick={() => {
-                          Object.keys(user).length !== 0 ? (
+                          User.isLoggined && (
                             likeHandler(post)
-                          ) : (
-                            <></>
                           );
                         }}
                       >

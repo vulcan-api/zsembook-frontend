@@ -10,7 +10,7 @@ import { NotificationManager } from "react-notifications";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import Wrapper from "../../Layout/Wrapper";
 import Modal from "../../Layout/ModalComponents/Modal";
-import getUserObject from "../../Lib/getUser";
+import User from "../../Lib/User";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -48,8 +48,6 @@ const Profile = () => {
     Following: 0,
     isAlreadyFollowed: true,
   });
-
-  const loggedUser = getUserObject();
 
   const { userId } = useParams();
 
@@ -249,7 +247,7 @@ const Profile = () => {
                 </p>
               )}
             </div>
-            {loggedUser.id !== +userId! && loggedUser.id !== undefined && (
+            {User.isItMe(+userId!) || (
               <Button
                 className={user.isAlreadyFollowed ? "alternate" : ""}
                 buttonText={user.isAlreadyFollowed ? "Obserwujesz" : "Obserwuj"}
@@ -308,7 +306,7 @@ const Profile = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {post.author.id === loggedUser.id ? (
+                      {User.isItMe(post.author.id) ? (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Wrapper from "../../Layout/Wrapper";
-import getUserObject from "../../Lib/getUser";
+import User from "../../Lib/User";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import * as Icon from "react-bootstrap-icons";
 //@ts-ignore
@@ -29,9 +29,7 @@ const Homepage = () => {
       username: "jajco",
     },
   ]);
-  let user: any;
   // @ts-ignore
-  user = getUserObject("user_info");
 
   async function getPosts() {
     setIsLoading(true);
@@ -96,9 +94,9 @@ const Homepage = () => {
       {isLoading && <LoadingSpinner />}
       <div>
         <h1>
-          {Object.keys(user).length === 0
+          {User.isLoggined
             ? `Witaj na ZSEMBook!`
-            : `Witaj ${user.name} ${user.surname}!`}
+            : `Witaj ${User.data.name} ${User.data.surname}!`}
         </h1>
       </div>
       <Wrapper>
