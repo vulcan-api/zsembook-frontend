@@ -21,7 +21,7 @@ const Login = () => {
 
     const fetchPosts = async () => {
         const throwObject = {};
-        await fetch("http://localhost:3000/spotted/post", {
+        await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/spotted/post`, {
             method: "GET",
             credentials: "include",
         })
@@ -39,7 +39,7 @@ const Login = () => {
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        fetch("http://localhost:3000/auth/logout", {
+        fetch(`http://${process.env.REACT_APP_REQUEST_URL}/auth/logout`, {
             method: "POST",
             headers: myHeaders,
             redirect: "follow",
@@ -59,7 +59,7 @@ const Login = () => {
             password: passwordRef.current.value,
         });
 
-        const response = await fetch("http://localhost:3000/auth/login", {
+        const response = await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/auth/login`, {
             method: "POST",
             headers: myHeaders,
             body: raw,

@@ -39,7 +39,7 @@ const Settings = () => {
   async function getSettings() {
     setIsLoading(true);
     try {
-      await fetch("http://localhost:3000/user/settings/get", {
+      await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/user/settings/get`, {
         method: "GET",
         credentials: "include",
       })
@@ -63,7 +63,7 @@ const Settings = () => {
     const filteredSettings = Object.fromEntries(Object.entries(settings).filter(([_, v]) => v !== ""));
     const throwObject = {};
     fetch(
-      "http://localhost:3000/user/settings/",
+      `http://${process.env.REACT_APP_REQUEST_URL}/user/settings/`,
       {
         method: "PATCH",
         headers: {

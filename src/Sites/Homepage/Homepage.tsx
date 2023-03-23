@@ -34,7 +34,7 @@ const Homepage = () => {
   async function getPosts() {
     setIsLoading(true);
     try {
-      await fetch("http://localhost:3000/spotted/post?postTake=4", {
+      await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/spotted/post?postTake=4`, {
         method: "GET",
         credentials: "include",
       })
@@ -68,7 +68,7 @@ const Homepage = () => {
   }
 
   const like = async (id: Number) => {
-    await fetch(`http://localhost:3000/spotted/post/${id}/like`, {
+    await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`, {
       method: "POST",
       credentials: "include",
     })
@@ -79,7 +79,7 @@ const Homepage = () => {
   };
 
   const unlike = async (id: Number) => {
-    await fetch(`http://localhost:3000/spotted/post/${id}/unlike`, {
+    await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`, {
       method: "POST",
       credentials: "include",
     })

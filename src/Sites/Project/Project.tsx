@@ -29,7 +29,7 @@ const Events = () => {
   async function getAllProjects() {
     setIsLoading(true);
     try {
-      await fetch("http://localhost:3000/event?take=20", {
+      await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/event?take=20`, {
         method: "GET",
         credentials: "include",
       })
