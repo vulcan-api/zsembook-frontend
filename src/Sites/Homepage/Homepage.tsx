@@ -95,8 +95,8 @@ const Homepage = () => {
       <div>
         <h1>
           {User.isLoggined
-            ? `Witaj na ZSEMBook!`
-            : `Witaj ${User.data.name} ${User.data.surname}!`}
+            ? `Witaj ${User.data.name} ${User.data.surname}!`
+            : `Witaj na ZSEMBook!`}
         </h1>
       </div>
       <Wrapper>
