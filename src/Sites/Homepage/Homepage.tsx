@@ -94,7 +94,7 @@ const Homepage = () => {
       {isLoading && <LoadingSpinner />}
       <div>
         <h1>
-          {User.isLoggined
+          {User.isLogged
             ? `Witaj ${User.data.name} ${User.data.surname}!`
             : `Witaj na ZSEMBook!`}
         </h1>

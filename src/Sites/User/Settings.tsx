@@ -5,7 +5,7 @@ import Input from "../../Components/Input";
 import Textarea from "../../Components/Textarea";
 import Button from "../../Components/Button";
 import defaultAvatar from "./Graphics/default.png";
-import { getTheme, toggleTheme } from "../../Lib/Theme";
+import Theme from "../../Lib/Theme";
 import {
   BrightnessHighFill,
   MoonFill,
@@ -19,7 +19,7 @@ import { NotificationManager } from "react-notifications";
 
 const Settings = () => {
   const navigate = useNavigate();
-  const [darkTheme, setDarkTheme] = useState(getTheme());
+  const [darkTheme, setDarkTheme] = useState(Theme.get());
   const [isLoading, setIsLoading] = useState(true);
   const [settings, setSettings] = useState({
     avatar: new File([new Blob()], "avatar"),
@@ -54,7 +54,7 @@ const Settings = () => {
 
   const updateTheme = () => {
     setDarkTheme(!darkTheme);
-    toggleTheme();
+    Theme.toggle();
     return;
   };
 
@@ -73,7 +73,6 @@ const Settings = () => {
         body: JSON.stringify(filteredSettings),
       }
     )
-      .then((res) => res.text())
       .then(() => setIsLoading(true))
       .then(() => {
         NotificationManager.success(
@@ -165,7 +164,7 @@ const Settings = () => {
             </div>
             <div className={classes.twoInputs}>
               <Input
-                placeholder="Nazwa kanału na youtubeie"
+                placeholder="Nazwa kanału na youtubie"
                 value={settings.youtube}
                 onChange={handleYTChange}
               />

@@ -5,7 +5,7 @@
 .question {
     color: var(--add1-500);
     font-size: 1.5rem;
-    font-family: 'Zen dots';
+    font-family: 'Quicksand';
 }
 
 .answer {
@@ -31,4 +31,57 @@
     .buttonCont {
         margin: auto;
     }
+  .menu {
+    width: 100% !important;
+    justify-content: center;
+  }
+}
+
+.active {
+  color: var(--add1-500);
+}
+
+.menu {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  color: var(--main-300);
+  gap: 16px;
+  width: fit-content;
+  margin-bottom: 1rem;
+}
+
+.menu > div {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu svg {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.questionsList {
+    padding-left: 2rem;
+}
+
+.questionsList .questionElem::marker {
+    color: var(--add1-500);
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.menu > button {
+  font-size: 20px;
+  padding: 8px 16px;
+  border-width: 2px;
+  border-radius: 6px;
+}
+
+.managementIcons div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: .5rem;
 }

@@ -20,7 +20,7 @@ const LinkSection = (props: {
     <>
       <ul className={`${classes.linkList} ${props.className}`}>
         {props.elements.map((item, index) => {
-          const logged = (item.usersOnly && User.isLoggined) || !item.usersOnly;
+          const logged = (item.usersOnly && User.isLogged) || !item.usersOnly;
           return (
             <li
               key={index + 1}
@@ -30,8 +30,8 @@ const LinkSection = (props: {
                 <NavLink
                   to={logged ? item.destination : "/auth/login"}
                   className={`${classes.link} ${logged ? "" : classes.tooltip}`}
-                  tooltip-dsc={!logged && "Zaloguj się, aby uzyskać dostęp"}
-                  tooltip-bottom={!logged && "50%"}
+                  tooltip-dsc={logged ? "" : "Zaloguj się, aby uzyskać dostęp"}
+                  tooltip-bottom={logged ? "" : "50%"}
                   style={({ isActive }) =>
                     isActive
                       ? { color: "var(--add1-500)" }
