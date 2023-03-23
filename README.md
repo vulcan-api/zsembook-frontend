@@ -1,4 +1,4 @@
-# BasedBook frontend
+# ZSEMBook frontend
 ![](https://img.shields.io/github/actions/workflow/status/nasz-elektryk/basedbook-frontend/tests.yml?logo=github-actions&logoColor=white&style=for-the-badge)
 ![](https://img.shields.io/github/license/nasz-elektryk/basedbook-frontend?logo=gnu&style=for-the-badge)
 ![](https://img.shields.io/github/package-json/v/nasz-elektryk/basedbook-frontend?color=yellow&logo=pnpm&logoColor=white&style=for-the-badge)
