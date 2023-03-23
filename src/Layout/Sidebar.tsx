@@ -41,7 +41,7 @@ const Sidebar = () => {
   };
 
   let loginOrLogout =
-    User.isLoggined
+    User.isLogged
       ? {
           label: "Wyloguj się",
           icon: <Icon.DoorOpenFill />,
@@ -136,7 +136,7 @@ const Sidebar = () => {
             elements={[
               {
                 destination:
-                    User.isLoggined
+                    User.isLogged
                     ? `/profile/${User.data.id}`
                     : "/auth/login",
                 label: "Profil",
@@ -148,7 +148,7 @@ const Sidebar = () => {
               },
               {
                 destination:
-                    User.isLoggined
+                    User.isLogged
                     ? `/settings`
                     : "/auth/login",
                 label: "Ustawienia",

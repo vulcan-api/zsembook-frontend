@@ -133,7 +133,7 @@ const Spotted = () => {
             onClick={() => changeListType()}
           />
         </div>
-        {User.isLoggined ? (
+        {User.isLogged ? (
           <Button
             buttonText="Dodaj post"
             onClick={() => {
@@ -193,7 +193,7 @@ const Spotted = () => {
                           : new Date(post.createdAt).getMinutes()}
                       </div>
                       {!User.isItMe(post.author.id) &&
-                        User.isLoggined && (<>
+                        User.isLogged && (<>
                           <Icon.FlagFill
                             onClick={() => {
                               setShowModal(true);
@@ -216,7 +216,7 @@ const Spotted = () => {
                     <div className={classes.bottomData}>
                       <div
                         onClick={() => {
-                          User.isLoggined && (
+                          User.isLogged && (
                             likeHandler(post)
                           );
                         }}

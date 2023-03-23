@@ -1,4 +1,35 @@
-import User from "./User";
+import Cookie from "cookie-ts";
+
+export default abstract class Theme {
+  public static theme: boolean;
+
+  public static get(): boolean {
+    this.theme = Cookie.get('theme') ? true : false;
+    return this.theme;
+  }
+
+  public static set(theme: boolean) {
+    theme ? Cookie.set('theme', '1', 60 * 60 * 24 * 365) : Cookie.clear('theme');
+  }
+
+  public static toggle() {
+    if(this.theme) {
+      this.set(false);
+      setLight();
+    }
+    else {
+      this.set(true);
+      setDark();
+    }
+  }
+
+  public static execute() {
+    if(this.theme === undefined)
+      this.get();
+    if(this.theme === true)
+      setDark();
+  }
+}
 
 const updateMains = (dark: boolean) => {
   const mainColor = dark ? 'light-' : 'black-';
@@ -21,25 +52,4 @@ const setDark = () => {
   setVariable('bg-clr', 'dark');
   setVariable('txt-clr', 'light');
   updateMains(true);
-}
-
-export function executeTheme() {
-  if(getTheme() === true)
-    setDark();
-}
-
-export function getTheme(): boolean {
-  return User.theme;
-}
-
-export function toggleTheme() {
-  if(User.theme) {
-    //User.updateUser({theme: false});
-    setLight();
-  }
-  else {
-    //User.updateUser({theme: true});
-    setDark();
-  }
-
 }
