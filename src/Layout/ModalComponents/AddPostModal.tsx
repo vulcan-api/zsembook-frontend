@@ -34,7 +34,7 @@ const AddPostModal = (props: {onClose: Function, showSpinner: Function}) => {
         };
 
         const throwObject = {};
-        await fetch(`https://${process.env.REACT_APP_REQUEST_URL}/spotted/post`, {
+        await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

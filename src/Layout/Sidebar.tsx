@@ -18,7 +18,7 @@ const Sidebar = () => {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    fetch(`https://${process.env.REACT_APP_REQUEST_URL}/auth/logout`, {
+    fetch(`${process.env.REACT_APP_REQUEST_URL}/auth/logout`, {
       method: "POST",
       headers: myHeaders,
       redirect: "follow",

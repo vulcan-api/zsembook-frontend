@@ -13,7 +13,7 @@ const AddQuestion = (props: {onClose: Function, showSpinner: Function}) => {
         event.preventDefault();
 
         const throwObject = {};
-        await fetch(`https://${process.env.REACT_APP_REQUEST_URL}/faq/ask`, {
+        await fetch(`${process.env.REACT_APP_REQUEST_URL}/faq/ask`, {
             method: "POST", headers: { "Content-Type": "application/json", },
             credentials: "include",
             body: JSON.stringify({question: questionRef.current?.value}),

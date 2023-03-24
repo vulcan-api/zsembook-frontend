@@ -6,14 +6,12 @@ import Wrapper from "../../Layout/Wrapper";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
-//@ts-ignore
 import Modal from "../../Layout/ModalComponents/Modal";
 import { useNavigate } from "react-router-dom";
 import User from "../../Lib/User";
 
 const Spotted = () => {
   const navigate = useNavigate();
-  // @ts-ignore
   const [posts, setPosts] = useState([
     {
       id: 69,
@@ -59,7 +57,7 @@ const Spotted = () => {
   }
 
   const like = async (id: Number) => {
-    await fetch(`https://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`, {
+    await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`, {
       method: "POST",
       credentials: "include",
     })
@@ -70,7 +68,7 @@ const Spotted = () => {
   };
 
   const unlike = async (id: Number) => {
-    await fetch(`https://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`, {
+    await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`, {
       method: "POST",
       credentials: "include",
     })
@@ -84,7 +82,7 @@ const Spotted = () => {
     setIsLoading(true);
     try {
       await fetch(
-        `https://${process.env.REACT_APP_REQUEST_URL}/spotted/post?postTake=${spottedPostsCount}`,
+        `${process.env.REACT_APP_REQUEST_URL}/spotted/post?postTake=${spottedPostsCount}`,
         {
           method: "GET",
           credentials: "include",
@@ -192,8 +190,8 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {!User.isItMe(post.author.id) &&
-                        User.isLogged && (<>
+                      {!User.isItMe(post.author?.id) &&
+                        User.isLogged ? (
                           <Icon.FlagFill
                             onClick={() => {
                               setShowModal(true);
@@ -202,6 +200,7 @@ const Spotted = () => {
                             }}
                             className={classes.report}
                           />
+                          ) : (
                           <Icon.TrashFill
                             onClick={() => {
                               setShowModal(true);
@@ -210,7 +209,7 @@ const Spotted = () => {
                             }}
                             className={classes.report}
                           />
-                      </>)}
+                      )}
                     </div>
                     <div className={classes.content}>{post.text}</div>
                     <div className={classes.bottomData}>
