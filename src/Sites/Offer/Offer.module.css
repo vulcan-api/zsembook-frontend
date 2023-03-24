@@ -62,12 +62,15 @@
     font-size: 1.25rem !important;
 }
 
-.offertItems > div > p:first-of-type {
+.offertItems > div > ul:first-of-type {
     border-bottom: 1px solid var(--main-100);
     padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    font-size: 24px;
+    color: var(--main-400);
+    font-weight: 500;
 }
 
 .new p:first-of-type {
