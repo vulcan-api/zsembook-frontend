@@ -59,7 +59,7 @@ const Spotted = () => {
   }
 
   const like = async (id: Number) => {
-    await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`, {
+    await fetch(`https://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`, {
       method: "POST",
       credentials: "include",
     })
@@ -70,7 +70,7 @@ const Spotted = () => {
   };
 
   const unlike = async (id: Number) => {
-    await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`, {
+    await fetch(`https://${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`, {
       method: "POST",
       credentials: "include",
     })
@@ -84,7 +84,7 @@ const Spotted = () => {
     setIsLoading(true);
     try {
       await fetch(
-        `http://${process.env.REACT_APP_REQUEST_URL}/spotted/post?postTake=${spottedPostsCount}`,
+        `https://${process.env.REACT_APP_REQUEST_URL}/spotted/post?postTake=${spottedPostsCount}`,
         {
           method: "GET",
           credentials: "include",

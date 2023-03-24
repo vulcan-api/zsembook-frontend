@@ -24,7 +24,7 @@ const Register = () => {
 
   const fetchPosts = async () => {
     const throwObject = {};
-    await fetch(`http://${process.env.REACT_APP_REQUEST_URL}/spotted/post`, {
+    await fetch(`https://${process.env.REACT_APP_REQUEST_URL}/spotted/post`, {
       method: "GET",
       credentials: "include",
     })
@@ -42,7 +42,7 @@ const Register = () => {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    fetch(`http://${process.env.REACT_APP_REQUEST_URL}/auth/logout`, {
+    fetch(`https://${process.env.REACT_APP_REQUEST_URL}/auth/logout`, {
       method: "POST",
       headers: myHeaders,
       redirect: "follow",
@@ -107,7 +107,7 @@ const Register = () => {
       surname: surnameRef.current.value,
     });
 
-    fetch(`http://${process.env.REACT_APP_REQUEST_URL}/auth/register`, {
+    fetch(`https://${process.env.REACT_APP_REQUEST_URL}/auth/register`, {
       method: "POST",
       headers: myHeaders,
       body: raw,

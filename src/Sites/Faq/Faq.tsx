@@ -26,7 +26,7 @@ const Faq = () => {
 
     const getQuestions = useCallback(async () => {
         setIsLoading(true);
-        fetch(`http://${process.env.REACT_APP_REQUEST_URL}/faq/${isActive ? "unanswered" : ""}`, {method: 'GET'})
+        fetch(`https://${process.env.REACT_APP_REQUEST_URL}/faq/${isActive ? "unanswered" : ""}`, {method: 'GET'})
         .then(res => res.json())
         .then(json => setQuestions(json))
         .finally(() => {setIsLoading(false)})
