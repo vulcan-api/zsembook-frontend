@@ -27,5 +27,6 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
+      - run: echo "REACT_APP_REQUEST_URL=${{env.REACT_APP_REQUEST_URL}}" > .env
       - name: Build project
         run: pnpm build
