@@ -31,3 +31,4 @@ jobs:
     - run: pnpm i
     - run: echo "REACT_APP_REQUEST_URL=${{env.REACT_APP_REQUEST_URL}}" > .env
     - run: pnpm build
+    - run: cp -r build/* /var/www/html
