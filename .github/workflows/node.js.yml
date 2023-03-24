@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    
+    env:
+      REACT_APP_REQUEST_URL: "https://rekrutacja.zsem.edu.pl/api"
 
     strategy:
       matrix:
