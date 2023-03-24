@@ -50,6 +50,11 @@
     text-align: center;
 }
 
+.main > p:last-of-type {
+    color: var(--add1-500);
+    cursor: pointer;
+}
+
 .offertItems > div h2 {
     font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
