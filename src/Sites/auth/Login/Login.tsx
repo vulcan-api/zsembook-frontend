@@ -75,7 +75,6 @@ const Login = () => {
                     3000
                 );
             });
-        console.log(response)
         if (response.token) {
             User.getUser();
             navigate("/");

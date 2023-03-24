@@ -1,40 +1,52 @@
 .heading {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .question {
-    color: var(--add1-500);
-    font-size: 2rem;
-    font-family: 'Quicksand';
+  color: var(--add1-500);
+  font-size: 2rem;
+  font-family: 'Quicksand';
 }
 
 .answer {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .questionCont {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.iconCont:hover {
+  cursor: pointer;
 }
 
 .buttonCont {
-    max-width: 15rem;
+  max-width: 15rem;
 }
 
 .buttonDesc {
-    margin-bottom: .5rem;
+  margin-bottom: .5rem;
 }
 
 @media screen and (max-width: 900px) {
-    .question, .answer {
-        text-align: center;
-    } 
-    .buttonCont {
-        margin: auto;
-    }
-  .menu {
-    width: 100% !important;
-    justify-content: center;
+  .question, .answer {
+    text-align: center;
+  } 
+  .buttonCont {
+    margin: auto;
   }
+.menu {
+  width: 100% !important;
+  justify-content: center;
+}
 }
 
 .active {
@@ -65,12 +77,13 @@
 .questionsList {
   list-style: none;
   padding-left: 0;
+  margin-block: 2rem;
 }
 
 .questionsList .questionElem::marker {
-    color: var(--add1-500);
-    font-size: 1.5rem;
-    text-align: left;
+  color: var(--add1-500);
+  font-size: 1.5rem;
+  text-align: left;
 }
 
 .menu > button {

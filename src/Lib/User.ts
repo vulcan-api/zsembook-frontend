@@ -1,6 +1,7 @@
 import Cookies from "cookie-ts";
 
 export enum UserRole {
+  Guest,
   User,
   Moderator,
   Faq
@@ -24,11 +25,16 @@ export default abstract class User {
         case "USER": this.role = UserRole.User; break;
         case "MODERATOR": this.role = UserRole.Moderator; break;
         case "FAQ": this.role = UserRole.Faq; break;
+        default: this.role = UserRole.Guest; break;
       }
     } catch {};
   }
 
   public static isItMe(id: number): boolean {
     return this.data.id === id
+  }
+
+  public static isFaq(): boolean {
+    return this.role === UserRole.Moderator;
   }
 }
