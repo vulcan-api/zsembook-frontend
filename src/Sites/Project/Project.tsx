@@ -20,7 +20,7 @@ const Events = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [modalProjectId, setModalProjectId] = useState(-100);
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
 
   function changeListType(active?: boolean) {
     active !== undefined ? setIsActive(active) : setIsActive(!isActive);

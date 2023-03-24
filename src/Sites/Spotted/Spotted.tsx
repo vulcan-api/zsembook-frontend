@@ -12,6 +12,7 @@ import User from "../../Lib/User";
 
 const Spotted = () => {
   const navigate = useNavigate();
+  const [showMorePostsButton, setShowMorePostsButton] = useState(true);
   const [posts, setPosts] = useState([
     {
       id: 69,
@@ -29,7 +30,7 @@ const Spotted = () => {
       isOwned: true,
     },
   ]);
-  const [spottedPostsCount, setSpottedPostsCount] = useState(20);
+  const [spottedPostsCount, setSpottedPostsCount] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("report");
@@ -57,10 +58,13 @@ const Spotted = () => {
   }
 
   const like = async (id: Number) => {
-    await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`, {
-      method: "POST",
-      credentials: "include",
-    })
+    await fetch(
+      `${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .catch((err) => {
         console.error(err);
@@ -68,10 +72,13 @@ const Spotted = () => {
   };
 
   const unlike = async (id: Number) => {
-    await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`, {
-      method: "POST",
-      credentials: "include",
-    })
+    await fetch(
+      `${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .catch((err) => {
         console.error(err);
@@ -96,6 +103,16 @@ const Spotted = () => {
     setIsLoading(false);
   }, [spottedPostsCount]);
 
+  const downloadMorePosts = () => {
+    console.log(posts);
+    if (spottedPostsCount + 10 < posts.length) {
+      setSpottedPostsCount(spottedPostsCount + 10);
+    } else {
+      setSpottedPostsCount(spottedPostsCount + 10);
+      setShowMorePostsButton(false);
+    }
+  };
+
   useEffect(() => {
     getAllPosts();
   }, [getAllPosts]);
@@ -103,10 +120,6 @@ const Spotted = () => {
   const closeModal = () => {
     setShowModal(false);
     getAllPosts();
-  };
-
-  const downloadMorePosts = () => {
-    setSpottedPostsCount(spottedPostsCount + 10);
   };
 
   return (
@@ -141,9 +154,9 @@ const Spotted = () => {
           />
         ) : (
           <Button
-            buttonText="Zaloguj się aby uzyskać dostęp"
+            buttonText="Zaloguj się aby dodać post"
             onClick={() => {
-              navigate("/auth/login")
+              navigate("/auth/login");
             }}
           />
         )}
@@ -190,34 +203,31 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {!User.isItMe(post.author?.id) &&
-                        User.isLogged ? (
-                          <Icon.FlagFill
-                            onClick={() => {
-                              setShowModal(true);
-                              setModalPostId(post.id);
-                              setModalContent("report");
-                            }}
-                            className={classes.report}
-                          />
-                          ) : (
-                          <Icon.TrashFill
-                            onClick={() => {
-                              setShowModal(true);
-                              setModalPostId(post.id);
-                              setModalContent("delete");
-                            }}
-                            className={classes.report}
-                          />
+                      {!User.isItMe(post.author?.id) && User.isLogged ? (
+                        <Icon.FlagFill
+                          onClick={() => {
+                            setShowModal(true);
+                            setModalPostId(post.id);
+                            setModalContent("report");
+                          }}
+                          className={classes.report}
+                        />
+                      ) : (
+                        <Icon.TrashFill
+                          onClick={() => {
+                            setShowModal(true);
+                            setModalPostId(post.id);
+                            setModalContent("delete");
+                          }}
+                          className={classes.report}
+                        />
                       )}
                     </div>
                     <div className={classes.content}>{post.text}</div>
                     <div className={classes.bottomData}>
                       <div
                         onClick={() => {
-                          User.isLogged && (
-                            likeHandler(post)
-                          );
+                          User.isLogged && likeHandler(post);
                         }}
                       >
                         {post.isLiked && (
@@ -240,9 +250,15 @@ const Spotted = () => {
               );
             })}
           </div>
-          <div className={classes.loadMoreButton}>
-            <Button buttonText="Więcej postów" onClick={downloadMorePosts} className="alternate"/>
-          </div>
+          {showMorePostsButton && (
+            <div className={classes.loadMoreButton}>
+              <Button
+                buttonText="Więcej postów"
+                onClick={downloadMorePosts}
+                className="alternate"
+              />
+            </div>
+          )}
         </>
       )}
       {isLoading && <LoadingSpinner />}
