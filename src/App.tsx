@@ -21,6 +21,7 @@ import Walk from './Sites/Walk/Walk';
 import Offer from './Sites/Offer/Offer';
 import OfferItem from './Sites/Offer/OfferItem';
 import Faq from './Sites/Faq/Faq';
+import Verify from './Sites/auth/Verify/Verify';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/signup",
     element: <Register />,
+  },
+  {
+    path: "/auth/verify/:tempId",
+    element: <Verify />,
   },
   {
     path: "/",
