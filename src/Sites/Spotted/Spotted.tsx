@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import Modal from "../../Layout/ModalComponents/Modal";
 import { useNavigate } from "react-router-dom";
-import User from "../../Lib/User";
+import User, { UserRole } from "../../Lib/User";
 
 const Spotted = () => {
   const navigate = useNavigate();
@@ -203,21 +203,21 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {!User.isItMe(post.author?.id) && User.isLogged ? (
-                        <Icon.FlagFill
-                          onClick={() => {
-                            setShowModal(true);
-                            setModalPostId(post.id);
-                            setModalContent("report");
-                          }}
-                          className={classes.report}
-                        />
-                      ) : (
+                      {User.isItMe(post.author?.id) || User.role === UserRole.Moderator ? (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);
                             setModalPostId(post.id);
                             setModalContent("delete");
+                          }}
+                          className={classes.report}
+                        />
+                      ) : User.isLogged && (
+                        <Icon.FlagFill
+                          onClick={() => {
+                            setShowModal(true);
+                            setModalPostId(post.id);
+                            setModalContent("report");
                           }}
                           className={classes.report}
                         />
