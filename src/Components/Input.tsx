@@ -9,6 +9,7 @@ const Input = React.forwardRef((props: any, ref:any) => {
       ref={ref}
       required={props.required}
       onChange={props.onChange}
+      defaultValue={props.defaultValue} 
       placeholder={props.placeholder || "debiluZapomniałeśWpisać"}
       className={
         props.className === "alternate"

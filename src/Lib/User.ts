@@ -35,6 +35,6 @@ export default abstract class User {
   }
 
   public static isFaq(): boolean {
-    return this.role === UserRole.Moderator;
+    return this.role === UserRole.Faq;
   }
 }

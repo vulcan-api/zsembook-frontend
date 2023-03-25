@@ -17,11 +17,31 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  max-width: 50rem;
 }
 
 .icon {
+  color: var(--main-400);
   width: 2rem;
   height: 2rem;
+}
+
+.hierarchyIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: fill .2s;
+}
+
+.hierarchyIcon:hover {
+  fill: var(--add1-500);
+}
+
+.hierarchyMan {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: .2rem;
 }
 
 .iconCont:hover {

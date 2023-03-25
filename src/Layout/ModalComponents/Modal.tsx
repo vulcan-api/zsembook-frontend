@@ -11,6 +11,7 @@ import FollowingModal from "./FollowingModal";
 import SocialsModal from "./SocialsModal";
 import AddPostModal from "./AddPostModal";
 import AddQuestion from "./AddQuestion";
+import EditQuestion from "./EditQuestion";
 
 const Modal = (props: any) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -88,6 +89,13 @@ const Modal = (props: any) => {
             <AddQuestion
               onClose={props.onClose}
               showSpinner={showSpinner}
+            />
+          )}
+          {props.modalContent === "editquestion" && (
+            <EditQuestion
+              onClose={props.onClose}
+              showSpinner={showSpinner}
+              questionData={props.question}
             />
           )}
           {isLoading && <LoadingSpinner height="100%" />}
