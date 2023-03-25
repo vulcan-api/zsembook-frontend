@@ -203,7 +203,7 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {User.isItMe(post.author?.id) || User.role === UserRole.Moderator ? (
+                      {(User.isItMe(post.author?.id) || User.role === UserRole.Moderator) ? (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);

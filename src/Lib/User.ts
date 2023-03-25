@@ -31,7 +31,7 @@ export default abstract class User {
   }
 
   public static isItMe(id: number): boolean {
-    return this.data.id === id
+    return this.isLogged && this.data.id === id;
   }
 
   public static isFaq(): boolean {
