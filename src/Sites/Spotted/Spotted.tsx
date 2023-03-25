@@ -176,6 +176,7 @@ const Spotted = () => {
                     <div className={classes.topData}>
                       {post.isAnonymous ? (
                         <div>
+                          <Icon.QuestionLg />
                           <p>
                             {post.isAnonymous ? "Anonim" : post.author.username}
                           </p>
@@ -203,7 +204,8 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {(User.isItMe(post.author?.id) || User.role === UserRole.Moderator) ? (
+                      {User.isItMe(post.author?.id) ||
+                      User.role === UserRole.Moderator ? (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);
@@ -212,15 +214,17 @@ const Spotted = () => {
                           }}
                           className={classes.report}
                         />
-                      ) : User.isLogged && (
-                        <Icon.FlagFill
-                          onClick={() => {
-                            setShowModal(true);
-                            setModalPostId(post.id);
-                            setModalContent("report");
-                          }}
-                          className={classes.report}
-                        />
+                      ) : (
+                        User.isLogged && (
+                          <Icon.FlagFill
+                            onClick={() => {
+                              setShowModal(true);
+                              setModalPostId(post.id);
+                              setModalContent("report");
+                            }}
+                            className={classes.report}
+                          />
+                        )
                       )}
                     </div>
                     <div className={classes.content}>{post.text}</div>

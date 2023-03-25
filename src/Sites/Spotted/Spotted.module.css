@@ -147,6 +147,10 @@
   .centerOnPhone {
     text-align: center;
   }
+  .schoolDesc {
+    text-align:justify;
+    word-spacing:-2px;
+  }
 }
 
 @keyframes pulse-black {

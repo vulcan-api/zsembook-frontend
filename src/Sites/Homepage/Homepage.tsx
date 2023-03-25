@@ -34,10 +34,13 @@ const Homepage = () => {
   async function getPosts() {
     setIsLoading(true);
     try {
-      await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post?postTake=4`, {
-        method: "GET",
-        credentials: "include",
-      })
+      await fetch(
+        `${process.env.REACT_APP_REQUEST_URL}/spotted/post?postTake=4`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      )
         .then((res) => res.json())
         .then(setPosts);
     } catch (error) {
@@ -68,10 +71,13 @@ const Homepage = () => {
   }
 
   const like = async (id: Number) => {
-    await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`, {
-      method: "POST",
-      credentials: "include",
-    })
+    await fetch(
+      `${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/like`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .catch((err) => {
         console.error(err);
@@ -79,10 +85,13 @@ const Homepage = () => {
   };
 
   const unlike = async (id: Number) => {
-    await fetch(`${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`, {
-      method: "POST",
-      credentials: "include",
-    })
+    await fetch(
+      `${process.env.REACT_APP_REQUEST_URL}/spotted/post/${id}/unlike`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .catch((err) => {
         console.error(err);
@@ -100,8 +109,24 @@ const Homepage = () => {
         </h1>
       </div>
       <Wrapper>
-        <h2>Aktualności</h2>
-        <p className={classes.centerOnPhone}>\\ Wkrótce //</p>
+        <h2>Zespół Szkół Elektryczno - Mechanicznych w Nowym Sączu</h2>
+        <p className={classes.schoolDesc}>
+          Zespół Szkół Elektryczno-Mechanicznych w Nowym Sączu to renomowana
+          placówka edukacyjna, która oferuje szeroki wybór kierunków związanych
+          z techniką i elektroniką. Szkoła znajduje się w centrum miasta Nowego
+          Sącza. Uczniowie mają do wyboru wiele kierunków kształcenia, takich
+          jak programowanie, teleinformatyka, informatyka lub mechatronika.
+          Szkoła posiada specjalne sale do nauki przedmiotów zawodowych, w
+          których uczniowie mogą ćwiczyć praktyczne umiejętności. Wszystkie sale
+          wyposażone są w specjalne narzędzia i urządzenia, co umożliwia
+          skuteczne kształcenie. Nauczyciele są wysoko wykwalifikowani i
+          posiadają doświadczenie w branży, co pozwala na dostosowanie programu
+          nauczania do potrzeb rynku pracy. Zespół Szkół
+          Elektryczno-Mechanicznych w Nowym Sączu oferuje również wiele
+          możliwości rozwoju osobistego i kulturalnego. W szkole organizowane są
+          różne inicjatywy, o których można przeczytać w zakładce "Wydarzenia".
+          Podsumowując, nie czekaj! Już dziś zapoznaj się z ofertą ZSEM!
+        </p>
       </Wrapper>
       <Wrapper>
         <h2>Spotted</h2>
