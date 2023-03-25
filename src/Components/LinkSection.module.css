@@ -36,8 +36,14 @@
     .mobile {
         display: none;
     }
+    .notmobile {
+        display: block;
+    }
 }
 
+.notmobile {
+    display: none;
+}
 
 .tooltip {
   position: relative;

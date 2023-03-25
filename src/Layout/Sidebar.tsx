@@ -40,24 +40,23 @@ const Sidebar = () => {
     setIsSearching(!isSearching);
   };
 
-  let loginOrLogout =
-    User.isLogged
-      ? {
-          label: "Wyloguj się",
-          icon: <Icon.DoorOpenFill />,
-          onClick: () => {
-            logout();
-            setIsShown(false);
-          },
-        }
-      : {
-          label: "Zaloguj się",
-          icon: <Icon.DoorClosedFill />,
-          onClick: () => {
-            logout();
-            setIsShown(false);
-          },
-        };
+  let loginOrLogout = User.isLogged
+    ? {
+        label: "Wyloguj się",
+        icon: <Icon.DoorOpenFill />,
+        onClick: () => {
+          logout();
+          setIsShown(false);
+        },
+      }
+    : {
+        label: "Zaloguj się",
+        icon: <Icon.DoorClosedFill />,
+        onClick: () => {
+          logout();
+          setIsShown(false);
+        },
+      };
 
   return (
     <>
@@ -92,6 +91,7 @@ const Sidebar = () => {
                   label: "Szukaj",
                   colored: isSearching,
                   onClick: searchHandler,
+                  notMobileOnly: true,
                 },
                 {
                   destination: "/spotted",
@@ -107,6 +107,7 @@ const Sidebar = () => {
                   destination: "/events",
                   label: "Wydarzenia",
                   icon: <Icon.CardChecklist />,
+                  notMobileOnly: true,
                 },
                 {
                   destination: "/walk",
@@ -135,10 +136,28 @@ const Sidebar = () => {
             className={isShown ? classes.show : classes.hidden}
             elements={[
               {
-                destination:
-                    User.isLogged
-                    ? `/profile/${User.data.id}`
-                    : "/auth/login",
+                icon: <Icon.Search />,
+                label: "Szukaj",
+                colored: isSearching,
+                onClick: () => {
+                  searchHandler();
+                  setIsShown(false);
+                },
+                mobileOnly: true,
+              },
+              {
+                destination: "/events",
+                label: "Wydarzenia",
+                icon: <Icon.CardChecklist />,
+                mobileOnly: true,
+                onClick: () => {
+                  setIsShown(false);
+                },
+              },
+              {
+                destination: User.isLogged
+                  ? `/profile/${User.data.id}`
+                  : "/auth/login",
                 label: "Profil",
                 icon: <Icon.PersonCircle />,
                 usersOnly: true,
@@ -147,10 +166,7 @@ const Sidebar = () => {
                 },
               },
               {
-                destination:
-                    User.isLogged
-                    ? `/settings`
-                    : "/auth/login",
+                destination: User.isLogged ? `/settings` : "/auth/login",
                 label: "Ustawienia",
                 icon: <Icon.Tools />,
                 usersOnly: true,
