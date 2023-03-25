@@ -57,7 +57,6 @@ const Offer = () => {
               <li>Matematyka</li>
               <li>Fizyka</li>
             </ul>
-
             <Link to={"/offer/mechatronik"}>
               <Button buttonText="Więcej informacji" />
             </Link>
@@ -73,7 +72,6 @@ const Offer = () => {
               <li>Matematyka</li>
               <li>J. angielski</li>
             </ul>
-
             <Link to={"/offer/programista"}>
               <Button buttonText="Więcej informacji" />
             </Link>
@@ -90,7 +88,6 @@ const Offer = () => {
             <ul>
               <li>Matematyka</li>
             </ul>
-
             <div className={classes.new}>
               <p>Nowość !</p>
               <p>
@@ -114,7 +111,6 @@ const Offer = () => {
             <ul>
               <li>Matematyka</li>
             </ul>
-
             <div className={classes.new}>
               <p>Nowość !</p>
               <p>Specjalizacja: Programowanie mikroprocesorów</p>
@@ -135,7 +131,6 @@ const Offer = () => {
             <ul>
               <li>Matematyka</li>
             </ul>
-
             <div className={classes.new}>
               <p>Nowość !</p>
               <p>Specjalizacja: Systemy inteligentnych budynków</p>

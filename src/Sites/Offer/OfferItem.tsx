@@ -255,7 +255,7 @@ const OfferItem = () => {
       {!isWrong && (
         <>
           <h1 className={classes.h1}>{(profiles as any)[profile].title}</h1>
-          <p className={classes.related}>
+          {(profiles as any)[profile].related && <p className={classes.related}>
             Pokrewne kierunki:
             {(profiles as any)[profile].related.map(
               (profile: string, index: any) => {
@@ -266,8 +266,8 @@ const OfferItem = () => {
                 );
               }
             )}
-          </p>
-          <h2>Nauczysz sie: </h2>
+          </p>}
+          <h2 className={classes.h2}>Nauczysz sie: </h2>
           <ul className={classes.mainDesc}>
             {(profiles as any)[profile].desc.map((qual: any, index: any) => {
               return (
