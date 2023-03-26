@@ -9,7 +9,6 @@ import programista from "./graphics/programista.svg";
 import informatyk from "./graphics/informatyk.png";
 import teleinformatyk from "./graphics/teleinformatyk.png";
 import mechatronik from "./graphics/mechatronik.png";
-import * as Icon from "react-bootstrap-icons";
 
 const Offer = () => {
   return (
@@ -140,15 +139,6 @@ const Offer = () => {
             </Link>
           </Wrapper>
         </div>
-        <Button
-          buttonText="Wizytówka ZSEM"
-          icon={<Icon.Youtube />}
-          onClick={() => {
-            window.location.replace(
-              "https://www.youtube.com/watch?v=yG12VjDxQfc"
-            );
-          }}
-        />
       </div>
     </>
   );

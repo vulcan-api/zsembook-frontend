@@ -108,7 +108,7 @@ const Homepage = () => {
             : `Witaj na ZSEMBook!`}
         </h1>
       </div>
-      <Wrapper>
+      <Wrapper className={classes.zsemDesc}>
         <h2>Zespół Szkół Elektryczno - Mechanicznych w Nowym Sączu</h2>
         <p className={classes.schoolDesc}>
           Zespół Szkół Elektryczno-Mechanicznych w Nowym Sączu to renomowana
@@ -127,6 +127,16 @@ const Homepage = () => {
           różne inicjatywy, o których można przeczytać w zakładce "Wydarzenia".
           Podsumowując, nie czekaj! Już dziś zapoznaj się z ofertą ZSEM!
         </p>
+        <Button
+          buttonText="Wizytówka ZSEM"
+          icon={<Icon.Youtube />}
+          className={classes.zsemVideo}
+          onClick={() => {
+            window.location.replace(
+              "https://www.youtube.com/watch?v=yG12VjDxQfc"
+            );
+          }}
+        />
       </Wrapper>
       <Wrapper>
         <h2>Spotted</h2>

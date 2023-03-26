@@ -147,7 +147,7 @@
   .centerOnPhone {
     text-align: center;
   }
-  .schoolDesc {
+  .zsemDesc > p {
     text-align:justify;
     word-spacing:-2px;
   }
@@ -170,4 +170,12 @@
 .h1 {
   text-align: center;
   margin: 1rem 0;
+}
+
+.zsemDesc > p {
+  margin-bottom: 2rem;
+}
+
+.zsemDesc > button {
+  width: fit-content !important;
 }
