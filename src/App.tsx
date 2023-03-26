@@ -22,6 +22,7 @@ import Offer from './Sites/Offer/Offer';
 import OfferItem from './Sites/Offer/OfferItem';
 import Faq from './Sites/Faq/Faq';
 import Verify from './Sites/auth/Verify/Verify';
+import ResetPassword from './Sites/auth/ResetPassword/ResetPassword';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/verify/:tempId",
     element: <Verify />,
+  },
+  {
+    path: "/auth/reset/:hash",
+    element: <ResetPassword />,
   },
   {
     path: "/",
