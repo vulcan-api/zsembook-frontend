@@ -47,10 +47,11 @@ const Events = () => {
 
   useEffect(() => {
     getAllProjects();
-  },[]);
+  }, []);
 
   return (
     <>
+      <h1 className={classes.h1}>Wydarzenia</h1>
       {showModal && (
         <Modal
           projectId={modalProjectId}
@@ -75,7 +76,12 @@ const Events = () => {
         <div className={classes.posts}>
           {projects.map((project) => {
             return (
-              <div key={project.id} className={isActive ? classes.narrowContainer : classes.wideContainer}>
+              <div
+                key={project.id}
+                className={
+                  isActive ? classes.narrowContainer : classes.wideContainer
+                }
+              >
                 <ProjectItem
                   project={project}
                   setShowModal={setShowModal}

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import classes from "./AddPostModal.module.css";
 import Checkbox from "../../Components/Checkbox";
 import Button from "../../Components/Button";
-import {useRef, useState} from "react";
+import {useRef} from "react";
 import {useNavigate} from "react-router-dom";
 //@ts-ignore
 import {NotificationManager} from "react-notifications";
@@ -10,27 +10,17 @@ import Textarea from "../../Components/Textarea";
 
 const AddPostModal = (props: {onClose: Function, showSpinner: Function}) => {
     const navigate = useNavigate();
-    const [dateHourAuto, setDateHourAuto] = useState(true);
     const postText: any = useRef('');
     const isAnonymous: any = useRef(false);
-
-    function disableTimeAndDate() {
-        setDateHourAuto(!dateHourAuto);
-    }
 
     async function addPost(event: any) {
         event.preventDefault();
 
-        let publishDate;
-
-        if (dateHourAuto) {
-            publishDate = new Date();
-        }
         const post = {
             title: "do not ask",
             text: postText.current.value,
             isAnonymous: isAnonymous.current.checked,
-            publishAt: publishDate,
+            publishAt: new Date(),
         };
 
         const throwObject = {};
@@ -79,26 +69,6 @@ const AddPostModal = (props: {onClose: Function, showSpinner: Function}) => {
               label="Anonimowy post"
               ref={isAnonymous}
             />
-            <Checkbox
-              id="dataIGodzina"
-              label="Obecna data i godzina"
-              onChange={disableTimeAndDate}
-              checked={dateHourAuto}
-            />
-            <div className={classes.inputFlex}>
-              <input
-                type="date"
-                name="data"
-                id="data"
-                disabled={dateHourAuto}
-              />
-              <input
-                type="time"
-                name="godzina"
-                id="godzina"
-                disabled={dateHourAuto}
-              />
-            </div>
             <Button type="submit" buttonText="Dodaj post" />
           </div>
         </form>

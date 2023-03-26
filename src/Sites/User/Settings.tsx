@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
+import User from "../../Lib/User";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -134,8 +135,8 @@ const Settings = () => {
   }
 
   useEffect(() => {
-    getSettings();
-  }, []);
+    User.isLogged ? getSettings() : navigate("/");
+  }, [navigate]);
   return (
     <>
       {!isLoading && (

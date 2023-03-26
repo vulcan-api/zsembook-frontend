@@ -18,8 +18,21 @@ const ProjectItem = (props: any) => {
         <h2>{project.title}</h2>
         <p className={classes.content}>{project.text}</p>
         <div className={classes.buttonFlex}>
-          <Button buttonText="Facebook" icon={<Icon.Facebook />} />
-          <Button buttonText="Strona szkoły" icon={<Icon.BrowserFirefox />} className="alternate" onClick={() => {window.location.replace(project.website)}}/>
+          <Button
+            buttonText="Facebook"
+            icon={<Icon.Facebook />}
+            onClick={() => {
+              window.location.replace(project.facebook);
+            }}
+          />
+          <Button
+            buttonText="Strona szkoły"
+            icon={<Icon.BrowserFirefox />}
+            className="alternate"
+            onClick={() => {
+              window.location.replace(project.website);
+            }}
+          />
         </div>
       </Wrapper>
     </div>
