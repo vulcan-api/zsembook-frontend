@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import Modal from "../../Layout/ModalComponents/Modal";
 import { useNavigate } from "react-router-dom";
-import User, { UserRole } from "../../Lib/User";
+import User from "../../Lib/User";
 
 const Spotted = () => {
   const navigate = useNavigate();
@@ -205,7 +205,7 @@ const Spotted = () => {
                           : new Date(post.createdAt).getMinutes()}
                       </div>
                       {User.isItMe(post.author?.id) ||
-                      User.role === UserRole.Moderator ? (
+                      User.isModerator() ? (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);

@@ -10,24 +10,34 @@ export enum UserRole {
 export default abstract class User {
   public static data: any;
   public static isLogged: boolean;
-  public static role: UserRole;
+  public static roles: Array<UserRole>;
 
   public static getUser() {
     this.data = {};
     this.isLogged = false;
     const user = Cookies.get('user_info');
+    this.roles = [];
 
     try {
       this.data = JSON.parse(user);
       if(this.data.id) 
         this.isLogged = true;
-      switch(this.data.role) {
-        case "USER": this.role = UserRole.User; break;
-        case "MODERATOR": this.role = UserRole.Moderator; break;
-        case "FAQ": this.role = UserRole.Faq; break;
-        default: this.role = UserRole.Guest; break;
+
+      // TODO: check if it is up-to-date
+      for(const role of this.data.Roles) {
+        switch(role) {
+          case "MODERATOR": this.roles.push(UserRole.Moderator); break;
+          case "FAQ": this.roles.push(UserRole.Faq); break;
+        }
       }
+
+      if(this.roles.length === 0)
+        this.roles.push(UserRole.User);
+
     } catch {};
+
+    if(this.roles.length === 0)
+      this.roles.push(UserRole.Guest);
   }
 
   public static isItMe(id: number): boolean {
@@ -35,6 +45,14 @@ export default abstract class User {
   }
 
   public static isFaq(): boolean {
-    return this.role === UserRole.Faq;
+    return this.roles.includes(UserRole.Faq);
+  }
+
+  public static isModerator(): boolean {
+    return this.roles.includes(UserRole.Moderator);
+  }
+
+  public static isUser(): boolean {
+    return this.roles.includes(UserRole.User);
   }
 }

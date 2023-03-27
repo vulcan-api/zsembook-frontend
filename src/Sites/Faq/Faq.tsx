@@ -4,7 +4,7 @@ import LoadingSpinner from "../../Components/LoadingSpinner";
 import Modal from "../../Layout/ModalComponents/Modal";
 import classes from "./Faq.module.css";
 import * as Icon from "react-bootstrap-icons";
-import User, { UserRole } from "../../Lib/User";
+import User from "../../Lib/User";
 import { useNavigate } from "react-router-dom";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
@@ -32,14 +32,12 @@ const Faq = () => {
 
     const getQuestionsRes = useCallback(async (forceFetch?: boolean): Promise<Response> => {
         let link = "";
-        if(forceFetch || isActive)
-            switch(User.role){
-                // Change to Faq when it is implemented in backend
-                case UserRole.Moderator: link = "unanswered"; break;
-                case UserRole.User: link = "my-questions"; break;
-            };
-        return fetch(
-            `${process.env.REACT_APP_REQUEST_URL}/faq/${link}`, 
+        if(forceFetch || isActive) {
+            if(User.isUser()) link = "my-questions";
+            if(User.isFaq()) link = "unanswered";
+        }
+
+        return fetch(`${process.env.REACT_APP_REQUEST_URL}/faq/${link}`, 
             { 
                 method: 'GET', 
                 credentials: "include" 
@@ -48,13 +46,16 @@ const Faq = () => {
     }, [isActive]);
 
     const areQestionsOk = useCallback(async () => {
-        return getQuestionsRes(true)
+        let isOk = false;
+        await getQuestionsRes(true)
         .then(res => res.json())
-        .then(json => json.length !== 0)
+        .then(json => json.length !== 0 && json.length !== undefined)
+        .then(isArray => isOk = isArray)
+        return isOk;
     }, [getQuestionsRes]);
 
     const solveMenu = useCallback(async () => {
-        if((await areQestionsOk()))
+        if((User.isFaq() || User.isUser()) && await areQestionsOk())
             setShowMenu(true);
         else
             setShowMenu(false);
@@ -106,8 +107,8 @@ const Faq = () => {
     }
 
     useEffect(() => {
-        getQuestions(); 
         solveMenu()
+        getQuestions(); 
     }, [getQuestions, solveMenu]);
 
     return (<>
@@ -147,18 +148,18 @@ const Faq = () => {
                             <Icon.ArrowDownCircleFill className={classes.hierarchyIcon} />
                         </span>
                     </>*/}
-                    <span className={classes.dataSubcont}>
+                    <div className={classes.dataSubcont}>
                         <p className={classes.question}>{quest.question}</p>
                         <p className={classes.answer}>{quest.answer}</p>
-                    </span>
-                    {User.isFaq() && <>
+                    </div>
+                    {User.isFaq() && <div className={classes.faqIcons}>
                         <span className={classes.iconCont} onClick={() => editQuestion(quest.id)}>
                             <Icon.PencilFill className={classes.icon} />
                         </span>
                         <span className={classes.iconCont} onClick={() => deleteQuestion(quest.id)}>
                             <Icon.Trash3Fill className={classes.icon} />
                         </span>
-                    </>}
+                    </div>}
                 </div>
             </li>
         )}))

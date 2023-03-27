@@ -57,16 +57,31 @@
 }
 
 @media screen and (max-width: 900px) {
+  .buttonDesc {
+    margin-bottom: .5rem;
+    text-align: center;
+  }
+  .questionCont {
+    justify-content: center;
+  }
   .question, .answer {
     text-align: center;
   } 
   .buttonCont {
     margin: auto;
   }
-.menu {
-  width: 100% !important;
-  justify-content: center;
+  .menu {
+    width: 100% !important;
+    justify-content: center;
+  }
+  .managementIcons {
+    flex-direction: column;
+  } 
 }
+
+.faqIcons {
+  display: flex;
+  gap: .5rem;
 }
 
 .active {
