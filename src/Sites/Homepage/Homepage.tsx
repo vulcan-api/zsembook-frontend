@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useLayoutEffect, useRef } from "react";
 import Wrapper from "../../Layout/Wrapper";
 import User from "../../Lib/User";
 import LoadingSpinner from "../../Components/LoadingSpinner";
@@ -9,6 +9,14 @@ import classes from "../Spotted/Spotted.module.css";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button";
 import { Link } from "react-router-dom";
+import photo1 from "./Photos/1.jpg";
+import photo2 from "./Photos/2.jpg";
+import photo3 from "./Photos/3.jpg";
+import photo4 from "./Photos/4.jpg";
+import photo5 from "./Photos/5.jpg";
+import photo6 from "./Photos/6.jpg";
+import photo7 from "./Photos/7.jpg";
+import photo8 from "./Photos/8.jpg";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -30,7 +38,8 @@ const Homepage = () => {
       username: "jajco",
     },
   ]);
-  // @ts-ignore
+  const sliderRef = useRef<any>(null);
+  const [slideWidth, setSlideWidth] = useState<number>(0);
 
   const getPosts = useCallback(async () => {
     setIsLoading(true);
@@ -51,7 +60,7 @@ const Homepage = () => {
     posts.length < 1 ? setShowMorePostsButton(false) : <></>;
 
     setIsLoading(false);
-  }, [posts.length])
+  }, [posts.length]);
 
   useEffect(() => {
     getPosts();
@@ -102,6 +111,12 @@ const Homepage = () => {
       });
   };
 
+  useLayoutEffect(() => {
+    setSlideWidth(sliderRef.current.offsetWidth * -1);
+  }, []);
+
+  const slidesContainer: any = document.getElementById("slides-container");
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
@@ -112,7 +127,7 @@ const Homepage = () => {
             : `Witaj na ZSEMBook!`}
         </h1>
       </div>
-      <Wrapper className={classes.zsemDesc}>
+      <Wrapper className={classes.zsemDesc} style={{display: "flex", flexDirection: "column", alignItems: "center",}}>
         <h2>Zespół Szkół Elektryczno - Mechanicznych w Nowym Sączu</h2>
         <p className={classes.schoolDesc}>
           Zespół Szkół Elektryczno-Mechanicznych w Nowym Sączu to renomowana
@@ -131,6 +146,38 @@ const Homepage = () => {
           różne inicjatywy, o których można przeczytać w zakładce "Wydarzenia".
           Podsumowując, nie czekaj! Już dziś zapoznaj się z ofertą ZSEM!
         </p>
+        <div className={classes.caroseul}>
+          <button
+            className={`${classes.slideArrow} ${classes.slideArrowPrev}`}
+            onClick={() => {
+              slidesContainer.scrollLeft += slideWidth;
+            }}
+          >
+            &#8249;
+          </button>
+          <button
+            className={`${classes.slideArrow} ${classes.slideArrowNext}`}
+            onClick={() => {
+              slidesContainer.scrollLeft -= slideWidth;
+            }}
+          >
+            &#8250;
+          </button>
+          <ul
+            className={classes.slidesContainer}
+            id="slides-container"
+            ref={sliderRef}
+          >
+            <img className={classes.slide} src={photo1} alt="zdj1" />
+            <img className={classes.slide} src={photo2} alt="zdj2" />
+            <img className={classes.slide} src={photo3} alt="zdj3" />
+            <img className={classes.slide} src={photo4} alt="zdj4" />
+            <img className={classes.slide} src={photo5} alt="zdj5" />
+            <img className={classes.slide} src={photo6} alt="zdj6" />
+            <img className={classes.slide} src={photo7} alt="zdj7" />
+            <img className={classes.slide} src={photo8} alt="zdj8" />
+          </ul>
+        </div>
         <Button
           buttonText="Wizytówka ZSEM"
           icon={<Icon.Youtube />}
@@ -228,7 +275,9 @@ const Homepage = () => {
         ) : (
           <p>Brak postów do wyświetlenia</p>
         )}
-        {posts.length < 1 && <p className={classes.p}>Brak postów do wyświetlenia</p>}
+        {posts.length < 1 && (
+          <p className={classes.p}>Brak postów do wyświetlenia</p>
+        )}
       </Wrapper>
     </>
   );
