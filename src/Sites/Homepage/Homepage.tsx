@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Wrapper from "../../Layout/Wrapper";
 import User from "../../Lib/User";
 import LoadingSpinner from "../../Components/LoadingSpinner";
@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 const Homepage = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showMorePostsButton, setShowMorePostsButton] = useState(true);
   const [posts, setPosts] = useState([
     {
       id: 69,
@@ -31,7 +32,7 @@ const Homepage = () => {
   ]);
   // @ts-ignore
 
-  async function getPosts() {
+  const getPosts = useCallback(async () => {
     setIsLoading(true);
     try {
       await fetch(
@@ -46,12 +47,15 @@ const Homepage = () => {
     } catch (error) {
       console.error(error);
     }
+
+    posts.length < 1 ? setShowMorePostsButton(false) : <></>;
+
     setIsLoading(false);
-  }
+  }, [posts.length])
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [getPosts]);
 
   function likeHandler(post: any) {
     let postsCopy = [...posts];
@@ -211,17 +215,20 @@ const Homepage = () => {
                   </Wrapper>
                 );
               })}
-              <div className={classes.loadMoreButton}>
-                <Button
-                  buttonText="Więcej postów"
-                  onClick={() => navigate("/spotted")}
-                />
-              </div>
+              {showMorePostsButton && (
+                <div className={classes.loadMoreButton}>
+                  <Button
+                    buttonText="Więcej postów"
+                    onClick={() => navigate("/spotted")}
+                  />
+                </div>
+              )}
             </div>
           </>
         ) : (
           <p>Brak postów do wyświetlenia</p>
         )}
+        {posts.length < 1 && <p className={classes.p}>Brak postów do wyświetlenia</p>}
       </Wrapper>
     </>
   );

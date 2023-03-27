@@ -100,11 +100,13 @@ const Spotted = () => {
     } catch (error) {
       console.error(error);
     }
+
+    posts.length < 1 ? setShowMorePostsButton(false) : <></>;
+
     setIsLoading(false);
-  }, [spottedPostsCount]);
+  }, [spottedPostsCount, posts.length]);
 
   const downloadMorePosts = () => {
-    console.log(posts);
     if (spottedPostsCount + 10 < posts.length) {
       setSpottedPostsCount(spottedPostsCount + 10);
     } else {
@@ -204,8 +206,7 @@ const Spotted = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {User.isItMe(post.author?.id) ||
-                      User.isModerator() ? (
+                      {User.isItMe(post.author?.id) || User.isModerator() ? (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);
@@ -265,6 +266,7 @@ const Spotted = () => {
           )}
         </>
       )}
+      {posts.length < 1 && <p className={classes.p}>Brak postów do wyświetlenia</p>}
       {isLoading && <LoadingSpinner />}
     </>
   );

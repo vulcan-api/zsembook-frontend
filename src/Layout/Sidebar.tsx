@@ -15,6 +15,8 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const logout = () => {
+    let loggedIn = User.isLogged;
+
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -26,7 +28,13 @@ const Sidebar = () => {
     })
       .then((response) => response.text())
       .then(() => {
-        NotificationManager.success("Udało się wylogować.", "Wylogowano", 3000);
+        if (loggedIn) {
+          NotificationManager.success(
+            "Udało się wylogować.",
+            "Wylogowano",
+            3000
+          );
+        }
         navigate("/auth/login");
       })
       .catch((error) => console.log("error", error));

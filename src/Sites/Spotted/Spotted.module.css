@@ -179,3 +179,9 @@
 .zsemDesc > button {
   width: fit-content !important;
 }
+
+.p {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.25rem
+}
