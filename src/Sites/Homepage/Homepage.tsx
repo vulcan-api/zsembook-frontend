@@ -157,7 +157,11 @@ const Homepage = () => {
           <button
             className={`${classes.slideArrow} ${classes.slideArrowPrev}`}
             onClick={() => {
-              slidesContainer.scrollLeft += slideWidth;
+              if (slidesContainer.scrollLeft === 0) {
+                slidesContainer.scrollLeft -= slideWidth * 8;
+              } else {
+                slidesContainer.scrollLeft += slideWidth;
+              }
             }}
           >
             &#8249;
@@ -165,7 +169,14 @@ const Homepage = () => {
           <button
             className={`${classes.slideArrow} ${classes.slideArrowNext}`}
             onClick={() => {
-              slidesContainer.scrollLeft -= slideWidth;
+              if (
+                slidesContainer.scrollLeft ===
+                slidesContainer.scrollWidth - slidesContainer.clientWidth
+              ) {
+                slidesContainer.scrollLeft += slideWidth * 8;
+              } else {
+                slidesContainer.scrollLeft -= slideWidth;
+              }
             }}
           >
             &#8250;
