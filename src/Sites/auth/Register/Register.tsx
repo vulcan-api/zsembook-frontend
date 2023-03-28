@@ -114,8 +114,17 @@ const Register = () => {
       redirect: "follow",
       credentials: "include",
     })
-      .then((response) => response.json())
-      .then(console.log) 
+      .then((response) => {
+        if (!response.ok) {
+          NotificationManager.error(
+              "Nie udało się zarejestrować. Spróbuj ponownie później",
+              "Nie zarejestrowano",
+              3000
+          );
+          return Promise.reject();
+        }
+        return response.json();
+      })
       .then(() => {
         NotificationManager.success(
           "Udało się zarejestrować. Nie zapomnij potwierdzić rejestracji poprzez email!",
@@ -126,11 +135,6 @@ const Register = () => {
       })
       .catch((error) => {
         console.log("error", error);
-        NotificationManager.error(
-          "Nie udało się zarejestrować. Spróbuj ponownie później",
-          "Nie zarejestrowano",
-          3000
-        );
       });
   };
 

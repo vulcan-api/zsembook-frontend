@@ -11,7 +11,7 @@ const Verify = () => {
   const { tempId = "" } = useParams();
 
   useEffect(() => {
-    tempId?.length !== 64 ? setIsError(true) : setIsError(false);
+    tempId?.length !== 128 ? setIsError(true) : setIsError(false);
     setIsLoading(false);
   }, [tempId]);
 
