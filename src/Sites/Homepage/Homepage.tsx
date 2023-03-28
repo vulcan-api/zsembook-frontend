@@ -127,7 +127,14 @@ const Homepage = () => {
             : `Witaj na ZSEMBook!`}
         </h1>
       </div>
-      <Wrapper className={classes.zsemDesc} style={{display: "flex", flexDirection: "column", alignItems: "center",}}>
+      <Wrapper
+        className={classes.zsemDesc}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <h2>Zespół Szkół Elektryczno - Mechanicznych w Nowym Sączu</h2>
         <p className={classes.schoolDesc}>
           Zespół Szkół Elektryczno-Mechanicznych w Nowym Sączu to renomowana
@@ -188,6 +195,10 @@ const Homepage = () => {
             );
           }}
         />
+        <p>Nie wiesz jaki kierunek kształcenia obrać? Spróbujemy ci w tym pomóc! Kliknij poniżej.</p>
+        <Link to="/survey">
+          <Button buttonText="Ankieta" icon={<Icon.UiRadios />} />
+        </Link>
       </Wrapper>
       <Wrapper>
         <h2>Spotted</h2>

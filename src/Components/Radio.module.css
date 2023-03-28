@@ -1,0 +1,30 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.main input {
+    width: 2rem;
+    height: 2rem;
+    appearance: none;
+    background-color: var(--add2-400);
+    border-radius: 8px;
+}
+
+.main input:checked {
+    background-color: var(--add1-500);
+}
+
+.main span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main label {
+    font-size: 1rem;
+}

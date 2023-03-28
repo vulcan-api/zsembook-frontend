@@ -24,6 +24,7 @@ import Faq from './Sites/Faq/Faq';
 import Verify from './Sites/auth/Verify/Verify';
 import ResetPassword from './Sites/auth/ResetPassword/ResetPassword';
 import ResetPasswordLobby from './Sites/auth/ResetPassword/ResetPasswordLobby';
+import Survey from './Sites/Survey/Survey';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "spotted",
         element: <Spotted />,
+      },
+      {
+        path: "survey",
+        element: <Survey />,
       },
       {
         path: "offer",

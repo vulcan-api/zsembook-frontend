@@ -102,20 +102,9 @@ const Sidebar = () => {
                   notMobileOnly: true,
                 },
                 {
-                  destination: "/spotted",
-                  label: "Spotted",
-                  icon: <Icon.ChatRightDotsFill />,
-                },
-                {
                   destination: "/offer",
                   label: "Oferta",
                   icon: <Icon.FolderFill />,
-                },
-                {
-                  destination: "/events",
-                  label: "Wydarzenia",
-                  icon: <Icon.CardChecklist />,
-                  notMobileOnly: true,
                 },
                 {
                   destination: "/walk",
@@ -123,9 +112,26 @@ const Sidebar = () => {
                   icon: <Icon.BuildingFill />,
                 },
                 {
+                  destination: "/survey",
+                  label: "Ankieta",
+                  icon: <Icon.UiRadios />,
+                },
+                {
+                  destination: "/events",
+                  label: "Wydarzenia",
+                  icon: <Icon.CardChecklist />,
+                },
+                {
                   destination: "/faq",
                   label: "FAQ",
                   icon: <Icon.QuestionCircleFill />,
+                  notMobileOnly: true,
+                },
+                {
+                  destination: "/spotted",
+                  label: "Spotted",
+                  icon: <Icon.ChatRightDotsFill />,
+                  notMobileOnly: true,
                 },
                 {
                   label: "",
@@ -154,13 +160,22 @@ const Sidebar = () => {
                 mobileOnly: true,
               },
               {
-                destination: "/events",
-                label: "Wydarzenia",
-                icon: <Icon.CardChecklist />,
-                mobileOnly: true,
+                destination: "/faq",
+                label: "FAQ",
+                icon: <Icon.QuestionCircleFill />,
                 onClick: () => {
                   setIsShown(false);
                 },
+                mobileOnly: true,
+              },
+              {
+                destination: "/spotted",
+                label: "Spotted",
+                icon: <Icon.ChatRightDotsFill />,
+                onClick: () => {
+                  setIsShown(false);
+                },
+                mobileOnly: true,
               },
               {
                 destination: User.isLogged
