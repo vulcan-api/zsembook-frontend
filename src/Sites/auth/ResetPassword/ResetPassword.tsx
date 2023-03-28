@@ -17,7 +17,7 @@ const ResetPassword = () => {
   const repeatPasswordRef = useRef<any>();
 
   useEffect(() => {
-    hash?.length !== 64 ? setIsError(true) : setIsError(false);
+    hash?.length !== 128 ? setIsError(true) : setIsError(false);
     setIsLoading(false);
   }, [hash]);
 
@@ -45,38 +45,42 @@ const ResetPassword = () => {
       return;
     }
 
-    const resetFetch = await fetch(
+    const body = {
+        newPassword: passwordRef.current.value,
+    };
+
+    fetch(
       `${process.env.REACT_APP_REQUEST_URL}/auth/reset/${hash}`,
       {
-        method: "GET",
+        method: "PATCH",
         credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
       }
-    )
-      .then((res) => res.json())
+    ).then((res) => {
+      if (!res.ok) {
+        setIsError(true);
+        NotificationManager.error(
+            "Nie udało się zmienić hasła.",
+            "Nie zmieniono hasła!",
+            3000
+        );
+      } else {
+        NotificationManager.success(
+            "Udało się zmienić hasło",
+            "Zmieniono hasło.",
+            3000
+        );
+        navigate("/auth/login");
+      }
+      setIsLoading(false);
+    })
       .catch((err) => {
         setIsError(true);
         console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
-
-    if (resetFetch.statusCode !== 200) {
-      setIsError(true);
-      NotificationManager.error(
-        "Nie udało się zmienić hasła.",
-        "Nie zmieniono hasła!",
-        3000
-      );
-    } else {
-      NotificationManager.success(
-        "Udało się zmienić hasło",
-        "Zmieniono hasło.",
-        3000
-      );
-      navigate("/auth/login");
-    }
-    setIsLoading(false);
   };
 
   return (

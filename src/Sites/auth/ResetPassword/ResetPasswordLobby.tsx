@@ -23,16 +23,27 @@ const ResetPasswordLobby = () => {
       return;
     }
 
-    let body = { email: email };
-    const resetFetch = await fetch(
+    let body = { email };
+    fetch(
       `${process.env.REACT_APP_REQUEST_URL}/auth/reset`,
       {
-        method: "POSt",
+        method: "POST",
         credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
         body: JSON.stringify(body),
       }
-    )
-      .then((res) => res.json())
+    ).then((res) => {
+        if (res.ok) {
+            setIsSend(true);
+            NotificationManager.success(
+                "Udało się zmienić hasło",
+                "Zmieniono hasło.",
+                3000
+            );
+        }
+    })
       .catch((err) => {
         NotificationManager.error(
           "Nie udało się wysłąć emaila odnośnie zmiany hasła.",
@@ -40,18 +51,7 @@ const ResetPasswordLobby = () => {
           3000
         );
         console.error(err);
-      })
-      .finally(() => {
-        setIsSend(true);
       });
-
-    if (resetFetch.statusCode === 200) {
-      NotificationManager.success(
-        "Udało się zmienić hasło",
-        "Zmieniono hasło.",
-        3000
-      );
-    }
   };
 
   return (
