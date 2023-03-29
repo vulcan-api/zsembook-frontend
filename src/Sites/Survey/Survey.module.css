@@ -1,15 +1,23 @@
 .question {
-    margin: 2rem 0;
+    margin: 4rem 0;
 }
 
 .question > p, .p {
     font-size: 1.5rem;
     color: var(--add1-500);
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.result button {
+    width: fit-content;
 }
 
 @media screen and (max-width: 900px) {
     .question > p, .p {
         text-align: center;
+    }
+    .result button {
+        width: 100% !important;
+        margin-bottom: 6rem;
     }
 }

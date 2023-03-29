@@ -59,9 +59,8 @@ const Survey = () => {
                 const max = Object.keys(currentScore).filter((key: any) => currentScore[key] === value);
                 maxValue.push(max);
          });
-         maxValue.pop();
+        maxValue.pop();
         setScore(currentScore);
-        console.log(maxValue);
         setResult(maxValue);
     };
 
@@ -83,7 +82,7 @@ const Survey = () => {
             label: "Informatyka",
             score: {
                 Programista: 1,
-                Informatyk: 2,
+                Informatyk: 1,
                 Teleinformatyk: 1,
                 Elektronik: 0,
                 Elektryk: 0,
@@ -155,7 +154,7 @@ const Survey = () => {
         },
         {
             value: "Programista",
-            label: "Konfiguracja systemów operacyjnych windows i linux",
+            label: "Konfiguracja systemów operacyjnych Windows i Linux",
             score: {
                 Programista: 0,
                 Informatyk: 1,
@@ -193,7 +192,7 @@ const Survey = () => {
             value: "Programista",
             label: "Grafika komputerowa",
             score: {
-                Programista: 1,
+                Programista: 0.5,
                 Informatyk: 1,
                 Teleinformatyk: 0,
                 Elektronik: 0,
@@ -246,7 +245,7 @@ const Survey = () => {
             score: {
                 Programista: 1,
                 Informatyk: 1,
-                Teleinformatyk: 1,
+                Teleinformatyk: 0,
                 Elektronik: 0,
                 Elektryk: 0,
                 Mechatronik: 0,
@@ -390,17 +389,14 @@ const Survey = () => {
                 <p>Po ukończeniu Technikum chciałbyś</p>
                 <Radio values={fourthQuestion} name="fourth"/>
             </div>
-
             <div>
-              <Button onClick={getResult} buttonText="Sprawdź kierunek dla Ciebie"/> : <div><p className={classes.p}>Najlepsze kierunki dla Ciebie to: </p>
+                {result.length !== 0 ? (<div><p className={classes.p}>Najlepsze kierunki dla Ciebie to: </p>
                     {result.map((item : any) => {
                         return <div>
-                            <p className={classes.p}>{item}, </p>
+                            <p className={classes.p}>{item.join(', ')} </p>
                         </div>
-                    })}
-                </div>
+                    })}</div>) : (<Button onClick={getResult} buttonText="Sprawdź kierunek dla Ciebie"/>)}
             </div>
-
         </>
     );
 }
