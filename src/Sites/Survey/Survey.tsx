@@ -12,7 +12,7 @@ const Survey = () => {
         Elektryk: 0,
         Mechatronik: 0,
     });
-    const [result, setResult] = useState("");
+    const [result, setResult] = useState<any>([]);
     const getResult = () => {
         const currentScore = {...score};
 
@@ -59,8 +59,10 @@ const Survey = () => {
                 const max = Object.keys(currentScore).filter((key: any) => currentScore[key] === value);
                 maxValue.push(max);
          });
+         maxValue.pop();
         setScore(currentScore);
-        setResult(maxValue.join(", "));
+        console.log(maxValue);
+        setResult(maxValue);
     };
 
     const firstQuestion = [
@@ -390,9 +392,13 @@ const Survey = () => {
             </div>
 
             <div>
-                {result ? <p className={classes.p}>Najlepsze kierunki dla Ciebie to: {result}</p> : <div>
-                    <Button onClick={getResult} buttonText="Sprawdź kierunek dla Ciebie"/>
-                </div>}
+              <Button onClick={getResult} buttonText="Sprawdź kierunek dla Ciebie"/> : <div><p className={classes.p}>Najlepsze kierunki dla Ciebie to: </p>
+                    {result.map((item : any) => {
+                        return <div>
+                            <p className={classes.p}>{item}, </p>
+                        </div>
+                    })}
+                </div>
             </div>
 
         </>
