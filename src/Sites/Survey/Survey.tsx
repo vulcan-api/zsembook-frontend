@@ -50,11 +50,17 @@ const Survey = () => {
         currentScore.Mechatronik += firstQuestion.find((q) => q.value === firstAnswer).score.Mechatronik
             // @ts-ignore
             + secondQuestion.find((q) => q.value === secondAnswer).score.Mechatronik + thirdQuestion.find((q) => q.value === thirdAnswer).score.Mechatronik + fourthQuestion.find((q) => q.value === fourthAnswer).score.Mechatronik;
-        const maxValue = Math.max(...Object.values(currentScore));
-        // @ts-ignore
-        const max = Object.keys(currentScore).filter((key: any) => currentScore[key] === maxValue);
+        console.log(currentScore);
+        const threeMaxValues = Object.values(currentScore).sort((a, b) => b - a).slice(0, 2);
+
+         const maxValue: string[][] = [];
+         threeMaxValues.forEach((value) => {
+                // @ts-ignore
+                const max = Object.keys(currentScore).filter((key: any) => currentScore[key] === value);
+                maxValue.push(max);
+         });
         setScore(currentScore);
-        setResult(max[0]);
+        setResult(maxValue.join(", "));
     };
 
     const firstQuestion = [
@@ -384,7 +390,7 @@ const Survey = () => {
             </div>
 
             <div>
-                {result ? <p className={classes.p}>Najlepszy kierunek dla Ciebie to: {result}</p> : <div>
+                {result ? <p className={classes.p}>Najlepsze kierunki dla Ciebie to: {result}</p> : <div>
                     <Button onClick={getResult} buttonText="Sprawdź kierunek dla Ciebie"/>
                 </div>}
             </div>
