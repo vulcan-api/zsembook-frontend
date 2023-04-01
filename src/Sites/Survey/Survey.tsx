@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import classes from "./Survey.module.css";
 import Radio from "../../Components/Radio";
 import Button from "../../Components/Button";
+import surveyClasses from "../Offer/Offer.module.css";
+import Wrapper from "../../Layout/Wrapper";
+import { Link } from "react-router-dom";
+import elektryk from "../Offer/graphics/elektryk.png";
+import elektronik from "../Offer/graphics/elektronik.png";
+import programista from "../Offer/graphics/programista.svg";
+import informatyk from "../Offer/graphics/informatyk.png";
+import teleinformatyk from "../Offer/graphics/teleinformatyk.png";
+import mechatronik from "../Offer/graphics/mechatronik.png";
 
 const Survey = () => {
   const [score, setScore] = useState({
@@ -13,32 +22,32 @@ const Survey = () => {
     Mechatronik: 0,
   });
   const [result, setResult] = useState<any>([]);
- const getResult = () => {
-   const currentScore: any = { ...score };
-   const answerNames = ["first", "second", "third", "fourth"];
+  const getResult = () => {
+    const currentScore: any = { ...score };
+    const answerNames = ["first", "second", "third", "fourth"];
 
-   const answerScores = answerNames.map((name) => {
-     const answer = JSON.parse(
-       (document.querySelector(`input[name="${name}"]:checked`) as any)?.value
-     );
-     return answer || {};
-   });
+    const answerScores = answerNames.map((name) => {
+      const answer = JSON.parse(
+        (document.querySelector(`input[name="${name}"]:checked`) as any)?.value
+      );
+      return answer || {};
+    });
 
-   for (let field in currentScore) {
-     currentScore[field] = answerScores.reduce((acc, answer) => {
-       return acc + (answer[field] || 0);
-     }, 0);
-   }
+    for (let field in currentScore) {
+      currentScore[field] = answerScores.reduce((acc, answer) => {
+        return acc + (answer[field] || 0);
+      }, 0);
+    }
 
-   const maxValues = Object.entries(currentScore).sort((a: any, b: any) => {
-     return b[1] - a[1];
-   });
+    const maxValues = Object.entries(currentScore).sort((a: any, b: any) => {
+      return b[1] - a[1];
+    });
 
-   const tempResult = [[maxValues[0][0]], [maxValues[1][0], maxValues[2][0]]];
+    const tempResult = [[maxValues[0][0]], [maxValues[1][0], maxValues[2][0]]];
 
-   setScore(currentScore);
-   setResult(tempResult);
- };
+    setScore(currentScore);
+    setResult(tempResult);
+  };
 
   const firstQuestion = [
     {
@@ -245,6 +254,42 @@ const Survey = () => {
     },
   ];
 
+  const profilesInfo = {
+    Programista: {
+      classes: ["1d", "1p"],
+      extendedLevel: ["Matematyka", "J. angielski"],
+      img: programista,
+    },
+    Informatyk: {
+      classes: ["1i"],
+      extendedLevel: ["Matematyka", "J. angielski"],
+      img: informatyk,
+    },
+    Teleinformatyk: {
+      classes: ["1t"],
+      extendedLevel: ["Matematyka"],
+      new: "Specjalizacja: Cyberbezpieczeństwo w sieciach teleinformatycznych",
+      img: teleinformatyk,
+    },
+    Elektronik: {
+      classes: ["1g"],
+      extendedLevel: ["Matematyka"],
+      new: "Specjalizacja: Programowanie mikroprocesorów",
+      img: elektronik,
+    },
+    Elektryk: {
+      classes: ["1f"],
+      extendedLevel: ["Matematyka"],
+      new: "Specjalizacja: Systemy inteligentnych budynków",
+      img: elektryk,
+    },
+    Mechatronik: {
+      classes: ["1m", "1e"],
+      extendedLevel: ["Matematyka", "Fizyka"],
+      img: mechatronik,
+    },
+  };
+
   return (
     <>
       <h1>Ankieta</h1>
@@ -276,14 +321,86 @@ const Survey = () => {
             <p className={classes.p} onClick={() => console.log(result)}>
               Najlepsze kierunki dla Ciebie to:{" "}
             </p>
-            {result[0].map((item: any, index: number) => {
-              return (
-                <div key={index}>
-                  <p className={classes.p}>{item}</p>
-                  <p className={classes.p}>{result[1].join(" ")}</p>
-                </div>
-              );
-            })}
+            <div className={surveyClasses.offertItems}>
+              {result[0].map((item: any, index: number) => {
+                let profile: any = (profilesInfo as any)[item];
+                return (
+                  <Wrapper key={index}>
+                    <div>
+                      <h1>Technik {item}</h1>
+                      {profile.classes.length === 1 ? (
+                        <h2>{profile.classes[0]}, 1 oddział - 32 miejsca</h2>
+                      ) : (
+                        <h2>
+                          {profile.classes[0] +
+                            ", " +
+                            profile.classes[1] +
+                            ", "}
+                          2 oddziały - 64 miejsca
+                        </h2>
+                      )}
+                    </div>
+                    <img src={profile.img} alt="" />
+                    <p className={surveyClasses.subjects}>
+                      Przedmioty realizowane na poziomie rozszerzonym:
+                    </p>
+                    <ul>
+                      {profile.extendedLevel.map((item: any, index: number) => {
+                        return <li key={index}>{item}</li>;
+                      })}
+                    </ul>
+                    {profile.new && (
+                      <div className={surveyClasses.new}>
+                        <p>Nowość !</p>
+                        <p>{profile.new}</p>
+                      </div>
+                    )}
+                    <Link to={`/offer/${item.toLowerCase()}`}>
+                      <Button buttonText="Więcej informacji" />
+                    </Link>
+                  </Wrapper>
+                );
+              })}
+              {result[1].map((item: any, index: number) => {
+                let profile: any = (profilesInfo as any)[item];
+                return (
+                  <Wrapper key={index} style={result[1][1] === item ? {marginBottom : "6rem"} : {}}>
+                    <div>
+                      <h1>Technik {item}</h1>
+                      {profile.classes.length === 1 ? (
+                        <h2>{profile.classes[0]}, 1 oddział - 32 miejsca</h2>
+                      ) : (
+                        <h2>
+                          {profile.classes[0] +
+                            ", " +
+                            profile.classes[1] +
+                            ", "}
+                          2 oddziały - 64 miejsca
+                        </h2>
+                      )}
+                    </div>
+                    <img src={profile.img} alt="" />
+                    <p className={surveyClasses.subjects}>
+                      Przedmioty realizowane na poziomie rozszerzonym:
+                    </p>
+                    <ul>
+                      {profile.extendedLevel.map((item: any, index: number) => {
+                        return <li key={index}>{item}</li>;
+                      })}
+                    </ul>
+                    {profile.new && (
+                      <div className={surveyClasses.new}>
+                        <p>Nowość !</p>
+                        <p>{profile.new}</p>
+                      </div>
+                    )}
+                    <Link to={`/offer/${item.toLowerCase()}`}>
+                      <Button buttonText="Więcej informacji" />
+                    </Link>
+                  </Wrapper>
+                );
+              })}
+            </div>
           </div>
         ) : (
           <Button

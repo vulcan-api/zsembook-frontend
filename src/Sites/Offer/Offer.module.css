@@ -11,6 +11,7 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .buttonFlex {
   width: 100%;
   display: flex;
@@ -21,11 +22,13 @@
   padding-top: 1rem;
   gap: 1rem;
 }
+
 .buttonFlex > button {
   flex: 1;
   min-width: 200px;
   overflow: hidden;
 }
+
 .offertItems > div {
     box-sizing: border-box;
     margin: 1rem;

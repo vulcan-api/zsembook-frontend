@@ -8,7 +8,7 @@
     margin-bottom: 2rem;
 }
 
-.result button {
+.result > button {
     width: fit-content;
 }
 
@@ -16,7 +16,7 @@
     .question > p, .p {
         text-align: center;
     }
-    .result button {
+    .result > button {
         width: 100% !important;
         margin-bottom: 6rem;
     }
