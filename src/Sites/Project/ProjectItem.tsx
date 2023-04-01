@@ -40,11 +40,13 @@ const ProjectItem = (props: any) => {
                 onClick={handleFacebookClick}
               />
             ) : (
-              <Button
-                buttonText="Facebook"
-                icon={<Icon.Facebook />}
-                style={{cursor: "not-allowed"}}
-              />
+              !isMobile && (
+                <Button
+                  buttonText="Facebook"
+                  icon={<Icon.Facebook />}
+                  style={{ cursor: "not-allowed" }}
+                />
+              )
             )}
             <Button
               buttonText="Strona szkoły"

@@ -389,7 +389,7 @@ const Survey = () => {
                 <p>Po ukończeniu Technikum chciałbyś</p>
                 <Radio values={fourthQuestion} name="fourth"/>
             </div>
-            <div>
+            <div className={classes.result}>
                 {result.length !== 0 ? (<div><p className={classes.p}>Najlepsze kierunki dla Ciebie to: </p>
                     {result.map((item : any) => {
                         return <div>
