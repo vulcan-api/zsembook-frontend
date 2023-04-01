@@ -247,7 +247,7 @@ const Profile = () => {
                 </p>
               )}
             </div>
-            {(!User.isItMe(+userId!) && User.isLogged) && (
+            {!User.isItMe(+userId!) && (
               <Button
                 className={user.isAlreadyFollowed ? "alternate" : ""}
                 buttonText={user.isAlreadyFollowed ? "Obserwujesz" : "Obserwuj"}

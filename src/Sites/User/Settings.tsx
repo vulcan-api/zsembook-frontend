@@ -61,7 +61,7 @@ const Settings = () => {
 
   async function updateSettings(event: any) {
     event.preventDefault();
-    const filteredSettings = Object.fromEntries(Object.entries(settings).filter(([_, v]) => v !== ""));
+    const filteredSettings = Object.fromEntries(Object.entries(settings));
     const throwObject = {};
     fetch(
       `${process.env.REACT_APP_REQUEST_URL}/user/settings/`,

@@ -16,7 +16,7 @@ interface SocialElementProps {
   fullUrl?: boolean,
 }
 
-interface SocialsType {
+interface SocialObjectProps {
   facebook: string,
   instagram: string,
   youtube: string,
@@ -34,27 +34,41 @@ const SocialElement = (props: SocialElementProps) =>
   </Link>
 
 const SocialsModal = (props: SocialsModalProps) => {
-  const [socials, setSocials] = useState<SocialsType>();
+  const [socials, setSocials] = useState<Array<SocialElementProps>>();
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const getSocials = useCallback(async () => {
+  const setupSocials = useCallback((json: SocialObjectProps) => {
+    const toSet: Array<SocialElementProps> = [];
+    json.facebook && toSet.push({icon: <Facebook/>, name: json.facebook, url: 'https://facebook.com/'});
+    json.instagram && toSet.push({icon: <Instagram/>, name: json.instagram, url: 'https://instagram.com/'});
+    json.youtube && toSet.push({icon: <Youtube/>, name: json.youtube, url: 'https://youtube.com/@'});
+    json.website && toSet.push({icon: <BrowserFirefox/>, name: new URL(json.website).hostname, url: json.website, fullUrl: true});
+
+    setSocials(toSet);
+  }, []);
+
+  const getSocials = useCallback(() => {
+    
       fetch(`${process.env.REACT_APP_REQUEST_URL}/user/${props.userId}`)
       .then(res => res.json())
-      .then(json => setSocials(json))
-  }, [props.userId]);
+      .then(json => setupSocials(json))
+      .finally(() => {props.showSpinner(false); setIsLoaded(true)})
+  }, [setupSocials, props]);
 
   useEffect(() => {
-    props.showSpinner(false);
     getSocials();
   }, [props, getSocials]);
 
   return <>
     <p>Social media</p>
+    {isLoaded &&
     <ul>
-      {socials?.facebook && <SocialElement icon={<Facebook/>} name={socials.facebook} url='https://facebook.com/' />}
-      {socials?.instagram && <SocialElement icon={<Instagram/>} name={socials.instagram} url='https://instagram.com/' />}
-      {socials?.youtube && <SocialElement icon={<Youtube/>} name={socials.youtube} url='https://youtube.com/@' />}
-      {socials?.website && <SocialElement icon={<BrowserFirefox/>} name={new URL(socials.website).hostname} url={socials.website} fullUrl={true}/>}
+      {socials && socials.length !== 0 ? socials.map((elem, key) => {
+        return <li key={key}><SocialElement icon={elem.icon} name={elem.name} url={elem.url} fullUrl={elem.fullUrl}/></li>
+      })
+       : <p>Brak linków do mediów społecznościowych użytkownika</p>}
     </ul>
+    }
   </>
 };
 
