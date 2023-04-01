@@ -171,7 +171,7 @@ const Register = () => {
                 ref={repeatPasswordRef}
                 required
               />
-              <Checkbox id="acceptRegulamin" label="Akceptuję regulamin" required/>
+              <Checkbox id="acceptRegulamin" label={<>Akceptuję <Link to='/statute' className={classes.link}>regulamin</Link></>} required/>
               <Button buttonText="Zarejestruj się" type="submit" />
             </>
           </form>

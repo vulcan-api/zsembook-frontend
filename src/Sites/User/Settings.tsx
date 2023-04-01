@@ -224,6 +224,7 @@ const Settings = () => {
             <div className={classes.bottomButtons}>
               <Button buttonText="Usuń konto" className="alternate" />
               <Button
+                disposable={true}
                 buttonText={
                   <span
                     style={{

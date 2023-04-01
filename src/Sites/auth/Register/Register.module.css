@@ -12,6 +12,10 @@
     }
 }
 
+.link {
+    color: var(--add2-500);
+}
+
 .img {
     width: 50%;
     background-image: url('./Graphics/bgregister.png');

@@ -25,6 +25,7 @@ import Verify from './Sites/auth/Verify/Verify';
 import ResetPassword from './Sites/auth/ResetPassword/ResetPassword';
 import ResetPasswordLobby from './Sites/auth/ResetPassword/ResetPasswordLobby';
 import Survey from './Sites/Survey/Survey';
+import Statute from './Sites/Statute/Statute';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/reset",
     element: <ResetPasswordLobby />,
+  },
+  {
+    path: "/statute",
+    element: <Statute />,
   },
   {
     path: "/",

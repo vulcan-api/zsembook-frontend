@@ -1,0 +1,9 @@
+.text {
+    max-width: 50rem;
+    margin: auto;
+    text-align: justify;
+    flex-direction: column;
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+}

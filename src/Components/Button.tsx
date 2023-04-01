@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Button.module.css";
 
-export const classMgmt = (className: any) => {
+const Button = (props: any) => {
+  const [isClicked, setIsClicked] = useState(props.disabled);
+
+  const classMgmt = (className: any) => {
+    if(props.disposable && isClicked)
+      return classes.grayDisabled;
+
     switch (className) {
       case "alternate":
         return classes.alternate;
@@ -15,9 +21,12 @@ export const classMgmt = (className: any) => {
       default:
         return classes.default;
     }
-}
+  }
 
-const Button = (props:any) => {
+  const isDisabled = (): boolean => {
+    return props.disabled || (props.disposable && isClicked);
+  }
+
   const sharedProps = {
     className: classes.button + " " + classMgmt(props.className),
     children: <>{props.icon}{props.buttonText || "debiluZapomniałeśWpisać"}</>
@@ -29,8 +38,8 @@ const Button = (props:any) => {
       <button
         tooltip-dsc={props.tooltipDsc}
         type={props.type || "button"}
-        onClick={props.onClick}
-        disabled={props.disabled}
+        onClick={() => {setIsClicked(true); props.onClick && props.onClick();}}
+        disabled={isDisabled()}
         style={props.style}
         title={props.title}
         {...sharedProps}

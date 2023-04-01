@@ -16,6 +16,10 @@
     transition: all .3s;
 }
 
+.fit {
+    width: fit-content;
+}
+
 .default {
     border: 2px solid var(--add1-500);
     box-shadow: 0px 2px 0px var(--add1-400);
