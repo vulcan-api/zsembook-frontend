@@ -32,6 +32,7 @@ const Button = (props:any) => {
         onClick={props.onClick}
         disabled={props.disabled}
         style={props.style}
+        title={props.title}
         {...sharedProps}
       >
       </button> }</>

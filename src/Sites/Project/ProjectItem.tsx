@@ -45,6 +45,7 @@ const ProjectItem = (props: any) => {
                   buttonText="Facebook"
                   icon={<Icon.Facebook />}
                   style={{ cursor: "not-allowed" }}
+                  title="Brak posta na Facebook!"
                 />
               )
             )}
