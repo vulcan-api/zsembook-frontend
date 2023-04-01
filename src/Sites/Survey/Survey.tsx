@@ -60,27 +60,22 @@ const Survey = () => {
       (thirdAnswer.Mechatronik || 0) +
       (fourthAnswer.Mechatronik || 0);
 
-    const threeMaxValues = Object.values(currentScore)
-      .sort((a: any, b: any) => b - a)
-      .slice(0, 3);
-    
-    const maxValue: any = [];
-    
-    threeMaxValues.forEach((value) => {
-      const max = Object.keys(currentScore).filter(
-        (key: any) => currentScore[key] === value
-      );
-      maxValue.push(max);
+    let maxValues: any = [];
+
+    for (let value in currentScore) {
+      maxValues.push([value, currentScore[value]]);
+    }
+
+    maxValues.sort(function (a: any, b: any) {
+      return b[1] - a[1];
     });
-    maxValue.pop();
-    console.log(firstAnswer);
-    console.log(secondAnswer);
-    console.log(thirdAnswer);
-    console.log(fourthAnswer);
-    console.log(currentScore);
+
+    let tempResult: any[] = [];
+    tempResult.push([maxValues[0][0]]);
+    tempResult.push([maxValues[1][0], maxValues[2][0]])
 
     setScore(currentScore);
-    setResult(maxValue);
+    setResult(tempResult);
   };
 
   const firstQuestion = [
@@ -319,10 +314,11 @@ const Survey = () => {
             <p className={classes.p} onClick={() => console.log(result)}>
               Najlepsze kierunki dla Ciebie to:{" "}
             </p>
-            {result.map((item: any, index: number) => {
+            {result[0].map((item: any, index: number) => {
               return (
                 <div key={index}>
-                  <p className={classes.p}>{item.join(", ")} </p>
+                  <p className={classes.p}>{item}</p>
+                  <p className={classes.p}>{result[1].join(" ")}</p>
                 </div>
               );
             })}
