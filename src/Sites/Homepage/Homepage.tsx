@@ -323,7 +323,7 @@ const Homepage = () => {
             <ul className={classes.authors}>
               <li>
                 <Link to="https://github.com/BaderBC" target={"_blank"}>
-                  Bartlomiej Strama
+                  Bartłomiej Strama
                 </Link>
               </li>
               <li>
