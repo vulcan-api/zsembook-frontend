@@ -1,4 +1,5 @@
-import React, {useState, useLayoutEffect, useRef} from "react";
+import React, {useState, useLayoutEffect, useRef, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import Wrapper from "../../Layout/Wrapper";
 import User from "../../Lib/User";
 import * as Icon from "react-bootstrap-icons";
@@ -15,11 +16,18 @@ import photo7 from "./Photos/7.jpg";
 import photo8 from "./Photos/8.jpg";
 
 const Homepage = () => {
+    const navigate = useNavigate();
     const sliderRef = useRef<any>(null);
     const [slideWidth, setSlideWidth] = useState<number>(0);
 
     const isMobile = /Mobile/.test(navigator.userAgent);
 
+    useEffect(() => {
+      if (!sessionStorage.getItem("firstEnter")) {
+        sessionStorage.setItem("firstEnter", "1");
+        navigate("/offer");
+      }
+    }, [navigate]);
 
     useLayoutEffect(() => {
         setSlideWidth(sliderRef.current.offsetWidth * -1);
