@@ -7,24 +7,31 @@
 }
 
 .main input {
-    width: 2rem;
-    height: 2rem;
+    width: 32px !important;
+    height: 32px !important;
     appearance: none;
     background-color: var(--add2-400);
-    border-radius: 8px;
+    border-radius: 100%;
 }
 
 .main input:checked {
     background-color: var(--add1-500);
 }
 
-.main span {
+.main div {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 1rem;
+    white-space: normal;
+    line-break: anywhere;
+    width: 100%;
+}
+
+.main div > * {
+    cursor: pointer;
 }
 
 .main label {
     font-size: 1rem;
+    max-width: 80%;
 }
