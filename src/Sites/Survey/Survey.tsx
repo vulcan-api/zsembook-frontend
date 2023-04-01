@@ -17,56 +17,43 @@ const Survey = () => {
         const currentScore = {...score};
 
         // @ts-ignore
-        const firstAnswer = document.querySelector('input[name="first"]:checked').value;
+        const firstAnswer = JSON.parse(document.querySelector('input[name="first"]:checked').value);
         // @ts-ignore
-        const secondAnswer = document.querySelector('input[name="second"]:checked').value;
+        const secondAnswer = JSON.parse(document.querySelector('input[name="second"]:checked').value);
         // @ts-ignore
-        const thirdAnswer = document.querySelector('input[name="second"]:checked').value;
+        const thirdAnswer = JSON.parse(document.querySelector('input[name="third"]:checked').value);
         // @ts-ignore
-        const fourthAnswer = document.querySelector('input[name="second"]:checked').value;
+        const fourthAnswer = JSON.parse(document.querySelector('input[name="fourth"]:checked').value);
 
+        //@ts-ignore
+        currentScore.Programista += firstAnswer.Programista + secondAnswer.Programista + thirdAnswer.Programista + fourthAnswer.Programista;
+        //@ts-ignore
+        currentScore.Informatyk += firstAnswer.Informatyk + secondAnswer.Informatyk + thirdAnswer.Informatyk + fourthAnswer.Informatyk;
+        //@ts-ignore
+        currentScore.Teleinformatyk += firstAnswer.Teleinformatyk + secondAnswer.Teleinformatyk + thirdAnswer.Teleinformatyk + fourthAnswer.Teleinformatyk;
+        //@ts-ignore
+        currentScore.Elektronik += firstAnswer.Elektronik + secondAnswer.Elektronik + thirdAnswer.Elektronik + fourthAnswer.Elektronik;
+        //@ts-ignore
+        currentScore.Elektryk += firstAnswer.Elektryk + secondAnswer.Elektryk + thirdAnswer.Elektryk + fourthAnswer.Elektryk;
+        //@ts-ignore
+        currentScore.Mechatronik += firstAnswer.Mechatronik + secondAnswer.Mechatronik + thirdAnswer.Mechatronik + fourthAnswer.Mechatronik;
 
-        // @ts-ignore
-        currentScore.Programista += firstQuestion.find((q) => q.value === firstAnswer).score.Programista
+        const threeMaxValues = Object.values(currentScore).sort((a, b) => b - a).slice(0, 3);
+        const maxValue: string[][] = [];
+        threeMaxValues.forEach((value) => {
             // @ts-ignore
-            + secondQuestion.find((q) => q.value === secondAnswer).score.Programista + thirdQuestion.find((q) => q.value === thirdAnswer).score.Programista + fourthQuestion.find((q) => q.value === fourthAnswer).score.Programista;
-        // @ts-ignore
-        currentScore.Informatyk += firstQuestion.find((q) => q.value === firstAnswer).score.Informatyk
-            // @ts-ignore
-            + secondQuestion.find((q) => q.value === secondAnswer).score.Informatyk + thirdQuestion.find((q) => q.value === thirdAnswer).score.Informatyk + fourthQuestion.find((q) => q.value === fourthAnswer).score.Informatyk;
-        // @ts-ignore
-        currentScore.Teleinformatyk += firstQuestion.find((q) => q.value === firstAnswer).score.Teleinformatyk
-            // @ts-ignore
-            + secondQuestion.find((q) => q.value === secondAnswer).score.Teleinformatyk + thirdQuestion.find((q) => q.value === thirdAnswer).score.Teleinformatyk + fourthQuestion.find((q) => q.value === fourthAnswer).score.Teleinformatyk;
-        // @ts-ignore
-        currentScore.Elektronik += firstQuestion.find((q) => q.value === firstAnswer).score.Elektronik
-            // @ts-ignore
-            + secondQuestion.find((q) => q.value === secondAnswer).score.Elektronik + thirdQuestion.find((q) => q.value === thirdAnswer).score.Elektronik + fourthQuestion.find((q) => q.value === fourthAnswer).score.Elektronik;
-        // @ts-ignore
-        currentScore.Elektryk += firstQuestion.find((q) => q.value === firstAnswer).score.Elektryk
-            // @ts-ignore
-            + secondQuestion.find((q) => q.value === secondAnswer).score.Elektryk + thirdQuestion.find((q) => q.value === thirdAnswer).score.Elektryk + fourthQuestion.find((q) => q.value === fourthAnswer).score.Elektryk;
-        // @ts-ignore
-        currentScore.Mechatronik += firstQuestion.find((q) => q.value === firstAnswer).score.Mechatronik
-            // @ts-ignore
-            + secondQuestion.find((q) => q.value === secondAnswer).score.Mechatronik + thirdQuestion.find((q) => q.value === thirdAnswer).score.Mechatronik + fourthQuestion.find((q) => q.value === fourthAnswer).score.Mechatronik;
-        console.log(currentScore);
-        const threeMaxValues = Object.values(currentScore).sort((a, b) => b - a).slice(0, 2);
-
-         const maxValue: string[][] = [];
-         threeMaxValues.forEach((value) => {
-                // @ts-ignore
-                const max = Object.keys(currentScore).filter((key: any) => currentScore[key] === value);
-                maxValue.push(max);
-         });
+            const max = Object.keys(currentScore).filter((key: any) => currentScore[key] === value);
+            maxValue.push(max);
+        });
         maxValue.pop();
         setScore(currentScore);
         setResult(maxValue);
     };
 
+
     const firstQuestion = [
+
         {
-            value: "Matematyka",
             label: "Matematyka",
             score: {
                 Programista: 1,
@@ -78,7 +65,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Informatyka",
             label: "Informatyka",
             score: {
                 Programista: 1,
@@ -90,7 +76,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Fizyka",
             label: "Fizyka",
             score: {
                 Programista: 0,
@@ -102,7 +87,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Technika",
             label: "Technika",
             score: {
                 Programista: 0,
@@ -114,7 +98,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Technika",
             label: "Języki obce",
             score: {
                 Programista: 1,
@@ -129,7 +112,6 @@ const Survey = () => {
 
     const secondQuestion = [
         {
-            value: "Programista",
             label: "Sieci komputerowe",
             score: {
                 Programista: 0,
@@ -141,7 +123,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Konfiguracja urządzeń telekomunikacyjnych (telefony, centrale)",
             score: {
                 Programista: 0,
@@ -153,7 +134,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Konfiguracja systemów operacyjnych Windows i Linux",
             score: {
                 Programista: 0,
@@ -165,7 +145,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Programowanie aplikacji mobilnych lub desktopowych",
             score: {
                 Programista: 1,
@@ -177,7 +156,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Tworzenie stron internetowych",
             score: {
                 Programista: 1,
@@ -189,7 +167,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Grafika komputerowa",
             score: {
                 Programista: 0.5,
@@ -201,7 +178,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Programowanie sterowników, urządzeń elektronicznych",
             score: {
                 Programista: 0,
@@ -213,7 +189,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Automatyka, mechanika",
             score: {
                 Programista: 0,
@@ -225,7 +200,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Programista",
             label: "Robotyka, urządzenia elektroniczne",
             score: {
                 Programista: 0,
@@ -240,7 +214,6 @@ const Survey = () => {
 
     const thirdQuestion = [
         {
-            value: "Programista",
             label: "Praca zespołowa",
             score: {
                 Programista: 1,
@@ -252,7 +225,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Informatyk",
             label: "Indywidualna praca",
             score: {
                 Programista: 0,
@@ -264,7 +236,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Teleinformatyk",
             label: "Praca w terenie",
             score: {
                 Programista: 0,
@@ -276,7 +247,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Elektronik",
             label: "Praca w stałym miejscu",
             score: {
                 Programista: 1,
@@ -288,7 +258,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Elektronik",
             label: "Praca na wysokości",
             score: {
                 Programista: 0,
@@ -300,7 +269,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Elektronik",
             label: "Praca przy komputerze",
             score: {
                 Programista: 1,
@@ -312,7 +280,6 @@ const Survey = () => {
             }
         },
         {
-            value: "Elektronik",
             label: "Wykonywanie czynności manualnych (majsterkowanie)",
             score: {
                 Programista: 0,
@@ -327,19 +294,17 @@ const Survey = () => {
 
     const fourthQuestion = [
         {
-            value: "Programista",
             label: "Prowadzić własną firmę",
             score: {
                 Programista: 1,
                 Informatyk: 1,
                 Teleinformatyk: 1,
                 Elektronik: 1,
-                Elektryk: 0,
+                Elektryk: 1,
                 Mechatronik: 1,
             }
         },
         {
-            value: "Informatyk",
             label: "Pracować dla kogoś",
             score: {
                 Programista: 0,
@@ -351,10 +316,9 @@ const Survey = () => {
             }
         },
         {
-            value: "Teleinformatyk",
             label: "Studiować",
             score: {
-                Programista: 2,
+                Programista: 1,
                 Informatyk: 0,
                 Teleinformatyk: 1,
                 Elektronik: 0,
@@ -391,7 +355,7 @@ const Survey = () => {
             </div>
             <div className={classes.result}>
                 {result.length !== 0 ? (<div><p className={classes.p}>Najlepsze kierunki dla Ciebie to: </p>
-                    {result.map((item : any) => {
+                    {result.map((item: any) => {
                         return <div>
                             <p className={classes.p}>{item.join(', ')} </p>
                         </div>
