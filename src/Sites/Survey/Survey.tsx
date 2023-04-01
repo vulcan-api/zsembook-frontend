@@ -13,70 +13,32 @@ const Survey = () => {
     Mechatronik: 0,
   });
   const [result, setResult] = useState<any>([]);
-  const getResult = () => {
-    const currentScore: any = { ...score };
+ const getResult = () => {
+   const currentScore: any = { ...score };
+   const answerNames = ["first", "second", "third", "fourth"];
 
-    const firstAnswer = JSON.parse(
-      document.querySelector('input[name="first"]:checked' as any).value
-    );
-    const secondAnswer = JSON.parse(
-      document.querySelector('input[name="second"]:checked' as any).value
-    );
-    const thirdAnswer = JSON.parse(
-      document.querySelector('input[name="third"]:checked' as any).value
-    );
-    const fourthAnswer = JSON.parse(
-      document.querySelector('input[name="fourth"]:checked' as any).value
-    );
+   const answerScores = answerNames.map((name) => {
+     const answer = JSON.parse(
+       (document.querySelector(`input[name="${name}"]:checked`) as any)?.value
+     );
+     return answer || {};
+   });
 
-    currentScore.Programista +=
-      (firstAnswer.Programista || 0) +
-      (secondAnswer.Programista || 0) +
-      (thirdAnswer.Programista || 0) +
-      (fourthAnswer.Programista || 0);
-    currentScore.Informatyk +=
-      (firstAnswer.Informatyk || 0) +
-      (secondAnswer.Informatyk || 0) +
-      (thirdAnswer.Informatyk || 0) +
-      (fourthAnswer.Informatyk || 0);
-    currentScore.Teleinformatyk +=
-      (firstAnswer.Teleinformatyk || 0) +
-      (secondAnswer.Teleinformatyk || 0) +
-      (thirdAnswer.Teleinformatyk || 0) +
-      (fourthAnswer.Teleinformatyk || 0);
-    currentScore.Elektronik +=
-      (firstAnswer.Elektronik || 0) +
-      (secondAnswer.Elektronik || 0) +
-      (thirdAnswer.Elektronik || 0) +
-      (fourthAnswer.Elektronik || 0);
-    currentScore.Elektryk +=
-      (firstAnswer.Elektryk || 0) +
-      (secondAnswer.Elektryk || 0) +
-      (thirdAnswer.Elektryk || 0) +
-      (fourthAnswer.Elektryk || 0);
-    currentScore.Mechatronik +=
-      (firstAnswer.Mechatronik || 0) +
-      (secondAnswer.Mechatronik || 0) +
-      (thirdAnswer.Mechatronik || 0) +
-      (fourthAnswer.Mechatronik || 0);
+   for (let field in currentScore) {
+     currentScore[field] = answerScores.reduce((acc, answer) => {
+       return acc + (answer[field] || 0);
+     }, 0);
+   }
 
-    let maxValues: any = [];
+   const maxValues = Object.entries(currentScore).sort((a: any, b: any) => {
+     return b[1] - a[1];
+   });
 
-    for (let value in currentScore) {
-      maxValues.push([value, currentScore[value]]);
-    }
+   const tempResult = [[maxValues[0][0]], [maxValues[1][0], maxValues[2][0]]];
 
-    maxValues.sort(function (a: any, b: any) {
-      return b[1] - a[1];
-    });
-
-    let tempResult: any[] = [];
-    tempResult.push([maxValues[0][0]]);
-    tempResult.push([maxValues[1][0], maxValues[2][0]])
-
-    setScore(currentScore);
-    setResult(tempResult);
-  };
+   setScore(currentScore);
+   setResult(tempResult);
+ };
 
   const firstQuestion = [
     {
