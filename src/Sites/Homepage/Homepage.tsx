@@ -41,6 +41,8 @@ const Homepage = () => {
     const sliderRef = useRef<any>(null);
     const [slideWidth, setSlideWidth] = useState<number>(0);
 
+    const isMobile = /Mobile/.test(navigator.userAgent);
+
     const getPosts = useCallback(async () => {
         setIsLoading(true);
         try {
@@ -118,203 +120,240 @@ const Homepage = () => {
     const slidesContainer: any = document.getElementById("slides-container");
 
     return (
-        <>
-            {isLoading && <LoadingSpinner/>}
-            <div>
-                <h1>
-                    {User.isLogged
-                        ? `Witaj ${User.data.name} ${User.data.surname}!`
-                        : `Witaj na ZSEMBook!`}
-                </h1>
-            </div>
-            <Wrapper
-                className={classes.zsemDesc}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
+      <>
+        {isLoading && <LoadingSpinner />}
+        <div>
+          <h1>
+            {User.isLogged
+              ? `Witaj ${User.data.name} ${User.data.surname}!`
+              : `Witaj na ZSEMBook!`}
+          </h1>
+        </div>
+        <Wrapper
+          className={classes.zsemDesc}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <h2>Zespół Szkół Elektryczno - Mechanicznych w Nowym Sączu</h2>
+          <p className={classes.schoolDesc}>
+            Zespół Szkół Elektryczno-Mechanicznych w Nowym Sączu to renomowana
+            placówka edukacyjna, która oferuje szeroki wybór kierunków
+            związanych z techniką i elektroniką. Szkoła znajduje się w centrum
+            miasta Nowego Sącza. Uczniowie mają do wyboru wiele kierunków
+            kształcenia, takich jak programowanie, teleinformatyka, informatyka
+            lub mechatronika. Szkoła posiada specjalne sale do nauki przedmiotów
+            zawodowych, w których uczniowie mogą ćwiczyć praktyczne
+            umiejętności. Wszystkie sale wyposażone są w specjalne narzędzia i
+            urządzenia, co umożliwia skuteczne kształcenie. Nauczyciele są
+            wysoko wykwalifikowani i posiadają doświadczenie w branży, co
+            pozwala na dostosowanie programu nauczania do potrzeb rynku pracy.
+            Zespół Szkół Elektryczno-Mechanicznych w Nowym Sączu oferuje również
+            wiele możliwości rozwoju osobistego i kulturalnego. W szkole
+            organizowane są różne inicjatywy, o których można przeczytać w
+            zakładce "Wydarzenia". Podsumowując, nie czekaj! Już dziś zapoznaj
+            się z ofertą ZSEM!
+          </p>
+          <div className={classes.caroseul}>
+            <button
+              className={`${classes.slideArrow} ${classes.slideArrowPrev}`}
+              onClick={() => {
+                if (slidesContainer.scrollLeft === 0) {
+                  slidesContainer.scrollLeft -= slideWidth * 8;
+                } else {
+                  slidesContainer.scrollLeft += slideWidth;
+                }
+              }}
             >
-                <h2>Zespół Szkół Elektryczno - Mechanicznych w Nowym Sączu</h2>
-                <p className={classes.schoolDesc}>
-                    Zespół Szkół Elektryczno-Mechanicznych w Nowym Sączu to renomowana
-                    placówka edukacyjna, która oferuje szeroki wybór kierunków związanych
-                    z techniką i elektroniką. Szkoła znajduje się w centrum miasta Nowego
-                    Sącza. Uczniowie mają do wyboru wiele kierunków kształcenia, takich
-                    jak programowanie, teleinformatyka, informatyka lub mechatronika.
-                    Szkoła posiada specjalne sale do nauki przedmiotów zawodowych, w
-                    których uczniowie mogą ćwiczyć praktyczne umiejętności. Wszystkie sale
-                    wyposażone są w specjalne narzędzia i urządzenia, co umożliwia
-                    skuteczne kształcenie. Nauczyciele są wysoko wykwalifikowani i
-                    posiadają doświadczenie w branży, co pozwala na dostosowanie programu
-                    nauczania do potrzeb rynku pracy. Zespół Szkół
-                    Elektryczno-Mechanicznych w Nowym Sączu oferuje również wiele
-                    możliwości rozwoju osobistego i kulturalnego. W szkole organizowane są
-                    różne inicjatywy, o których można przeczytać w zakładce "Wydarzenia".
-                    Podsumowując, nie czekaj! Już dziś zapoznaj się z ofertą ZSEM!
-                </p>
-                <div className={classes.caroseul}>
-                    <button
-                        className={`${classes.slideArrow} ${classes.slideArrowPrev}`}
-                        onClick={() => {
-                            if (slidesContainer.scrollLeft === 0) {
-                                slidesContainer.scrollLeft -= slideWidth * 8;
-                            } else {
-                                slidesContainer.scrollLeft += slideWidth;
-                            }
-                        }}
+              &#8249;
+            </button>
+            <button
+              className={`${classes.slideArrow} ${classes.slideArrowNext}`}
+              onClick={() => {
+                if (
+                  slidesContainer.scrollLeft ===
+                  slidesContainer.scrollWidth - slidesContainer.clientWidth
+                ) {
+                  slidesContainer.scrollLeft += slideWidth * 8;
+                } else {
+                  slidesContainer.scrollLeft -= slideWidth;
+                }
+              }}
+            >
+              &#8250;
+            </button>
+            <ul
+              className={classes.slidesContainer}
+              id="slides-container"
+              ref={sliderRef}
+            >
+              <img className={classes.slide} src={photo1} alt="zdj1" />
+              <img className={classes.slide} src={photo2} alt="zdj2" />
+              <img className={classes.slide} src={photo3} alt="zdj3" />
+              <img className={classes.slide} src={photo4} alt="zdj4" />
+              <img className={classes.slide} src={photo5} alt="zdj5" />
+              <img className={classes.slide} src={photo6} alt="zdj6" />
+              <img className={classes.slide} src={photo7} alt="zdj7" />
+              <img className={classes.slide} src={photo8} alt="zdj8" />
+            </ul>
+          </div>
+          <Button
+            buttonText="Wizytówka ZSEM"
+            icon={<Icon.Youtube />}
+            className={classes.zsemVideo}
+            onClick={() => {
+              if (isMobile) {
+                window.location.replace(
+                  "https://www.youtube.com/watch?v=yG12VjDxQfc"
+                );
+              } else {
+                window.open(
+                  "https://www.youtube.com/watch?v=yG12VjDxQfc",
+                  "_blank"
+                );
+              }
+            }}
+          />
+          <p>
+            Nie wiesz jaki kierunek kształcenia obrać? Spróbujemy ci w tym
+            pomóc! Kliknij poniżej.
+          </p>
+          <Link to="/survey">
+            <Button buttonText="Ankieta" icon={<Icon.UiRadios />} />
+          </Link>
+        </Wrapper>
+        <Wrapper>
+          <h2>Spotted</h2>
+          {!isLoading && Array.isArray(posts) ? (
+            <>
+              <p className={classes.centerOnPhone}>Proponowane posty</p>
+              <div className={classes.posts}>
+                {posts.map((post) => {
+                  return (
+                    <Wrapper
+                      className={`${classes.post} ${classes.narrowContainer}`}
+                      key={post.id}
                     >
-                        &#8249;
-                    </button>
-                    <button
-                        className={`${classes.slideArrow} ${classes.slideArrowNext}`}
-                        onClick={() => {
-                            if (
-                                slidesContainer.scrollLeft ===
-                                slidesContainer.scrollWidth - slidesContainer.clientWidth
-                            ) {
-                                slidesContainer.scrollLeft += slideWidth * 8;
-                            } else {
-                                slidesContainer.scrollLeft -= slideWidth;
-                            }
-                        }}
-                    >
-                        &#8250;
-                    </button>
-                    <ul
-                        className={classes.slidesContainer}
-                        id="slides-container"
-                        ref={sliderRef}
-                    >
-                        <img className={classes.slide} src={photo1} alt="zdj1"/>
-                        <img className={classes.slide} src={photo2} alt="zdj2"/>
-                        <img className={classes.slide} src={photo3} alt="zdj3"/>
-                        <img className={classes.slide} src={photo4} alt="zdj4"/>
-                        <img className={classes.slide} src={photo5} alt="zdj5"/>
-                        <img className={classes.slide} src={photo6} alt="zdj6"/>
-                        <img className={classes.slide} src={photo7} alt="zdj7"/>
-                        <img className={classes.slide} src={photo8} alt="zdj8"/>
-                    </ul>
-                </div>
-                <Button
-                    buttonText="Wizytówka ZSEM"
-                    icon={<Icon.Youtube/>}
-                    className={classes.zsemVideo}
-                    onClick={() => {
-                        window.location.replace(
-                            "https://www.youtube.com/watch?v=yG12VjDxQfc"
-                        );
-                    }}
-                />
-                <p>Nie wiesz jaki kierunek kształcenia obrać? Spróbujemy ci w tym pomóc! Kliknij poniżej.</p>
-                <Link to="/survey">
-                    <Button buttonText="Ankieta" icon={<Icon.UiRadios/>}/>
-                </Link>
-            </Wrapper>
-            <Wrapper>
-                <h2>Spotted</h2>
-                {!isLoading && Array.isArray(posts) ? (
-                    <>
-                        <p className={classes.centerOnPhone}>Proponowane posty</p>
-                        <div className={classes.posts}>
-                            {posts.map((post) => {
-                                return (
-                                    <Wrapper
-                                        className={`${classes.post} ${classes.narrowContainer}`}
-                                        key={post.id}
-                                    >
-                                        <div className={classes.topData}>
-                                            {post.isAnonymous ? (
-                                                <div>
-                                                    <Icon.PersonFill/>
-                                                    <p>
-                                                        {post.isAnonymous ? "Anonim" : post.author.username}
-                                                    </p>
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    <Link
-                                                        to={`/profile/${
-                                                            post.isAnonymous ? 0 : post.author.id
-                                                        }`}
-                                                    >
-                                                        <Icon.PersonFill/>
-                                                        <p>
-                                                            {post.isAnonymous
-                                                                ? "Anonim"
-                                                                : post.author.username}
-                                                        </p>
-                                                    </Link>
-                                                </div>
-                                            )}
-                                            <div>
-                                                <Icon.CalendarDate/>
-                                                {new Date(post.createdAt).toLocaleDateString()}
-                                            </div>
-                                            <div>
-                                                <Icon.Clock/>
-                                                {new Date(post.createdAt).getUTCHours() + ":"}
-                                                {new Date(post.createdAt).getUTCMinutes() < 10
-                                                    ? "0" + new Date(post.createdAt).getUTCMinutes()
-                                                    : new Date(post.createdAt).getUTCMinutes()}
-                                            </div>
-                                        </div>
-                                        <div className={classes.content}>{post.text}</div>
-                                        <div className={classes.bottomData}>
-                                            <div
-                                                onClick={() => {
-                                                    likeHandler(post);
-                                                }}
-                                            >
-                                                {post.isLiked && (
-                                                    <Icon.HeartFill
-                                                        style={{color: "var(--add1-500)"}}
-                                                    />
-                                                )}
-                                                {!post.isLiked && <Icon.Heart/>}
-                                                <p
-                                                    style={
-                                                        post.isLiked ? {color: "var(--add1-500)"} : {}
-                                                    }
-                                                >
-                                                    {post.likes}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </Wrapper>
-                                );
-                            })}
-                            {showMorePostsButton && (
-                                <div className={classes.loadMoreButton}>
-                                    <Button
-                                        buttonText="Więcej postów"
-                                        onClick={() => navigate("/spotted")}
-                                    />
-                                </div>
-                            )}
+                      <div className={classes.topData}>
+                        {post.isAnonymous ? (
+                          <div>
+                            <Icon.PersonFill />
+                            <p>
+                              {post.isAnonymous
+                                ? "Anonim"
+                                : post.author.username}
+                            </p>
+                          </div>
+                        ) : (
+                          <div>
+                            <Link
+                              to={`/profile/${
+                                post.isAnonymous ? 0 : post.author.id
+                              }`}
+                            >
+                              <Icon.PersonFill />
+                              <p>
+                                {post.isAnonymous
+                                  ? "Anonim"
+                                  : post.author.username}
+                              </p>
+                            </Link>
+                          </div>
+                        )}
+                        <div>
+                          <Icon.CalendarDate />
+                          {new Date(post.createdAt).toLocaleDateString()}
                         </div>
-                    </>
-                ) : (
-                    <p>Brak postów do wyświetlenia</p>
+                        <div>
+                          <Icon.Clock />
+                          {new Date(post.createdAt).getUTCHours() + ":"}
+                          {new Date(post.createdAt).getUTCMinutes() < 10
+                            ? "0" + new Date(post.createdAt).getUTCMinutes()
+                            : new Date(post.createdAt).getUTCMinutes()}
+                        </div>
+                      </div>
+                      <div className={classes.content}>{post.text}</div>
+                      <div className={classes.bottomData}>
+                        <div
+                          onClick={() => {
+                            likeHandler(post);
+                          }}
+                        >
+                          {post.isLiked && (
+                            <Icon.HeartFill
+                              style={{ color: "var(--add1-500)" }}
+                            />
+                          )}
+                          {!post.isLiked && <Icon.Heart />}
+                          <p
+                            style={
+                              post.isLiked ? { color: "var(--add1-500)" } : {}
+                            }
+                          >
+                            {post.likes}
+                          </p>
+                        </div>
+                      </div>
+                    </Wrapper>
+                  );
+                })}
+                {showMorePostsButton && (
+                  <div className={classes.loadMoreButton}>
+                    <Button
+                      buttonText="Więcej postów"
+                      onClick={() => navigate("/spotted")}
+                    />
+                  </div>
                 )}
-                {posts.length < 1 && (
-                    <p className={classes.p}>Brak postów do wyświetlenia</p>
-                )}
-            </Wrapper>
-            <Wrapper>
-                <h2>Autorzy strony</h2>
-                <p className={classes.centerOnPhone}>
-                    Strona została stworzona przez uczniów klasy 2d (technika programista) w ZSEM w Nowym Sączu:
-                    <ul>
-                        <li><Link to="https://github.com/BaderBC">Bartlomiej Strama</Link></li>
-                        <li><Link to="https://github.com/sewe2000">Seweryn Pajor</Link></li>
-                        <li><Link to="https://github.com/Majkipl27">Tomasz Mamala</Link></li>
-                        <li><Link to="https://github.com/maxidragon">Maksymilian Gala</Link></li>
-                        <li><Link to="https://github.com/cooligus">Tomasz Kulig</Link></li>
-                    </ul>
-                </p>
-            </Wrapper>
-        </>
+              </div>
+            </>
+          ) : (
+            <p>Brak postów do wyświetlenia</p>
+          )}
+          {posts.length < 1 && (
+            <p className={classes.p}>Brak postów do wyświetlenia</p>
+          )}
+        </Wrapper>
+        <Wrapper>
+          <h2>Autorzy</h2>
+          <p className={classes.centerOnPhone}>
+            Wykonane przez uczniów klasy 2D ZSEM w Nowym Sączu
+            <ul className={classes.authors}>
+              <li>
+                <Link to="https://github.com/BaderBC" target={"_blank"}>
+                  Bartlomiej Strama
+                </Link>
+              </li>
+              <li>
+                <Link to="https://github.com/sewe2000" target={"_blank"}>
+                  Seweryn Pajor
+                </Link>
+              </li>
+              <li>
+                <Link to="https://github.com/Majkipl27" target={"_blank"}>
+                  Tomasz Mamala
+                </Link>
+              </li>
+              <li>
+                <Link to="https://github.com/maxidragon" target={"_blank"}>
+                  Maksymilian Gala
+                </Link>
+              </li>
+              <li>
+                <Link to="https://github.com/cooligus" target={"_blank"}>
+                  Tomasz Kulig
+                </Link>
+              </li>
+              <Link to="https://github.com/Nasz-Elektryk" target={"_blank"}>
+                <Icon.Github fontSize="48px"/>
+                Organizacja github "Nasz-Elektryk"
+              </Link>
+            </ul>
+          </p>
+        </Wrapper>
+      </>
     );
 };
 

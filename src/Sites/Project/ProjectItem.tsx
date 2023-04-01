@@ -22,31 +22,39 @@ const ProjectItem = (props: any) => {
         }
     }
     return (
-        <div style={props.listType}>
-            <Wrapper className={classes.post}>
-                <div className={classes.topData}>
-                    <div>
-                        <Icon.CalendarDate/>
-                        {new Date(project.date).toLocaleDateString()}
-                    </div>
-                </div>
-                <h2>{project.title}</h2>
-                <p className={classes.content}>{project.text}</p>
-                <div className={classes.buttonFlex}>
-                    <Button
-                        buttonText="Facebook"
-                        icon={<Icon.Facebook/>}
-                        onClick={handleFacebookClick}
-                    />
-                    <Button
-                        buttonText="Strona szkoły"
-                        icon={<Icon.BrowserFirefox/>}
-                        className="alternate"
-                        onClick={handleWebsiteClick}
-                    />
-                </div>
-            </Wrapper>
-        </div>
+      <div style={props.listType}>
+        <Wrapper className={classes.post}>
+          <div className={classes.topData}>
+            <div>
+              <Icon.CalendarDate />
+              {new Date(project.date).toLocaleDateString()}
+            </div>
+          </div>
+          <h2>{project.title}</h2>
+          <p className={classes.content}>{project.text}</p>
+          <div className={classes.buttonFlex}>
+            {project.facebook ? (
+              <Button
+                buttonText="Facebook"
+                icon={<Icon.Facebook />}
+                onClick={handleFacebookClick}
+              />
+            ) : (
+              <Button
+                buttonText="Facebook"
+                icon={<Icon.Facebook />}
+                style={{cursor: "not-allowed"}}
+              />
+            )}
+            <Button
+              buttonText="Strona szkoły"
+              icon={<Icon.BrowserFirefox />}
+              className="alternate"
+              onClick={handleWebsiteClick}
+            />
+          </div>
+        </Wrapper>
+      </div>
     );
 };
 

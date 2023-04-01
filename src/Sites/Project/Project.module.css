@@ -5,6 +5,9 @@
   .narrowContainer {
     width: 100% !important;
   }
+  .buttonFlex > button {
+      max-width: none !important;
+  }
 }
 
 .h1 {
@@ -183,6 +186,6 @@
 
 .buttonFlex > button {
   flex: 1;
-  min-width: 200px;
+  min-width: fit-content;
   overflow: hidden;
 }

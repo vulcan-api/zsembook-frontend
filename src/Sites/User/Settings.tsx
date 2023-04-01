@@ -12,7 +12,7 @@ import {
   PencilFill,
   CheckSquareFill,
 } from "react-bootstrap-icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
@@ -149,7 +149,9 @@ const Settings = () => {
                 value={settings.username}
                 onChange={handleUserNameChange}
               />
-              <Button buttonText="Zmień hasło" />
+              <Link to={"/auth/reset"}>
+                <Button buttonText="Zmień hasło" />
+              </Link>
             </div>
             <div className={classes.twoInputs}>
               <Input
@@ -191,7 +193,12 @@ const Settings = () => {
                   <img className={classes.avImage} src={defaultAvatar} alt="" />
                 </label>
               </div>
-              <input type="file" id="avatarUploader" className={classes.invisible} onChange={handleAvatarChange}/>
+              <input
+                type="file"
+                id="avatarUploader"
+                className={classes.invisible}
+                onChange={handleAvatarChange}
+              />
             </div>
           </Section>
           <Section>
