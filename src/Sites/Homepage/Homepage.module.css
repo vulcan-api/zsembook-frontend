@@ -124,3 +124,18 @@
     width: 80% !important;
   }
 }
+
+.offerLink {
+  color: var(--add1-500);
+}
+
+.descList {
+  width: 100%;
+  margin: 1rem;
+  font-size: 1.5rem;
+  color: var(--main-400);
+}
+
+.descList li {
+  margin: 1rem 0.5rem;
+}
