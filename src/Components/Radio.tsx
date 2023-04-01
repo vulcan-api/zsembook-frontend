@@ -1,14 +1,7 @@
 import classes from "./Radio.module.css";
-import React, { useState } from "react";
+import React from "react";
 
 const Radio = (props: any) => {
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const handleSelectionChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSelectedValue(event.target.value);
-  };
   return (
     <div className={classes.main}>
       {props.values.map((value: any, index: number) => {
@@ -21,8 +14,6 @@ const Radio = (props: any) => {
               name={props.name}
               value={JSON.stringify(score)}
               className="radio"
-              checked={selectedValue === JSON.stringify(score)}
-              onChange={handleSelectionChange}
             />
             <label htmlFor={`${props.name}${index}`}>{value.label}</label>
           </div>
