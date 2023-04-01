@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./Button.module.css";
 
 export const classMgmt = (className: any) => {
@@ -17,17 +18,23 @@ export const classMgmt = (className: any) => {
 }
 
 const Button = (props:any) => {
-    return (
+  const sharedProps = {
+    className: classes.button + " " + classMgmt(props.className),
+    children: <>{props.icon}{props.buttonText || "debiluZapomniałeśWpisać"}</>
+  }
+
+    return (<>
+      {props && props.destination ? 
+      <Link to={props.destination} {...sharedProps}></Link> :
       <button
         tooltip-dsc={props.tooltipDsc}
         type={props.type || "button"}
-        className={classes.button + " " + classMgmt(props.className)}
         onClick={props.onClick}
         disabled={props.disabled}
         style={props.style}
+        {...sharedProps}
       >
-        {props.icon}{props.buttonText || "debiluZapomniałeśWpisać"}
-      </button>
+      </button> }</>
     );
 }
 
