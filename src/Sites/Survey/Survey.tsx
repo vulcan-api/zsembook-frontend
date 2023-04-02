@@ -284,7 +284,7 @@ const Survey = () => {
       img: elektryk,
     },
     Mechatronik: {
-      classes: ["1m", "1e"],
+      classes: ["1m"],
       extendedLevel: ["Matematyka", "Fizyka"],
       img: mechatronik,
     },
