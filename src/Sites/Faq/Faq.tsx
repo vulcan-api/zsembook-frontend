@@ -172,8 +172,8 @@ const Faq = () => {
                 <li key={key} className={classes.questionElem}>
                   <div className={classes.questionCont}>
                     <div>
-                      <p className={classes.question}>Pytanie: {quest.question}</p>
-                      <p className={classes.answer}>Odpowiedź: {quest.answer || "Brak odpowiedzi"}</p>
+                      <p className={classes.question}>{quest.question}</p>
+                      <p className={classes.answer}>{quest.answer || "Brak odpowiedzi"}</p>
                     </div>
                     {User.isFaq() && (
                       <div className={classes.faqIcons}>
