@@ -12,10 +12,6 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    
-    env:
-      REACT_APP_REQUEST_URL: 'https://rekrutacja.zsem.edu.pl/api'
-
     strategy:
       matrix:
         node-version: [16.x]
@@ -29,6 +25,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
     - run: pnpm i
-    - run: echo "REACT_APP_REQUEST_URL=${{env.REACT_APP_REQUEST_URL}}" > .env
+    - name: Setting up .env
+      run: echo "${{ secrets.ENV }}" > .env
     - run: pnpm build
     - run: cp -r build/* /var/www/html
