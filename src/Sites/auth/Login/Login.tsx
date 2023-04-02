@@ -143,6 +143,7 @@ const Login = () => {
               <ReactFacebookLogin
                 appId={process.env.REACT_APP_FB_ID ?? ""}
                 fields="name,email,id"
+                isMobile={false}
                 render={(renderProps) => (
                   <Button
                     onClick={renderProps.onClick}
