@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./AddPostModal.module.css";
 import Checkbox from "../../Components/Checkbox";
 import Button from "../../Components/Button";
@@ -7,14 +7,17 @@ import {useNavigate} from "react-router-dom";
 //@ts-ignore
 import {NotificationManager} from "react-notifications";
 import Textarea from "../../Components/Textarea";
+import LoadingSpinner from "../../Components/LoadingSpinner";
 
 const AddPostModal = (props: {onClose: Function, showSpinner: Function}) => {
     const navigate = useNavigate();
     const postText: any = useRef('');
     const isAnonymous: any = useRef(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     async function addPost(event: any) {
         event.preventDefault();
+        setIsLoading(true);
 
         const post = {
             title: "do not ask",
@@ -36,7 +39,7 @@ const AddPostModal = (props: {onClose: Function, showSpinner: Function}) => {
                 NotificationManager.success("Udało się dodać post.", "Sukces!", 3000);
                 navigate("/spotted");
             })
-            .finally(() => props.onClose())
+            .finally(() => {props.onClose(); setIsLoading(false);})
             .catch((err) => {
                 console.error(err);
                 return throwObject;
@@ -54,6 +57,12 @@ const AddPostModal = (props: {onClose: Function, showSpinner: Function}) => {
     , [props]);
     return (
       <>
+        {isLoading && (
+          <>
+            <h1>Dodawanie posta...</h1>
+            <LoadingSpinner height="100%" />
+          </>
+        )}
         <p>Dodaj post</p>
         <form className={classes.addForm} onSubmit={addPost}>
           <Textarea

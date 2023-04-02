@@ -4,11 +4,13 @@
   font-family: 'Quicksand';
   padding-bottom: 1rem;
   border-bottom: 0.0625rem solid var(--main-100);
+  line-break: anywhere;
 }
 
 .answer {
   font-size: 1.5rem;
   padding-top: 1rem;
+  line-break: anywhere;
 }
 
 .questionCont {
