@@ -16,6 +16,7 @@ const Login = () => {
     const emailRef: any = useRef();
     const passwordRef: any = useRef();
     const remeberPasswordRef: any = useRef();
+    const isMobile = /Mobile/.test(navigator.userAgent);
 
     useEffect(() => {
         fetchPosts();
@@ -128,23 +129,36 @@ const Login = () => {
             <p>Zaloguj się</p>
             <img src={loginImg} alt="cool login img" />
             <form onSubmit={loginHandler} className={classes.form}>
-              <Input placeholder="E-Mail" ref={emailRef} type="email"/>
+              <Input placeholder="E-Mail" ref={emailRef} type="email" />
               <Input type="password" placeholder="Hasło" ref={passwordRef} />
-              <p onClick={() => navigate("/auth/reset")}>Nie pamiętasz hasła?</p>
+              <p onClick={() => navigate("/auth/reset")}>
+                Nie pamiętasz hasła?
+              </p>
               <Checkbox
                 ref={remeberPasswordRef}
                 id="passwordRemember"
                 label="Zapamiętaj hasło"
               />
-                <Button type="submit" buttonText="Zaloguj się" />
-                <ReactFacebookLogin
-                    appId={process.env.REACT_APP_FB_ID ?? ''}
-                    fields="name,email,id"
-                    render={renderProps => (
-                        <Button onClick={renderProps.onClick} className="facebook"
-                                buttonText={<><Facebook /><span>Zaloguj się przez Facebooka</span></>} />
-                    )}
-                    callback={(response) => facebookLoginHandler(response)} />
+              <Button type="submit" buttonText="Zaloguj się" />
+              <ReactFacebookLogin
+                appId={process.env.REACT_APP_FB_ID ?? ""}
+                fields="name,email,id"
+                render={(renderProps) => (
+                  <Button
+                    onClick={renderProps.onClick}
+                    className="facebook"
+                    buttonText={
+                      <>
+                        <Facebook
+                          fontSize={isMobile ? "40px" : "32px"}
+                        />
+                        <span>Zaloguj się przez Facebooka</span>
+                      </>
+                    }
+                  />
+                )}
+                callback={(response) => facebookLoginHandler(response)}
+              />
             </form>
             <Link to={"/auth/signup"}>Nie masz konta? Zarejestruj się!</Link>
             <p onClick={() => navigate("/")}>Kontynuuj bez logowania</p>

@@ -19,7 +19,7 @@ const Button = (props: any) => {
       case "tooltip":
         return classes.default + " tooltip";
       case "facebook":
-        return classes.alternate + " " + classes.facebook;
+        return `${classes.alternate} ${classes.facebook}`;
       default:
         return classes.default;
     }

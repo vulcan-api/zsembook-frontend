@@ -79,8 +79,7 @@
 
 .facebook {
     margin-top: .5em;
-    background-color: var(--facebook-blue);
     border-color: var(--facebook-blue);
-    box-shadow: 0 4px 0 0 lightblue;
-    color: white;
+    color: var(--facebook-blue);
+    box-shadow: 0 1px 0 var(--facebook-blue);
 }
