@@ -8,6 +8,8 @@ import {Link, useNavigate} from "react-router-dom";
 //@ts-ignore
 import {NotificationManager} from "react-notifications";
 import User from "../../../Lib/User";
+import ReactFacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import {Facebook} from 'react-bootstrap-icons';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -87,6 +89,37 @@ const Login = () => {
         }
     };
 
+    const facebookLoginHandler = (response: object) => {
+        fetch(`${process.env.REACT_APP_REQUEST_URL}/oauth/facebook/callback`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            credentials: "include",
+            body: JSON.stringify(response),
+        }).then((res) => {
+            if(!res.ok) {
+                NotificationManager.error(
+                    "Nie udało się zalogować przez Facebooka. Spróbuj ponownie później",
+                    "Nie zalogowano",
+                    3000
+                );
+                throw new Error('Cannot login with facebook');
+            }
+            return res.json();
+        }).then((json) => {
+            if(json.token) {
+                User.getUser();
+                console.log(User);
+                navigate("/");
+            }
+        })
+        .catch((errorMsg) => {
+            throw new Error("Couldn't resolve facebook login promise: " + errorMsg);
+        });
+    };
+
     return (
       <div className={classes.loginFlex}>
         <div className={classes.img}></div>
@@ -103,7 +136,15 @@ const Login = () => {
                 id="passwordRemember"
                 label="Zapamiętaj hasło"
               />
-              <Button type="submit" buttonText="Zaloguj się" />
+                <Button type="submit" buttonText="Zaloguj się" />
+                <ReactFacebookLogin
+                    appId={process.env.REACT_APP_FB_ID ?? ''}
+                    fields="name,email,id"
+                    render={renderProps => (
+                        <Button onClick={renderProps.onClick} className="facebook"
+                                buttonText={<><Facebook /><span>Zaloguj się przez Facebooka</span></>} />
+                    )}
+                    callback={(response) => facebookLoginHandler(response)} />
             </form>
             <Link to={"/auth/signup"}>Nie masz konta? Zarejestruj się!</Link>
             <p onClick={() => navigate("/")}>Kontynuuj bez logowania</p>

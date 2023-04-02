@@ -18,6 +18,8 @@ const Button = (props: any) => {
         return classes.grayDisabled;
       case "tooltip":
         return classes.default + " tooltip";
+      case "facebook":
+        return classes.alternate + " " + classes.facebook;
       default:
         return classes.default;
     }
@@ -36,7 +38,7 @@ const Button = (props: any) => {
       {props && props.destination ? 
       <Link to={props.destination} {...sharedProps}></Link> :
       <button
-        tooltip-dsc={props.tooltipDsc}
+        // tooltip-dsc={props.tooltipDsc}
         type={props.type || "button"}
         onClick={() => {setIsClicked(true); props.onClick && props.onClick();}}
         disabled={isDisabled()}

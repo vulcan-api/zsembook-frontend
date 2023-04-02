@@ -31,6 +31,7 @@
   --add2-300: #9BA5C960;
   --add2-200: #9BA5C940;
   --add2-100: #9BA5C920;
+  --facebook-blue: #4267B2;
 }
 
 body {
@@ -82,7 +83,7 @@ p {
 
 h1, h2 {
   color: var(--add1-500);
-  font-family: 'Zen Dots';
+  font-family: 'Zen Dots', sans-serif;
   margin-block-start: 0;
   margin-block-end: 0;
 }
@@ -102,7 +103,7 @@ input:disabled {
   right: 2rem;
   z-index: 999999;
   width: 320px;
-  padding: 0px 15px;
+  padding: 0 15px;
   max-height: calc(100% - 30px);
   overflow-x: hidden;
   overflow-y: auto;
@@ -163,7 +164,7 @@ input:disabled {
   left: 15px;
   margin-top: -14px;
   display: block;
-  font-family: 'Notification';
+  font-family: 'Notification', sans-serif;
   width: 28px;
   height: 28px;
   font-size: 28px;

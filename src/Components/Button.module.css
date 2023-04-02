@@ -9,9 +9,7 @@
     font-family: 'Quicksand', sans-serif;
     box-sizing: border-box;
     cursor: pointer;
-    display: flex;
     justify-content: center;
-    align-items: center;
     color: var(--light);
     transition: all .3s;
 }
@@ -22,7 +20,6 @@
 
 .default {
     border: 2px solid var(--add1-500);
-    box-shadow: 0px 2px 0px var(--add1-400);
     background-color: var(--add1-500);
     box-shadow: 0 4px 0 0 var(--add1-400);
 }
@@ -34,7 +31,6 @@
 
 .gray {
     border: 2px solid var(--light-200);
-    box-shadow: 0px 2px 0px var(--black-200);
     background-color: var(--add2-200);
     color: var(--main-500);
     box-shadow: 0 2px 0 0 var(--black-100);
@@ -47,7 +43,6 @@
 
 .grayDisabled {
     border: 2px solid var(--light-200);
-    box-shadow: 0px 2px 0px var(--black-200);
     background-color: var(--add2-200);
     color: var(--main-300);
     box-shadow: 0 2px 0 0 var(--black-100);
@@ -61,7 +56,6 @@
     border: 2px solid var(--add1-500);
     background-color: var(--bg-clr);
     color: var(--add1-500);
-    box-shadow: 0px 1px 0px var(--add1-300);
     box-shadow: 0 2px 0 0 var(--add1-400);
 }
 
@@ -75,10 +69,18 @@
     color: var(--main-400);
     cursor: not-allowed;
     border-color: var(--main-200);
-    box-shadow: 0px 1px 0px var(--black-100);
+    box-shadow: 0 1px 0 var(--black-100);
 }
 
 .button:active,
 .button:focus {
     outline: none;
+}
+
+.facebook {
+    margin-top: .5em;
+    background-color: var(--facebook-blue);
+    border-color: var(--facebook-blue);
+    box-shadow: 0 4px 0 0 lightblue;
+    color: white;
 }
