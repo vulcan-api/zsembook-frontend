@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classes from "./Register.module.css";
 import registerImg from "./Graphics/registerImg.png";
 import Input from "../../../Components/Input";
@@ -7,9 +7,11 @@ import Button from "../../../Components/Button";
 import { Link, useNavigate } from "react-router-dom";
 //@ts-ignore
 import { NotificationManager } from "react-notifications";
+import LoadingSpinner from "../../../Components/LoadingSpinner";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -96,6 +98,8 @@ const Register = () => {
       return;
     }
 
+    setIsLoading(true);
+
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -117,9 +121,9 @@ const Register = () => {
       .then((response) => {
         if (!response.ok) {
           NotificationManager.error(
-              "Nie udało się zarejestrować. Spróbuj ponownie później",
-              "Nie zarejestrowano",
-              3000
+            "Nie udało się zarejestrować. Spróbuj ponownie później",
+            "Nie zarejestrowano",
+            3000
           );
           return Promise.reject();
         }
@@ -135,48 +139,65 @@ const Register = () => {
       })
       .catch((error) => {
         console.log("error", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   return (
     <div className={classes.loginFlex}>
       <div className={classes.formSide}>
-        <div className={classes.loginForm}>
-          <p>Zarejestruj się</p>
-          <img src={registerImg} alt="cool register img" />
-          <form className={classes.form} onSubmit={registerHandler}>
-            <>
-              <Input placeholder="Imię" ref={nameRef} require />
-              <Input placeholder="Nazwisko" ref={surnameRef} require />
-              <Input
-                placeholder="Nazwa użytkownika"
-                ref={usernameRef}
-                required
-              />
-              <Input
-                type="email"
-                placeholder="E-Mail"
-                ref={emailRef}
-                required
-              />
-              <Input
-                type="password"
-                placeholder="Hasło"
-                ref={passwordRef}
-                required
-              />
-              <Input
-                type="password"
-                placeholder="Powtórz hasło"
-                ref={repeatPasswordRef}
-                required
-              />
-              <Checkbox id="acceptRegulamin" label={<>Akceptuję <Link to='/statute' className={classes.link}>regulamin</Link></>} required/>
-              <Button buttonText="Zarejestruj się" type="submit" />
-            </>
-          </form>
-          <Link to={"/auth/login"}>Masz już konto? Zaloguj się!</Link>
-        </div>
+        {isLoading && <LoadingSpinner />}
+        {!isLoading && (
+          <div className={classes.loginForm}>
+            <p>Zarejestruj się</p>
+            <img src={registerImg} alt="cool register img" />
+            <form className={classes.form} onSubmit={registerHandler}>
+              <>
+                <Input placeholder="Imię" ref={nameRef} require />
+                <Input placeholder="Nazwisko" ref={surnameRef} require />
+                <Input
+                  placeholder="Nazwa użytkownika"
+                  ref={usernameRef}
+                  required
+                />
+                <Input
+                  type="email"
+                  placeholder="E-Mail"
+                  ref={emailRef}
+                  required
+                />
+                <Input
+                  type="password"
+                  placeholder="Hasło"
+                  ref={passwordRef}
+                  required
+                />
+                <Input
+                  type="password"
+                  placeholder="Powtórz hasło"
+                  ref={repeatPasswordRef}
+                  required
+                />
+                <Checkbox
+                  id="acceptRegulamin"
+                  label={
+                    <>
+                      Akceptuję{" "}
+                      <Link to="/statute" className={classes.link}>
+                        regulamin
+                      </Link>
+                    </>
+                  }
+                  required
+                />
+                <Button buttonText="Zarejestruj się" type="submit" />
+              </>
+            </form>
+            <Link to={"/auth/login"}>Masz już konto? Zaloguj się!</Link>
+          </div>
+        )}
       </div>
       <div className={classes.img}></div>
     </div>
