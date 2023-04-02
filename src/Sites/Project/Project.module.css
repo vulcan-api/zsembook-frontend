@@ -8,11 +8,13 @@
   .buttonFlex > button {
       max-width: none !important;
   }
+  .h1 {
+    text-align: center !important;
+  }
 }
 
 .h1 {
   margin: 1rem 0;
-  text-align: center;
 }
 
 .narrowContainer {

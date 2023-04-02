@@ -44,7 +44,6 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
-    border-top: 1px solid var(--main-100);
   }
   .mainIcons label {
     display: none !important;

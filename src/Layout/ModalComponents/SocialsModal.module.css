@@ -16,6 +16,7 @@
     width: 2rem;
     height: 2rem;
     align-items: center;
+    color: var(--add1-500);
 }
 
 .name {

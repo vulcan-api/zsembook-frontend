@@ -14,22 +14,29 @@ const EditQuestion = (props: {onClose: Function, showSpinner: Function, question
 
     async function changeQuestion(event: any) {
         event.preventDefault();
-
-        // TODO: check if it works (doesn't implemented in backend)
-        await fetch(`${process.env.REACT_APP_REQUEST_URL}/faq/change`, {
-            method: "POST", headers: { "Content-Type": "application/json", },
-            credentials: "include",
-            body: JSON.stringify({question: questionRef.current?.value, anwer: answerRef.current?.value, questionId: props.questionData.id}),
+        await fetch(`${process.env.REACT_APP_REQUEST_URL}/faq/answer`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            question: questionRef.current?.value,
+            answer: answerRef.current?.value,
+            questionId: props.questionData.id,
+          }),
         })
-            .then(res => { 
-                if(res.ok)
-                    NotificationManager.success('Udało się usunąć pytanie.', 'Sukces!', 3000);
-                else
-                    throw new Error("Response error");
-                }
-            )
-            .finally(() => props.onClose())
-            .catch(() => NotificationManager.error('Coś poszło nie tak.', 'Błąd!', 3000))
+          .then((res) => {
+            if (res.ok)
+              NotificationManager.success(
+                "Udało się usunąć pytanie.",
+                "Sukces!",
+                3000
+              );
+            else throw new Error("Response error");
+          })
+          .finally(() => props.onClose())
+          .catch(() =>
+            NotificationManager.error("Coś poszło nie tak.", "Błąd!", 3000)
+          );
     }
 
     const maxLengthHandler = () => {
@@ -42,7 +49,7 @@ const EditQuestion = (props: {onClose: Function, showSpinner: Function, question
     }, [props]);
     return (
       <>
-        <p>Dodaj pytanie</p>
+        <p>Odpowiedz na pytanie</p>
         <form className={classes.addForm} onSubmit={changeQuestion}>
           <Input
             onChange={maxLengthHandler}
@@ -60,7 +67,7 @@ const EditQuestion = (props: {onClose: Function, showSpinner: Function, question
             defaultValue={props.questionData.answer}
             ref={answerRef}
           />
-          <Button type="submit" buttonText="Zadaj pytanie" />
+          <Button type="submit" buttonText="Zatwierdź odpowiedź" />
         </form>
       </>
     );

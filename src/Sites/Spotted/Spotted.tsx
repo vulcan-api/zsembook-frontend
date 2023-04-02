@@ -101,13 +101,15 @@ const Spotted = () => {
       console.error(error);
     }
 
-    posts.length < 1 ? setShowMorePostsButton(false) : <></>;
+    posts.length < 1 || posts.length < spottedPostsCount
+      ? setShowMorePostsButton(false)
+      : setShowMorePostsButton(true);
 
     setIsLoading(false);
   }, [spottedPostsCount, posts.length]);
 
   const downloadMorePosts = () => {
-    if (spottedPostsCount + 10 < posts.length) {
+    if (spottedPostsCount + 10 <= posts.length) {
       setSpottedPostsCount(spottedPostsCount + 10);
     } else {
       setSpottedPostsCount(spottedPostsCount + 10);

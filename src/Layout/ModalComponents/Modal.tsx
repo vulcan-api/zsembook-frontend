@@ -10,8 +10,8 @@ import FollowersModal from "./FollorwersModal";
 import FollowingModal from "./FollowingModal";
 import SocialsModal from "./SocialsModal";
 import AddPostModal from "./AddPostModal";
-import AddQuestion from "./AddQuestion";
-import EditQuestion from "./EditQuestion";
+import AddQuestion from "./AddQuestionModal";
+import EditQuestion from "./EditQuestionModal";
 
 const Modal = (props: any) => {
   const [isLoading, setIsLoading] = useState(true);

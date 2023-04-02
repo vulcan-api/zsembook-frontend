@@ -247,7 +247,7 @@ const Profile = () => {
                 </p>
               )}
             </div>
-            {!User.isItMe(+userId!) && (
+            {(!User.isItMe(+userId!) && User.isLogged) && (
               <Button
                 className={user.isAlreadyFollowed ? "alternate" : ""}
                 buttonText={user.isAlreadyFollowed ? "Obserwujesz" : "Obserwuj"}
@@ -306,7 +306,7 @@ const Profile = () => {
                           ? "0" + new Date(post.createdAt).getMinutes()
                           : new Date(post.createdAt).getMinutes()}
                       </div>
-                      {User.isItMe(post.author.id) ? (
+                      {User.isItMe(post.author?.id) || User.isModerator() ? (
                         <Icon.TrashFill
                           onClick={() => {
                             setShowModal(true);
@@ -316,14 +316,16 @@ const Profile = () => {
                           className={classes.report}
                         />
                       ) : (
-                        <Icon.FlagFill
-                          onClick={() => {
-                            setShowModal(true);
-                            setPostId(post.id);
-                            setModalContent("report");
-                          }}
-                          className={classes.report}
-                        />
+                        User.isLogged && (
+                          <Icon.FlagFill
+                            onClick={() => {
+                              setShowModal(true);
+                              setPostId(post.id);
+                              setModalContent("report");
+                            }}
+                            className={classes.report}
+                          />
+                        )
                       )}
                     </div>
                     <div className={classes.content}>{post.text}</div>
