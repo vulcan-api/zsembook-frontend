@@ -31,28 +31,25 @@ const Login = () => {
             credentials: "include",
         })
             .then((res) => res.json())
-            .then(() => {
-                logout();
-            })
             .catch((err) => {
                 console.error(err);
                 return throwObject;
             });
     };
 
-    const logout = () => {
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+    // const logout = () => {
+    //     let myHeaders = new Headers();
+    //     myHeaders.append("Content-Type", "application/json");
 
-        fetch(`${process.env.REACT_APP_REQUEST_URL}/auth/logout`, {
-            method: "POST",
-            headers: myHeaders,
-            redirect: "follow",
-            credentials: "include",
-        })
-            .then((response) => response.text())
-            .catch((error) => console.log("error", error));
-    };
+    //     fetch(`${process.env.REACT_APP_REQUEST_URL}/auth/logout`, {
+    //         method: "POST",
+    //         headers: myHeaders,
+    //         redirect: "follow",
+    //         credentials: "include",
+    //     })
+    //         .then((response) => response.text())
+    //         .catch((error) => console.log("error", error));
+    // };
 
     const loginHandler = async (event: any) => {
         event.preventDefault();
