@@ -155,24 +155,24 @@ const Login = () => {
                   label="Zapamiętaj hasło"
                 />
                 <Button type="submit" buttonText="Zaloguj się" />
-                <ReactFacebookLogin
-                  appId={process.env.REACT_APP_FB_ID ?? ""}
-                  fields="name,email,id"
-                  isMobile={false}
-                  render={(renderProps) => (
-                    <Button
-                      onClick={renderProps.onClick}
-                      className="facebook"
-                      buttonText={
-                        <>
-                          <Facebook fontSize={isMobile ? "40px" : "32px"} />
-                          <span>Zaloguj się przez Facebooka</span>
-                        </>
-                      }
-                    />
-                  )}
-                  callback={(response) => facebookLoginHandler(response)}
-                />
+                {/*<ReactFacebookLogin*/}
+                {/*  appId={process.env.REACT_APP_FB_ID ?? ""}*/}
+                {/*  fields="name,email,id"*/}
+                {/*  isMobile={false}*/}
+                {/*  render={(renderProps) => (*/}
+                {/*    <Button*/}
+                {/*      onClick={renderProps.onClick}*/}
+                {/*      className="facebook"*/}
+                {/*      buttonText={*/}
+                {/*        <>*/}
+                {/*          <Facebook fontSize={isMobile ? "40px" : "32px"} />*/}
+                {/*          <span>Zaloguj się przez Facebooka</span>*/}
+                {/*        </>*/}
+                {/*      }*/}
+                {/*    />*/}
+                {/*  )}*/}
+                {/*  callback={(response) => facebookLoginHandler(response)}*/}
+                {/*/>*/}
               </form>
               <Link to={"/auth/signup"}>Nie masz konta? Zarejestruj się!</Link>
               <p onClick={() => navigate("/")}>Kontynuuj bez logowania</p>
