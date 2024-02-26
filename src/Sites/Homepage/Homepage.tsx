@@ -177,9 +177,9 @@ const Homepage = () => {
                 Tomasz Kulig
               </Link>
             </li>
-            <Link to="https://github.com/Nasz-Elektryk" target={"_blank"}>
+            <Link to="https://github.com/avorty" target={"_blank"}>
               <Icon.Github fontSize="48px" />
-              Organizacja github "Nasz-Elektryk"
+              avorty
             </Link>
           </ul>
         </p>

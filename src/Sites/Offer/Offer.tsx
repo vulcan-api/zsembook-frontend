@@ -29,11 +29,12 @@ const Offer = () => {
         >
           Regulamin rekrutacji
         </p>
+        <h1>Technikum nr. 7</h1>
         <div className={classes.offertItems}>
           <Wrapper>
             <div>
               <h1>Technik Informatyk</h1>
-              <h2>1i, 1 oddział - 32 miejsca</h2>
+              <h2>1i, 1 oddział - 30 miejsc</h2>
             </div>
             <img src={informatyk} alt="" />
             <p>Przedmioty realizowane na poziomie rozszerzonym:</p>
@@ -48,7 +49,7 @@ const Offer = () => {
           <Wrapper>
             <div>
               <h1>Technik Mechatronik</h1>
-              <h2>1m, 1 oddział - 32 miejsca</h2>
+              <h2>1e, 1 oddział - 30 miejsc</h2>
             </div>
             <img src={mechatronik} alt="" />
             <p>Przedmioty realizowane na poziomie rozszerzonym:</p>
@@ -63,7 +64,7 @@ const Offer = () => {
           <Wrapper>
             <div>
               <h1>Technik Programista</h1>
-              <h2>1d, 1p, 2 oddziały - 64 miejsca</h2>
+              <h2>1d, 1p, 2 oddziały - 60 miejsc</h2>
             </div>
             <img src={programista} alt="" />
             <p>Przedmioty realizowane na poziomie rozszerzonym:</p>
@@ -78,7 +79,7 @@ const Offer = () => {
           <Wrapper>
             <div>
               <h1>Technik Teleinformatyk</h1>
-              <h2>1t, 1 oddział - 32 miejsca</h2>
+              <h2>1t, 1 oddział - 30 miejsc</h2>
             </div>
             <img src={teleinformatyk} alt="" />
             <p className={classes.subjects}>
@@ -101,7 +102,7 @@ const Offer = () => {
           <Wrapper>
             <div>
               <h1>Technik Elektronik</h1>
-              <h2>1g, 1 oddział - 32 miejsca</h2>
+              <h2>1g, 1 oddział - 30 miejsc</h2>
             </div>
             <img src={elektronik} alt="" />
             <p className={classes.subjects}>
@@ -121,7 +122,7 @@ const Offer = () => {
           <Wrapper>
             <div>
               <h1>Technik Elektryk</h1>
-              <h2>1f, 1 oddział - 32 miejsca</h2>
+              <h2>1f, 1 oddział - 30 miejsc</h2>
             </div>
             <img src={elektryk} alt="" />
             <p className={classes.subjects}>
@@ -137,6 +138,16 @@ const Offer = () => {
             <Link to={"/offer/elektryk"}>
               <Button buttonText="Więcej informacji" />
             </Link>
+          </Wrapper>
+        </div>
+        <h1>Szkoła branżowa I stopnia</h1>
+        <div className={classes.offertItems}>
+          <Wrapper>
+            <div>
+              <h1>Mechatronik</h1>
+              <h2>1b, 1 oddział - 28 miejsc</h2>
+            </div>
+            <img src={mechatronik} alt="" />
           </Wrapper>
         </div>
       </div>
