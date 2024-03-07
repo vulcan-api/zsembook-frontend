@@ -11,10 +11,11 @@ import teleinformatyk from "./graphics/teleinformatyk.png";
 import mechatronik from "./graphics/mechatronik.png";
 
 const Offer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <>
       <div className={classes.main}>
-        <h1>OFERTA REKRUTACYJNA ZSEM NA ROK SZKOLNY 2023/2024</h1>
+        <h1>OFERTA REKRUTACYJNA ZSEM NA ROK SZKOLNY {currentYear}/{currentYear + 1}</h1>
         <p>
           Do wszystkich klas technikum przedmioty przeliczane na punkty
           rekrutacyjne to:
