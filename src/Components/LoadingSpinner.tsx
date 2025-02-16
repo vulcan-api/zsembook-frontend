@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import { Triangle } from "react-loader-spinner";
 
 const LoadingSpinner = (props:any) => {
