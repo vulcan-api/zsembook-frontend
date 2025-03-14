@@ -20,16 +20,16 @@ const Offer = () => {
           Do wszystkich klas technikum przedmioty przeliczane na punkty
           rekrutacyjne to:
         </p>
-        <p>język polski, matematyka, fizyka i język angielski.</p>
+        <p>język polski, matematyka, informatyka i język angielski.</p>
         <p>
           <a
-              style={{
-                textDecoration: "none",
-                color: "var(--add1-500)",
-                fontWeight: "bold",
-              }}
-              target="_blank"
-              href={`https://zsem.edu.pl/pliki/szkolny_regulamin_rekrutacji_${CURRENT_YEAR}.pdf`}
+            style={{
+              textDecoration: "none",
+              color: "var(--add1-500)",
+              fontWeight: "bold",
+            }}
+            target="_blank"
+            href={`https://zsem.edu.pl/pliki/szkolny_regulamin_rekrutacji_${CURRENT_YEAR}.pdf`}
           >
             Regulamin rekrutacji
           </a>
@@ -41,7 +41,7 @@ const Offer = () => {
               <h1>Technik Informatyk</h1>
               <h2>1i, 1 oddział - 32 miejsca</h2>
             </div>
-            <img src={informatyk} alt=""/>
+            <img src={informatyk} alt="" />
             <p>Przedmioty realizowane na poziomie rozszerzonym:</p>
             <ul>
               <li>Matematyka</li>
@@ -54,7 +54,7 @@ const Offer = () => {
               </p>
             </div>
             <Link to={"/offer/informatyk"}>
-              <Button buttonText="Więcej informacji"/>
+              <Button buttonText="Więcej informacji" />
             </Link>
           </Wrapper>
           <Wrapper>
@@ -62,7 +62,7 @@ const Offer = () => {
               <h1>Technik Mechatronik</h1>
               <h2>1m, 1 oddział - 32 miejsca</h2>
             </div>
-            <img src={mechatronik} alt=""/>
+            <img src={mechatronik} alt="" />
             <p>Przedmioty realizowane na poziomie rozszerzonym:</p>
             <ul>
               <li>Matematyka</li>
@@ -75,7 +75,7 @@ const Offer = () => {
               </p>
             </div>
             <Link to={"/offer/mechatronik"}>
-              <Button buttonText="Więcej informacji"/>
+              <Button buttonText="Więcej informacji" />
             </Link>
           </Wrapper>
           <Wrapper>
@@ -83,7 +83,7 @@ const Offer = () => {
               <h1>Technik Programista</h1>
               <h2>1p, 1 oddział - 32 miejsca</h2>
             </div>
-            <img src={programista} alt=""/>
+            <img src={programista} alt="" />
             <p>Przedmioty realizowane na poziomie rozszerzonym:</p>
             <ul>
               <li>Matematyka</li>
@@ -96,7 +96,7 @@ const Offer = () => {
               </p>
             </div>
             <Link to={"/offer/programista"}>
-              <Button buttonText="Więcej informacji"/>
+              <Button buttonText="Więcej informacji" />
             </Link>
           </Wrapper>
           <Wrapper>
@@ -112,7 +112,7 @@ const Offer = () => {
               <li>Matematyka</li>
             </ul>
             <div className={classes.new}>
-              <p/> {/* empty paragraph because it's not new and I didn't want to modify classes.new */}
+              <p /> {/* empty paragraph because it's not new and I didn't want to modify classes.new */}
               <p>
                 Specjalizacja: Cyberbezpieczeństwo w sieciach
                 teleinformatycznych
@@ -135,7 +135,7 @@ const Offer = () => {
               <li>Matematyka</li>
             </ul>
             <div className={classes.new}>
-              <p/> {/* empty paragraph because it's not new and I didn't want to modify classes.new */}
+              <p /> {/* empty paragraph because it's not new and I didn't want to modify classes.new */}
               <p>Specjalizacja: Programowanie mikroprocesorów</p>
             </div>
             <Link to={"/offer/elektronik"}>
@@ -155,7 +155,7 @@ const Offer = () => {
               <li>Matematyka</li>
             </ul>
             <div className={classes.new}>
-              <p/> {/* empty paragraph because it's not new and I didn't want to modify classes.new */}
+              <p /> {/* empty paragraph because it's not new and I didn't want to modify classes.new */}
               <p>Specjalizacja: Systemy inteligentnych budynków</p>
             </div>
             <Link to={"/offer/elektryk"}>
